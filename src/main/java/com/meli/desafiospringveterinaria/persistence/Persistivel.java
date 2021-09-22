@@ -4,8 +4,9 @@ import java.util.List;
 
 public interface Persistivel<T> {
 
-    void cadastrar(T objeto);
-    void editar(T obejto);
+    void cadastrar(T obj);
+    void editar(T obj);
+    void obeter(T obj);
     List<T> listagem();
 
 }

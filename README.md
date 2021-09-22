@@ -38,21 +38,21 @@ A clínica veterinária “Zoo World” quer implementar um sistema desenvolvido
 Solicita-se a realização da modelagem de cada uma dessas classes, levando em consideração suas relações e a interação entre cada uma delas. Implementar (nas devidas classes) os métodos necessários para:
 
 ● Cadastrar/editar médicos;
-    ○ Não é permitido o cadastro de médicos em duplicidade;
-    ○ Todos os dados do médico são obrigatórios para realização do cadastro/edição;
-    ○ Não é permitido a exclusão de médicos que já realizaram consultas.
+    - Não é permitido o cadastro de médicos em duplicidade;
+    - Todos os dados do médico são obrigatórios para realização do cadastro/edição;
+    - Não é permitido a exclusão de médicos que já realizaram consultas.
 
 ● Cadastrar/editar proprietários;
-    ○ Não é permitido o cadastro de proprietários em duplicidade;
-    ○ Todos os dados do proprietários são obrigatórios para realização do cadastro/edição;
-    ○ Não é permitido a exclusão de proprietários de animais que já realizaram consultas.
+    - Não é permitido o cadastro de proprietários em duplicidade;
+    - Todos os dados do proprietários são obrigatórios para realização do cadastro/edição;
+    - Não é permitido a exclusão de proprietários de animais que já realizaram consultas.
 
 ● Cadastrar/editar pacientes;
-    ○ Todos os dados do paciente são obrigatórios para realização do cadastro/edição;
-    ○ Não é permitido a exclusão de animais que já realizaram consultas.
+    - Todos os dados do paciente são obrigatórios para realização do cadastro/edição;
+    - Não é permitido a exclusão de animais que já realizaram consultas.
 
 ● Criar/editar consultas;
-    ○ Uma consulta deve exigir o médico e o paciente para ser registrada, bem como a data e hora e o motivo.
+    - Uma consulta deve exigir o médico e o paciente para ser registrada, bem como a data e hora e o motivo.
 
 ● Ver a lista de todos os pacientes registrados junto com seus proprietários. A lista deve estar ordenada em ordem crescente de nome do proprietário do animal;
 

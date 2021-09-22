@@ -12,12 +12,17 @@ import java.util.List;
 public class DAOAnimal implements Persistivel<Animal> {
 
     @Override
-    public void cadastrar(Animal objeto) {
+    public void cadastrar(Animal obj) {
 
     }
 
     @Override
-    public void editar(Animal obejto) {
+    public void editar(Animal obj) {
+
+    }
+
+    @Override
+    public void obeter(Animal obj) {
 
     }
 

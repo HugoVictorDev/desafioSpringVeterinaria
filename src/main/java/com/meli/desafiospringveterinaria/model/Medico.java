@@ -20,6 +20,7 @@ public class Medico {
         this.especielidade = especielidade;
     }
 
+    public Medico(){};
 
 
     @Override

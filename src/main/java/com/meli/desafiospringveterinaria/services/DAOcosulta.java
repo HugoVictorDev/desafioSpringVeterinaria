@@ -13,12 +13,17 @@ public class DAOcosulta implements Persistivel<Cosulta> {
 
 
     @Override
-    public void cadastrar(Cosulta objeto) {
-        
+    public void cadastrar(Cosulta obj) {
+
     }
 
     @Override
-    public void editar(Cosulta obejto) {
+    public void editar(Cosulta obj) {
+
+    }
+
+    @Override
+    public void obeter(Cosulta obj) {
 
     }
 

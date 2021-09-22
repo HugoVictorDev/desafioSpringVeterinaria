@@ -20,7 +20,7 @@ public class DAOproprietarioAnimal implements Persistivel<ProprietarioAnimal> {
     }
 
     @Override
-    public void obeter(ProprietarioAnimal obj) {
+    public void obter(ProprietarioAnimal obj) {
 
     }
 

@@ -2,11 +2,6 @@ package com.meli.desafiospringveterinaria.services;
 
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
-
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DAOAnimal implements Persistivel<Animal> {
@@ -22,7 +17,7 @@ public class DAOAnimal implements Persistivel<Animal> {
     }
 
     @Override
-    public void obeter(Animal obj) {
+    public void obter(Animal obj) {
 
     }
 
@@ -30,4 +25,5 @@ public class DAOAnimal implements Persistivel<Animal> {
     public List<Animal> listagem() {
         return null;
     }
+
 }

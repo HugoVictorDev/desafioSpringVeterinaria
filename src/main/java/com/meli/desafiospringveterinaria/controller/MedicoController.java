@@ -1,8 +1,6 @@
 package com.meli.desafiospringveterinaria.controller;
 
-import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.services.DAOmedico;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -34,7 +32,5 @@ public class MedicoController {
 
 
     }
-
-
 
 }

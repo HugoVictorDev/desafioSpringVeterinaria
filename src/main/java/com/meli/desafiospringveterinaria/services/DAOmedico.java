@@ -5,26 +5,27 @@ import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 public class DAOmedico implements Persistivel<Medico> {
 
-  //  List<Medico> medicos = new ArrayList<>();
+    List<Medico> medicos = new ArrayList<>();
    // @Override
 
     @Override
     public void cadastrar(Medico objMedico) {
-        //  medicos.add(objMedico);
         if(validaMedico(objMedico.getNumeroRegistro())) {
-            cadastrar(objMedico);
+            medicos.add(objMedico);
         }else{throw new RuntimeException("Médico já cadastrado");
         }
     }
 
     @Override
     public List<Medico> listagem(){
-        return listagem();}
+        return medicos;
+    }
 
     @Override
     public void editar(Medico obj) {

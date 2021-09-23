@@ -12,7 +12,6 @@ import java.util.List;
 public class DAOmedico implements Persistivel<Medico> {
 
     List<Medico> medicos = new ArrayList<>();
-   // @Override
 
     @Override
     public void cadastrar(Medico objMedico) {

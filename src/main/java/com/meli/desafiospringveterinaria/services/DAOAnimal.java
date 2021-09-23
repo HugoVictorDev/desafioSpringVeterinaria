@@ -2,14 +2,18 @@ package com.meli.desafiospringveterinaria.services;
 
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOAnimal implements Persistivel<Animal> {
 
+    List<Animal> listaAnimal = new ArrayList<>();
+
     @Override
     public void cadastrar(Animal objAnimal) {
         if (validaAnimal(objAnimal.getNumeroDoPaciente())){
-            cadastrar(objAnimal);
+            listaAnimal.add(objAnimal);
         } else {
             throw new RuntimeException("Animal já cadastrado.");
         }
@@ -27,7 +31,7 @@ public class DAOAnimal implements Persistivel<Animal> {
 
     @Override
     public List<Animal> listagem() {
-        return listagem();
+        return listaAnimal;
     }
 
     // validando se animal existe

@@ -14,7 +14,7 @@ public class MedicoController {
 
 
    //responseEnity retorna um status
-    @PostMapping("/cadastrar/{medico}")
+    @PostMapping("/cadastrar")
     public ResponseEntity<Medico> cadastroMedico(@RequestBody Medico objMedico){
         daomedico.cadastrar(objMedico);
         return ResponseEntity.ok(objMedico);

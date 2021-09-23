@@ -16,5 +16,15 @@ public class AnimalController {
         return ResponseEntity.ok(objAnimal);
     }
 
+    @GetMapping("/consultar")
+    public String obter(){
+        return null;
+    }
+
+    @PutMapping("/editar")
+    public void atualizarAnimal(){
+        return;
+    }
+
 }
 

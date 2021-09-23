@@ -11,11 +11,10 @@ public class AnimalController {
     DAOAnimal daoAnimal = new DAOAnimal();
 
     @PostMapping("/cadastrar/{animal}")
-    public ResponseEntity<Animal> cadastrarAnimal(@RequestBody Animal objMedico){
-        daoAnimal.cadastrar(objMedico);
-        return ResponseEntity.ok(objMedico);
+    public ResponseEntity<Animal> cadastrarAnimal(@RequestBody Animal objAnimal){
+        daoAnimal.cadastrar(objAnimal);
+        return ResponseEntity.ok(objAnimal);
     }
-
 
 }
 

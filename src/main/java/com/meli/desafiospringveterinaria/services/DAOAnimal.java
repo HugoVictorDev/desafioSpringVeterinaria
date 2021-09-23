@@ -25,5 +25,4 @@ public class DAOAnimal implements Persistivel<Animal> {
     public List<Animal> listagem() {
         return null;
     }
-
 }

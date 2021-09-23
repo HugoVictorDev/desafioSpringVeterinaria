@@ -18,9 +18,8 @@ public class DAOcosulta implements Persistivel<Cosulta> {
     }
 
     @Override
-    public void obter(Cosulta obj) {
+    public void obter(Cosulta obj) {}
 
-    }
 
     @Override
     public List<Cosulta> listagem() {

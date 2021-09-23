@@ -10,24 +10,38 @@ import java.util.List;
 @Getter
 public class DAOmedico implements Persistivel<Medico> {
 
+  //  List<Medico> medicos = new ArrayList<>();
+   // @Override
 
     @Override
-    public void cadastrar(Medico obj) {
-
+    public void cadastrar(Medico objMedico) {
+        //  medicos.add(objMedico);
+        if(validaMedico(objMedico.getNumeroRegistro())) {
+            cadastrar(objMedico);
+        }else{throw new RuntimeException("Médico já cadastrado");
+        }
     }
+
+    @Override
+    public List<Medico> listagem(){
+        return listagem();}
 
     @Override
     public void editar(Medico obj) {
-
     }
 
     @Override
-    public void obeter(Medico obj) {
+    public void obter(Medico obj) {
 
     }
-
-    @Override
-    public List<Medico> listagem() {
-        return null;
+    //metodo que valida se o medico ja existe verificando o registro
+    private boolean validaMedico(long registroMedico) {
+        for(Medico medico: listagem()) {
+            if(medico.getNumeroRegistro() == (registroMedico)) {
+                return false;
+            }
+        }
+        return true;
     }
+
 }

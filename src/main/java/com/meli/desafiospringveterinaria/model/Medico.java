@@ -1,9 +1,11 @@
 package com.meli.desafiospringveterinaria.model;
 
 
+import lombok.Data;
 import lombok.Getter;
 
 
+@Data
 @Getter
 public class Medico {
     private String cpfMedico;

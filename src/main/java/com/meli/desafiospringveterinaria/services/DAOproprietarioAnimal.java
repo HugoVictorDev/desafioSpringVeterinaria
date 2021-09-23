@@ -21,7 +21,6 @@ public class DAOproprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
     @Override
     public void obter(ProprietarioAnimal obj) {
-
     }
 
     @Override

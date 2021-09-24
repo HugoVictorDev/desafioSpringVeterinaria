@@ -11,6 +11,8 @@ import java.util.List;
 public class AnimalController {
 
     DAOAnimal daoAnimal = new DAOAnimal();
+    List<Animal> listaDeAnimal = daoAnimal.listagem();
+
 
     @PostMapping("/cadastrar")
     public ResponseEntity<Animal> cadastrarAnimal(@RequestBody Animal objAnimal){
@@ -20,14 +22,14 @@ public class AnimalController {
 
     @GetMapping("/consultar")
     public List<Animal> listarAnimal(){
-        List<Animal> listaDeAnimal = daoAnimal.listagem();
         return listaDeAnimal;
     }
 
 <<<<<<< HEAD
     @PutMapping("/editar")
-    public void atualizarAnimal(){
-        return;
+    public ResponseEntity<Animal>  editarAnimal(@RequestBody Animal ObjAnimal){
+        daoAnimal.editar(ObjAnimal);
+        return ResponseEntity.ok(listaDeAnimal);
     }
 
 =======

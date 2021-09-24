@@ -28,5 +28,6 @@ public class DAOproprietarioAnimal implements Persistivel<ProprietarioAnimal> {
     public List<ProprietarioAnimal> listagem() {
         return null;
     }
+
 }
 

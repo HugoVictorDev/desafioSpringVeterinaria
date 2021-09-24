@@ -13,13 +13,18 @@ public class DAOcosulta implements Persistivel<Consulta> {
     }
 
     @Override
-    public void editar(Consulta obj) {
-
+    public Consulta editar(Consulta obj) {
+        return null;
     }
 
     @Override
     public Consulta obter(Consulta obj) {
         return obj;
+    }
+
+    @Override
+    public Consulta obterPorIdentificador(String identificador){
+        return null;
     }
 
 

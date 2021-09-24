@@ -11,4 +11,5 @@ public class RespostaBase
 
     public boolean Sucesso;
     public List<String> Erros;
+    public Object Data;
 }

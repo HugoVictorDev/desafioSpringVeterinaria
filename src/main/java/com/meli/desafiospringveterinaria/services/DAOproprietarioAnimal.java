@@ -2,8 +2,11 @@ package com.meli.desafiospringveterinaria.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
+import com.fasterxml.jackson.core.type.TypeReference;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -24,7 +27,7 @@ public class DAOproprietarioAnimal implements Persistivel<ProprietarioAnimal> {
         proprietarioAnimalList = new ArrayList<ProprietarioAnimal>();
         try
         {
-            proprietarioAnimalList = objectMapper.readValue(new File("Proprietarios.json"), proprietarioAnimalList.getClass());
+            proprietarioAnimalList = objectMapper.readValue(new File("Proprietarios.json"), new TypeReference<List<ProprietarioAnimal>>(){});
 
         }
         catch (Exception exception)
@@ -49,8 +52,22 @@ public class DAOproprietarioAnimal implements Persistivel<ProprietarioAnimal> {
     }
 
     @Override
-    public void editar(ProprietarioAnimal obj) {
+    public ProprietarioAnimal editar(ProprietarioAnimal obj) {
+        try {
+            for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList){
+                if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
+                    proprietarioAnimalList.remove(proprietarioAnimal);
+                    proprietarioAnimalList.add(obj);
+                    objectMapper.writeValue(new File("Proprietarios.json"), proprietarioAnimalList);
+                    return proprietarioAnimal;
+                }
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
 
+        return null;
     }
 
     @Override
@@ -59,24 +76,40 @@ public class DAOproprietarioAnimal implements Persistivel<ProprietarioAnimal> {
             return null;
         }
 
-        boolean existe = false;
-
-        for (int i = 0; i < proprietarioAnimalList.size(); i++) {
-            ProprietarioAnimal prop = ((ProprietarioAnimal) proprietarioAnimalList.get(i));
-            if (prop !=null && prop.getCpf().equals(obj.getCpf())) {
-                existe = true;
+        try {
+            for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList){
+                if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
+                    return proprietarioAnimal;
+                }
             }
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-        if(existe){
-            return  null;
+    @Override
+    public ProprietarioAnimal obterPorIdentificador(String identificador){
+        if(proprietarioAnimalList == null){
+            return null;
         }
 
-        return obj;
+        try {
+            for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList){
+                if (proprietarioAnimal.getCpf().equals(identificador)) {
+                    return proprietarioAnimal;
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public List<ProprietarioAnimal> listagem() {
-        return null;
+        return proprietarioAnimalList;
     }
 }

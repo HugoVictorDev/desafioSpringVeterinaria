@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
+import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 
@@ -39,8 +40,8 @@ public class DAOMedico implements Persistivel<Medico> {
     }
 
     @Override
-    public void editar(Medico obj) {
-
+    public Medico editar(Medico obj) {
+        return null;
     }
 
     @Override
@@ -85,6 +86,11 @@ public class DAOMedico implements Persistivel<Medico> {
     @Override
     public Medico obter(Medico obj) {
         return obj;
+    }
+
+    @Override
+    public Medico obterPorIdentificador(String identificador){
+        return null;
     }
 
     //metodo que valida se o medico ja existe verificando o registro

@@ -16,6 +16,11 @@ public class Animal {
     private String nome;
     List<Animal> animals = new ArrayList<>(); // sem uso por enquanto
 
+    public Animal()
+    {
+
+    }
+
     public Animal(int numeroDoPaciente, String especie, String raca, String cor, LocalDate dataDeNascimento, String nome) {
         this.numeroDoPaciente = numeroDoPaciente;
         this.especie = especie;
@@ -37,4 +42,3 @@ public class Animal {
                 '}';
     }
 }
-

@@ -6,7 +6,8 @@ public interface Persistivel<T> {
 
     void cadastrar(T obj);
     void editar(T obj);
-    void obter(T obj);
+    T obter(T obj);
     List<T> listagem();
 
 }
+

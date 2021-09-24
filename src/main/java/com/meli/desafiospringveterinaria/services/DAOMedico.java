@@ -34,7 +34,7 @@ public class DAOMedico implements Persistivel<Medico> {
         if(validaMedico(objMedico.getNumeroRegistro())) {
             medicosList.add(objMedico);
             arquivoUtil.gravaArquivo(medicosList);
-         }else{throw new RuntimeException("Médico já cadastrado");
+        }else{throw new RuntimeException("Médico já cadastrado");
         }
     }
 
@@ -45,7 +45,7 @@ public class DAOMedico implements Persistivel<Medico> {
 
     @Override
     public List<Medico> listagem() {
-       return medicosList;
+        return medicosList;
     }
 
 
@@ -63,7 +63,7 @@ public class DAOMedico implements Persistivel<Medico> {
     }
 
 
-   // @Override
+    // @Override
     public Medico edita(Medico objMedico){
         try {
             medicosList = objectMapper.readValue(new File("medico.json"), new TypeReference<List<Medico>>(){});
@@ -73,17 +73,18 @@ public class DAOMedico implements Persistivel<Medico> {
                     medicosList.add(objMedico);
                     objectMapper.writeValue(new File("medico.json"), medicosList);
                     return medico;
-                    }
-                }throw new RuntimeException("Médico não Atualizdo");
+                }
+            }throw new RuntimeException("Médico não Atualizdo");
         }catch (IOException e){
-                e.printStackTrace();
+            e.printStackTrace();
         }
         return null;
     }
 
 
     @Override
-    public void obter(Medico obj) {
+    public Medico obter(Medico obj) {
+        return obj;
     }
 
     //metodo que valida se o medico ja existe verificando o registro

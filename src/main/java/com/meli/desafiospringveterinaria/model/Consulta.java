@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class Cosulta {
+public class Consulta {
     private LocalDateTime dataHora;
     private String motivo;
     private String diagnostico;
@@ -13,7 +13,7 @@ public class Cosulta {
     private Medico medico;
     private Animal animal;
 
-    public Cosulta(LocalDateTime dataHora, String motivo, String diagnostico, String tratamento, Medico medico, Animal animal) {
+    public Consulta(LocalDateTime dataHora, String motivo, String diagnostico, String tratamento, Medico medico, Animal animal) {
         this.dataHora = dataHora;
         this.motivo = motivo;
         this.diagnostico = diagnostico;

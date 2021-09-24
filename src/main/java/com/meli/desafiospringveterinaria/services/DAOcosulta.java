@@ -1,28 +1,30 @@
 package com.meli.desafiospringveterinaria.services;
 
-import com.meli.desafiospringveterinaria.model.Cosulta;
+import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import java.util.List;
 
-public class DAOcosulta implements Persistivel<Cosulta> {
+public class DAOcosulta implements Persistivel<Consulta> {
 
 
     @Override
-    public void cadastrar(Cosulta obj) {
+    public void cadastrar(Consulta obj) {
 
     }
 
     @Override
-    public void editar(Cosulta obj) {
+    public void editar(Consulta obj) {
 
     }
 
     @Override
-    public void obter(Cosulta obj) {}
+    public Consulta obter(Consulta obj) {
+        return obj;
+    }
 
 
     @Override
-    public List<Cosulta> listagem() {
+    public List<Consulta> listagem() {
         return null;
     }
 

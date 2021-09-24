@@ -25,8 +25,8 @@ public class DAOAnimal implements Persistivel<Animal> {
     }
 
     @Override
-    public void obter(Animal obj) {
-
+    public Animal obter(Animal obj) {
+        return obj;
     }
 
     @Override

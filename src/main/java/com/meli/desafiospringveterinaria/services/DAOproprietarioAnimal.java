@@ -11,17 +11,14 @@ public class DAOproprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
     @Override
     public void cadastrar(ProprietarioAnimal obj) {
-
     }
 
     @Override
     public void editar(ProprietarioAnimal obj) {
-
     }
 
     @Override
-    public void obeter(ProprietarioAnimal obj) {
-
+    public void obter(ProprietarioAnimal obj) {
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.meli.desafiospringveterinaria.model;
 
-import lombok.Data;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -26,22 +25,16 @@ public class Animal {
         this.nome = nome;
     }
 
-
-
-
     @Override
     public String toString() {
-        return
-                "numeroDoPaciente :" + numeroDoPaciente +
-                ", especie :" + especie  +
-                ", raca: " + raca  +
-                ", cor: " + cor  +
-                ", dataDeNascimento: " + dataDeNascimento +
-                ", nome: " + nome
-
-                ;
+        return "Animal{" +
+                "numeroDoPaciente=" + numeroDoPaciente +
+                ", especie='" + especie + '\'' +
+                ", raca='" + raca + '\'' +
+                ", cor='" + cor + '\'' +
+                ", dataDeNascimento=" + dataDeNascimento +
+                ", nome='" + nome + '\'' +
+                '}';
     }
-
-
 }
 

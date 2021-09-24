@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/medico")
 public class MedicoController {
-
+//---
     DAOmedico daomedico = new DAOmedico();
 
 
@@ -30,7 +30,7 @@ public class MedicoController {
     @PutMapping("/editar")
     public void atualizarMedico(){
 
-        return;
+
 
     }
 

@@ -25,14 +25,11 @@ public class AnimalController {
         return listaDeAnimal;
     }
 
-<<<<<<< HEAD
     @PutMapping("/editar")
     public ResponseEntity<Animal>  editarAnimal(@RequestBody Animal ObjAnimal){
         daoAnimal.editar(ObjAnimal);
         return ResponseEntity.ok(listaDeAnimal);
     }
 
-=======
->>>>>>> 849c13c (alteracoes AnimalController)
 }
 

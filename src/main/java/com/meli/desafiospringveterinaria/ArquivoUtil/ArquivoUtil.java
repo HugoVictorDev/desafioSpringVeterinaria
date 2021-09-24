@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.meli.desafiospringveterinaria.model.Consulta;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.meli.desafiospringveterinaria.model.Medico;
@@ -29,5 +30,23 @@ public void gravaArquivo(List<Medico> medico){
         e.printStackTrace();
     }
     }
+
+
+
+    public void gravaArquivoConsulta(List<Consulta> cosultaList) {
+
+    Gson gson = new Gson();
+    String json = gson.toJson(cosultaList);
+
+    try {
+        //Escreve Json convertido em arquivo chamado "file.json"
+        FileWriter writer = new FileWriter("consulta.json");
+        writer.write(json);
+        writer.close();
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 }
 

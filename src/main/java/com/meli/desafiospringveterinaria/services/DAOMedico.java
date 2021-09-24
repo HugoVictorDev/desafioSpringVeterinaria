@@ -85,7 +85,6 @@ public class DAOMedico implements Persistivel<Medico> {
     @Override
     public void obter(Medico obj) {
     }
-
     //metodo que valida se o medico ja existe verificando o registro
     private boolean validaMedico(long registroMedico) {
         for(Medico medico:listagem()) {
@@ -95,7 +94,5 @@ public class DAOMedico implements Persistivel<Medico> {
         }
         return true;
     }
-
-
 
 }

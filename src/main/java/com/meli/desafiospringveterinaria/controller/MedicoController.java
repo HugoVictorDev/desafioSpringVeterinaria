@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
             return ResponseEntity.ok(objMedico);
         }
 
-
         @GetMapping("/consulta/{numeroRegistro}")
         public Medico obterMedico(@PathVariable("numeroRegistro") Long numeroRegistro) {
             return daomedico.obeterMedico(numeroRegistro);
@@ -32,9 +31,9 @@ import org.springframework.web.bind.annotation.*;
 
 
         @PutMapping("/editar")
-        public void atualizarMedico(){
-
-            return;
+        public Medico atualizarMedico(@RequestBody Medico objMedico){
+            daomedico.edita(objMedico);
+            return objMedico;
 
         }
     }

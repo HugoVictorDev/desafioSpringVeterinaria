@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 public class DAOMedico implements Persistivel<Medico> {
 
-    List<Medico> medicos = new ArrayList<>();
+    List<Medico> medicosList = new ArrayList<>();
 
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -32,22 +32,27 @@ public class DAOMedico implements Persistivel<Medico> {
     @Override
     public void cadastrar(Medico objMedico) {
         if(validaMedico(objMedico.getNumeroRegistro())) {
-            medicos.add(objMedico);
-            arquivoUtil.gravaArquivo(medicos);
+            medicosList.add(objMedico);
+            arquivoUtil.gravaArquivo(medicosList);
          }else{throw new RuntimeException("Médico já cadastrado");
         }
     }
 
     @Override
+    public void editar(Medico obj) {
+
+    }
+
+    @Override
     public List<Medico> listagem() {
-       return medicos;
+       return medicosList;
     }
 
 
     public Medico obeterMedico(Long numeroRegistro){
         try {
-            medicos = objectMapper.readValue(new File("medico.json"), new TypeReference<List<Medico>>(){});
-            for (Medico medico : medicos){
+            medicosList = objectMapper.readValue(new File("medico.json"), new TypeReference<List<Medico>>(){});
+            for (Medico medico : medicosList){
                 if (medico.getNumeroRegistro() == (numeroRegistro)) {
                     return medico;
                 }
@@ -58,13 +63,27 @@ public class DAOMedico implements Persistivel<Medico> {
     }
 
 
-    @Override
-    public void editar(Medico obj) {
+   // @Override
+    public Medico edita(Medico objMedico){
+        try {
+            medicosList = objectMapper.readValue(new File("medico.json"), new TypeReference<List<Medico>>(){});
+            for (Medico medico : medicosList){
+                if (medico.getNumeroRegistro() == (objMedico.getNumeroRegistro())) {
+                    medicosList.remove(medico);
+                    medicosList.add(objMedico);
+                    objectMapper.writeValue(new File("medico.json"), medicosList);
+                    return medico;
+                    }
+                }throw new RuntimeException("Médico não Atualizdo");
+        }catch (IOException e){
+                e.printStackTrace();
+        }
+        return null;
     }
+
 
     @Override
     public void obter(Medico obj) {
-
     }
 
     //metodo que valida se o medico ja existe verificando o registro

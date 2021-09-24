@@ -24,10 +24,13 @@ public class AnimalController {
         return listaDeAnimal;
     }
 
+<<<<<<< HEAD
     @PutMapping("/editar")
     public void atualizarAnimal(){
         return;
     }
 
+=======
+>>>>>>> 849c13c (alteracoes AnimalController)
 }
 

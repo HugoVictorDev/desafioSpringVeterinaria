@@ -34,8 +34,6 @@ import org.springframework.web.bind.annotation.*;
         @PutMapping("/editar")
         public void atualizarMedico(){
 
-            return;
-
         }
     }
 

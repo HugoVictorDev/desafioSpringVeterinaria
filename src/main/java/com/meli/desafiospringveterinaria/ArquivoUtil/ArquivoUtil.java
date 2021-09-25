@@ -1,16 +1,11 @@
 package com.meli.desafiospringveterinaria.ArquivoUtil;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import org.codehaus.jackson.map.ObjectMapper;
-
+import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.Medico;
-import org.json.*;
 
 public class ArquivoUtil {
 
@@ -25,6 +20,19 @@ public void gravaArquivo(List<Medico> medico){
         writer.write(json);
         writer.close();
 
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
+
+    public void gravarAnimal(List<Animal> animal){
+    Gson gson = new Gson();
+    String json = gson.toJson(animal);
+
+    try {
+        FileWriter writer = new FileWriter("animal.json");
+        writer.write(json);
+        writer.close();
     } catch (IOException e) {
         e.printStackTrace();
     }

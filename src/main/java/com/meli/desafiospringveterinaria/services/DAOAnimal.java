@@ -1,5 +1,6 @@
 package com.meli.desafiospringveterinaria.services;
 
+import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 
@@ -9,11 +10,13 @@ import java.util.List;
 public class DAOAnimal implements Persistivel<Animal> {
 
     List<Animal> listaAnimal = new ArrayList<>();
+    ArquivoUtil arquivoUtil = new ArquivoUtil();
 
     @Override
     public void cadastrar(Animal objAnimal) {
         if (validaAnimal(objAnimal.getNumeroDoPaciente())){
             listaAnimal.add(objAnimal);
+            arquivoUtil.gravarAnimal(listaAnimal);
         } else {
             throw new RuntimeException("Animal já cadastrado.");
         }

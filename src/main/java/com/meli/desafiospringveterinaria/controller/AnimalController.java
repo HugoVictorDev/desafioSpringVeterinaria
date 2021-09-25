@@ -26,9 +26,9 @@ public class AnimalController {
     }
 
     @PutMapping("/editar")
-    public ResponseEntity<Animal>  editarAnimal(@RequestBody Animal ObjAnimal){
-        daoAnimal.editar(ObjAnimal);
-        return ResponseEntity.ok(listaDeAnimal);
+    public Animal  editarAnimal(@RequestBody Animal objAnimal){
+        daoAnimal.editar(objAnimal);
+        return objAnimal;
     }
 
 }

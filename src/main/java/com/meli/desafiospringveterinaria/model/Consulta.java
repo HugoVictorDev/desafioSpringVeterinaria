@@ -1,19 +1,22 @@
 package com.meli.desafiospringveterinaria.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 public class Consulta {
-    private LocalDateTime dataHora;
+    private LocalDate dataHora;
     private String motivo;
     private String diagnostico;
     private String tratamento;
     private Medico medico;
     private Animal animal;
 
-    public Consulta(LocalDateTime dataHora, String motivo, String diagnostico, String tratamento, Medico medico, Animal animal) {
+    public Consulta(LocalDate dataHora, String motivo, String diagnostico, String tratamento, Medico medico, Animal animal) {
         this.dataHora = dataHora;
         this.motivo = motivo;
         this.diagnostico = diagnostico;
@@ -22,8 +25,6 @@ public class Consulta {
         this.animal = animal;
     }
 
-    public Consulta() {
-    }
 
     @Override
     public String toString() {

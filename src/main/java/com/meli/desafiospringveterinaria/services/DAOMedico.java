@@ -65,6 +65,7 @@ public class DAOMedico implements Persistivel<Medico> {
 
    // @Override
     public Medico edita(Medico objMedico){
+        mapearObjeto();
         try {
             medicosList = objectMapper.readValue(new File("medico.json"), new TypeReference<List<Medico>>(){});
             for (Medico medico : medicosList){

@@ -6,7 +6,7 @@ import com.meli.desafiospringveterinaria.persistence.Persistivel;
 
 import java.util.List;
 
-public class DAOproprietarioAnimal implements Persistivel<ProprietarioAnimal> {
+public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
 
     @Override

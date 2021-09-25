@@ -1,27 +1,36 @@
 package com.meli.desafiospringveterinaria.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
+import com.fasterxml.jackson.databind.*;
 import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOcosulta implements Persistivel<Consulta> {
 
-    List<Consulta> cosultaList = new ArrayList<>();
+public class DAOConsulta implements Persistivel<Consulta> {
+
+
+    List<Consulta> consultaList = new ArrayList<>();
 
     ObjectMapper objectMapper = new ObjectMapper();
+    private void mapearObjeto() {
+        objectMapper.findAndRegisterModules();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+    }
 
     @Override
     public void cadastrar(Consulta consulta) {
-        cosultaList.add(consulta);
-        ArquivoUtil arquivoUtil = new ArquivoUtil();
-        arquivoUtil.gravaArquivoConsulta(cosultaList);
+        mapearObjeto();
+        consultaList.add(consulta);
+        try {
+            objectMapper.writeValue(new File("consulta.json"), consultaList);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -39,17 +48,18 @@ public class DAOcosulta implements Persistivel<Consulta> {
     }
 
 
-    public List<Consulta> consultarMedico(String nome) {
+    public Consulta consultarMedico(String nome) {
+        mapearObjeto();
         try {
-            cosultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
-            for (Consulta cosulta : cosultaList){
+            consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
+            for (Consulta cosulta : consultaList){
                 if (cosulta.getMedico().getNomeMedico().equals(nome)) {
-                    listagem().add((Consulta) cosultaList);
-                    return listagem();
+                    return cosulta;
                 }
             }throw new RuntimeException("Não há consultas para esse Médico");
         }catch (IOException e){
             e.printStackTrace();
         }return null;
     }
+
 }

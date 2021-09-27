@@ -107,11 +107,6 @@ public class DAOMedico implements Persistivel<Medico> {
     }
 
     public void  remover(Long numeroRegistro) {
-        mapearObjeto();
-        List<Consulta> listC
-        try {
-            medicosList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Medico>>(){});
-            for (List<Consulta> consulta : medicosList){
-            if (medico.getNumeroRegistro() == (medicosList.getNumeroRegistro())) {
+
     }
 }

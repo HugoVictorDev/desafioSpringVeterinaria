@@ -31,9 +31,15 @@ public class ConsultaController {
     }
 
     @GetMapping("/listadeconsultas/{data}")
-    public List<Consulta> consultarPorData(@PathVariable("data") String data) throws IOException {
+    public List<Consulta> listagemMedicoConsulta(@PathVariable("data") String data) throws IOException {
 
         return daOcosulta.listagem2(data);
+    }
+
+    @GetMapping("/consultasporcpf/{cpfDoMedico}")
+    public List<Consulta> listagemMedicoConsultas(@PathVariable("cpfDoMedico") String cpfDoMedico) throws IOException {
+
+        return daOcosulta.listagemMedicoConsulta(cpfDoMedico);
     }
 
     @PutMapping("/editar")

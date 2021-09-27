@@ -89,6 +89,17 @@ public class DAOConsulta implements Persistivel<Consulta> {
     }
 
 
+    @SneakyThrows
+    public List<Consulta> listagemMedicoConsulta(String cpfDoMedico) {
+
+        mapearObjeto();
+
+        consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>() {
+        });
+        return consultaList.stream().filter(consulta -> consulta.getMedico().getCpfMedico()
+                        .equals(cpfDoMedico)).collect(Collectors.toList());
+    }
+
     public Consulta consultarMedico(String nome) {
         mapearObjeto();
         try {

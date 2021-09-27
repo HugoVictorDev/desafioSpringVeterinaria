@@ -11,6 +11,8 @@ import java.util.List;
 public class AnimalController {
 
     DAOAnimal daoAnimal = new DAOAnimal();
+    List<Animal> listaDeAnimal = daoAnimal.listagem();
+
 
     @PostMapping("/cadastrar")
     public ResponseEntity<Animal> cadastrarAnimal(@RequestBody Animal objAnimal){
@@ -18,19 +20,16 @@ public class AnimalController {
         return ResponseEntity.ok(objAnimal);
     }
 
-    @GetMapping("/consultar")
-    public List<Animal> listarAnimal(){
-        List<Animal> listaDeAnimal = daoAnimal.listagem();
-        return listaDeAnimal;
+    @GetMapping("/consultar/{numeroDoPaciente}")
+    public Animal consultarAnimal (@PathVariable("numeroDoPaciente") long numeroDoPaciente){
+        return daoAnimal.consultarAnimal(numeroDoPaciente);
     }
 
-<<<<<<< HEAD
     @PutMapping("/editar")
-    public void atualizarAnimal(){
-        return;
+    public Animal  editarAnimal(@RequestBody Animal objAnimal){
+        daoAnimal.editar(objAnimal);
+        return objAnimal;
     }
 
-=======
->>>>>>> 849c13c (alteracoes AnimalController)
 }
 

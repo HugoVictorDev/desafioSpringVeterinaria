@@ -1,0 +1,22 @@
+[ {
+  "numeroDoPaciente" : 2222,
+  "especie" : "Equino",
+  "raca" : "SRD",
+  "cor" : "Branco",
+  "dataDeNascimento" : "2021-05-01",
+  "nome" : "Janjao"
+}, {
+  "numeroDoPaciente" : 3333,
+  "especie" : "Canino",
+  "raca" : "SRD",
+  "cor" : "Branco",
+  "dataDeNascimento" : "2021-05-01",
+  "nome" : "Brutus"
+}, {
+  "numeroDoPaciente" : 1111,
+  "especie" : "Equino",
+  "raca" : "SRD",
+  "cor" : "Branco",
+  "dataDeNascimento" : "2021-05-01",
+  "nome" : "Zanzao"
+} ]

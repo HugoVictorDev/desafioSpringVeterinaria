@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
+import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 
@@ -39,9 +40,10 @@ public class DAOMedico implements Persistivel<Medico> {
     }
 
     @Override
-    public void editar(Medico obj) {
-
+    public Animal editar(Medico obj) {
+        return null;
     }
+
 
     @Override
     public List<Medico> listagem() {

@@ -7,6 +7,7 @@ import com.meli.desafiospringveterinaria.services.DAOConsulta;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class ConsultaController {
     }
 
     @GetMapping("/listadeconsultas/{data}")
-    public List<Consulta> consultarPorData(@PathVariable("data") String data) {
+    public List<Consulta> consultarPorData(@PathVariable("data") String data) throws IOException {
 
         return daOcosulta.listagem2(data);
     }

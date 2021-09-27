@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.*;
 import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
+import lombok.SneakyThrows;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -20,6 +22,7 @@ public class DAOConsulta implements Persistivel<Consulta> {
     List<Consulta> consultaList = new ArrayList<>();
 
     ObjectMapper objectMapper = new ObjectMapper();
+
     private void mapearObjeto() {
         objectMapper.findAndRegisterModules();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -67,15 +70,22 @@ public class DAOConsulta implements Persistivel<Consulta> {
 
     @Override
     public List<Consulta> listagem() {
+
         return consultaList.stream()
                 .sorted(Comparator.comparing(lista -> lista.getDataHora()))
                 .collect(Collectors.toList());
     }
 
+    @SneakyThrows
     public List<Consulta> listagem2(String data) {
-        return consultaList.stream().filter(consulta -> consulta.getDataHora().toString().equals(data)).sorted(Comparator.comparing(lista -> lista.getDataHora())).collect(Collectors.toList());
 
+        mapearObjeto();
 
+        consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>() {
+        });
+        return consultaList.stream().filter(consulta -> consulta.getDataHora().toString()
+                        .equals(data)).sorted(Comparator.comparing(lista -> lista.getDataHora()))
+                .collect(Collectors.toList());
     }
 
 

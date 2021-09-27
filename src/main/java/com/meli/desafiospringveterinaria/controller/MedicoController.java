@@ -31,5 +31,9 @@ import org.springframework.web.bind.annotation.*;
             return objMedico;
 
         }
+        @DeleteMapping(value="/deleta/{numeroRegistro}}")
+        public void cadastro(@PathVariable("numeroRegistro}") Long numeroRegistro){
+          daomedico.remover(numeroRegistro);
+        }
     }
 

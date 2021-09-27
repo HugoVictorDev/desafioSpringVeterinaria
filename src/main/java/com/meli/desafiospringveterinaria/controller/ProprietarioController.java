@@ -1,9 +1,6 @@
 package com.meli.desafiospringveterinaria.controller;
 
-import com.meli.desafiospringveterinaria.model.Animal;
-import com.meli.desafiospringveterinaria.model.Consulta;
-import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
-import com.meli.desafiospringveterinaria.model.RespostaBase;
+import com.meli.desafiospringveterinaria.model.*;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import com.meli.desafiospringveterinaria.services.DAOAnimal;
 import com.meli.desafiospringveterinaria.services.DAOConsulta;
@@ -12,26 +9,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/proprietario")
 public class ProprietarioController
 {
-    private Persistivel<ProprietarioAnimal> DAOProprietarioAnimal;
-    private Persistivel<Animal> DAOAnimal;
-    private Persistivel<Consulta> DAOConsulta;
 
-    public ProprietarioController(){
-        DAOProprietarioAnimal = new DAOProprietarioAnimal();
-        DAOAnimal = new DAOAnimal();
-        DAOConsulta = new DAOConsulta();
-    }
+    DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
+    DAOAnimal daoAnimal = new DAOAnimal();
 
-
-    @GetMapping("/consulta")
-    public RespostaBase obter(String identificador) throws IOException {
+    @GetMapping("/consulta/{identificador}")
+    public RespostaBase obter(@PathVariable ("identificador") String identificador) throws IOException {
         RespostaBase retorno = new RespostaBase();
-        ProprietarioAnimal prop = DAOProprietarioAnimal.obterPorIdentificador(identificador);
+        ProprietarioAnimal prop = daoProprietarioAnimal.obterPorIdentificador(identificador);
 
         if(prop == null) {
             retorno.Sucesso = false;
@@ -39,9 +30,8 @@ public class ProprietarioController
             return retorno;
         }
 
-        retorno.Data = prop;
         retorno.Sucesso = true;
-
+        retorno.Data = prop;
         return retorno;
     }
 
@@ -82,7 +72,7 @@ public class ProprietarioController
             return retorno;
         }
 
-        Animal animal = Animal.obter(proprietario.getAnimal());
+        Animal animal = daoAnimal.obter2(proprietario.getAnimal());
 
         if(animal == null){
             retorno.Erros.add("O Animal informado ainda não está cadastrado, favor cadastrar antes de registrarmos o proprietario.");
@@ -90,8 +80,8 @@ public class ProprietarioController
             return retorno;
         }
 
-        //ProprietarioAnimal prop = DAOProprietarioAnimal.obterAnimal(proprietario);
-        ProprietarioAnimal prop = DAOProprietarioAnimal.obter(proprietario);
+      //  ProprietarioAnimal prop = daoProprietarioAnimal.obter(proprietario);
+        ProprietarioAnimal prop = daoProprietarioAnimal.obterAnimal(proprietario);
 
         if(prop != null){
             retorno.Erros.add("Proprietario já cadastrado!");
@@ -99,10 +89,11 @@ public class ProprietarioController
             return retorno;
         }
 
-        DAOProprietarioAnimal.cadastrar(proprietario);
+        daoProprietarioAnimal.cadastrar(proprietario);
 
         retorno.Sucesso = true;
-        return  retorno;
+        retorno.Data = proprietario;
+        return retorno;
     }
 
 
@@ -143,29 +134,17 @@ public class ProprietarioController
             return retorno;
         }
 
-        //Animal animal = DAOAnimal.obter(proprietario.getAnimal());
-        ProprietarioAnimal animal = DAOAnimal.obter(proprietario.getAnimal());
-
-        if(animal == null){
-            retorno.Erros.add("O Animal informado ainda não está cadastrado, favor cadastrar antes de registrarmos o proprietario.");
-            retorno.Sucesso = false;
-            return retorno;
-        }
-
-        ProprietarioAnimal prop = DAOProprietarioAnimal.obter(proprietario);
-
-        if(prop == null){
-            retorno.Erros.add("Proprietario informado não cadastrado ainda!");
-            retorno.Sucesso = false;
-            return retorno;
-        }
-
-        DAOProprietarioAnimal.editar(proprietario);
+        daoProprietarioAnimal.edita(proprietario);
 
         retorno.Sucesso = true;
-        return  retorno;
+        retorno.Data = proprietario;
+        return retorno;
     }
 
+    @GetMapping("/consulta/pacientes")
+    public List<ProprietarioAnimal> listarProprietario() {
+        return daoProprietarioAnimal.listagemConsulta();
+    }
 
 
 }

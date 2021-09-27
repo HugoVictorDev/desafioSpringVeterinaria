@@ -5,8 +5,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
+import com.meli.desafiospringveterinaria.model.Animal;
+import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.model.Medico;
-import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 
 import lombok.Getter;
@@ -31,32 +32,34 @@ public class DAOMedico implements Persistivel<Medico> {
 
     @Override
     public void cadastrar(Medico objMedico) {
-        if(validaMedico(objMedico.getNumeroRegistro())) {
-            medicosList.add(objMedico);
-            arquivoUtil.gravaArquivo(medicosList);
-        }else{throw new RuntimeException("Médico já cadastrado");
+        mapearObjeto();
+        try {
+            medicosList = objectMapper.readValue(new File("medico.json"), new TypeReference<List<Medico>>(){});
+            for (Medico medico : medicosList){
+                if (medico.getNumeroRegistro() != (objMedico.getNumeroRegistro())) {
+                    medicosList.add(objMedico);
+                    objectMapper.writeValue(new File("medico.json"), medicosList);
+
+                }
+            }throw new RuntimeException("Médico ja cadastrado");
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 
     @Override
-    public ProprietarioAnimal editar(Medico obj) {
-    return null;
+    public void editar(Medico obj) {
     }
 
     @Override
-    public ProprietarioAnimal obter(Medico obj) {
+    public void obter(Medico obj) {
 
-        return null;
     }
+
 
     @Override
     public List<Medico> listagem() {
         return medicosList;
-    }
-
-    @Override
-    public Medico obterPorIdentificador(String identificador) {
-        return null;
     }
 
 
@@ -93,8 +96,6 @@ public class DAOMedico implements Persistivel<Medico> {
         return null;
     }
 
-
-
     //metodo que valida se o medico ja existe verificando o registro
     private boolean validaMedico(long registroMedico) {
         for(Medico medico:listagem()) {
@@ -105,4 +106,12 @@ public class DAOMedico implements Persistivel<Medico> {
         return true;
     }
 
+    public void  remover(Long numeroRegistro) {
+        mapearObjeto();
+        List<Consulta> listC
+        try {
+            medicosList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Medico>>(){});
+            for (List<Consulta> consulta : medicosList){
+            if (medico.getNumeroRegistro() == (medicosList.getNumeroRegistro())) {
+    }
 }

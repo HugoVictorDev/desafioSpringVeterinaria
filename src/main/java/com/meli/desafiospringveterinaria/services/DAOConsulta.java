@@ -2,17 +2,20 @@ package com.meli.desafiospringveterinaria.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
+import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.Consulta;
-import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
+import lombok.SneakyThrows;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class DAOConsulta implements Persistivel<Consulta> {
-
 
     List<Consulta> consultaList = new ArrayList<>();
 
@@ -35,8 +38,12 @@ public class DAOConsulta implements Persistivel<Consulta> {
     }
 
     @Override
-    public ProprietarioAnimal editar(Consulta obj) {
-  return null;
+    public void editar(Consulta obj) {
+    }
+
+    @Override
+    public void obter(Consulta obj) {
+
     }
 
 
@@ -58,21 +65,6 @@ public class DAOConsulta implements Persistivel<Consulta> {
         return null;
     }
 
-    @Override
-    public ProprietarioAnimal obter(Consulta obj) {
-        return null;
-    }
-
-
-    public Consulta obterPorIdentificador(String identificador) {
-        return null;
-    }
-
-    @Override
-    public List<Consulta> listagem() {
-        return null;
-    }
-
 
     public Consulta consultarMedico(String nome) {
         mapearObjeto();
@@ -86,6 +78,13 @@ public class DAOConsulta implements Persistivel<Consulta> {
         }catch (IOException e){
             e.printStackTrace();
         }return null;
+    }
+
+    @SneakyThrows
+    public List<Consulta> listagemMedicoConsulta(String cpfDoMedico) {
+        mapearObjeto();
+        consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
+        return consultaList.stream().filter(consulta -> consulta.getMedico().getCpfMedico().equals(cpfDoMedico)).collect(Collectors.toList());
     }
 
     public List<Consulta> pacienteConsulta(int numeroPaciente) {
@@ -105,4 +104,21 @@ public class DAOConsulta implements Persistivel<Consulta> {
         }
         return null;
     }
+
+    @SneakyThrows
+    public List<Consulta> listagem2(String data) {
+
+        mapearObjeto();
+        consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>() {
+        });
+        return consultaList.stream().filter(consulta -> consulta.getDataHora().toString()
+                .equals(data)).sorted(Comparator.comparing(lista -> lista.getDataHora()))
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<Consulta> listagem() {return null;}
+
+
 }

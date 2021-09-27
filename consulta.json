@@ -16,8 +16,7 @@
     "raca" : "do mato",
     "cor" : "preto",
     "dataDeNascimento" : "1977-05-13",
-    "nome" : "felix",
-    "animals" : [ ]
+    "nome" : "felix"
   }
 }, {
   "dataHora" : "1977-05-13",
@@ -37,7 +36,6 @@
     "raca" : "do mato",
     "cor" : "preto",
     "dataDeNascimento" : "1977-05-13",
-    "nome" : "felix",
-    "animals" : [ ]
+    "nome" : "felix"
   }
 } ]

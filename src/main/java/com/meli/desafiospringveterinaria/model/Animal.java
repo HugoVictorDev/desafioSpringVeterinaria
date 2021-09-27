@@ -14,7 +14,6 @@ public class Animal {
     private String cor;
     private LocalDate dataDeNascimento;
     private String nome;
-    List<Animal> animals = new ArrayList<>(); // sem uso por enquanto
 
     public Animal()
     {

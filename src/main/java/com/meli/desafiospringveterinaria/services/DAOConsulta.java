@@ -3,6 +3,7 @@ package com.meli.desafiospringveterinaria.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.meli.desafiospringveterinaria.model.Consulta;
+import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +35,9 @@ public class DAOConsulta implements Persistivel<Consulta> {
     }
 
     @Override
-    public void editar(Consulta obj) {}
+    public ProprietarioAnimal editar(Consulta obj) {
+  return null;
+    }
 
 
     public Consulta editarConsulta (Consulta objConsulta) {
@@ -56,8 +59,14 @@ public class DAOConsulta implements Persistivel<Consulta> {
     }
 
     @Override
-    public void obter(Consulta obj) {}
+    public ProprietarioAnimal obter(Consulta obj) {
+        return null;
+    }
 
+
+    public Consulta obterPorIdentificador(String identificador) {
+        return null;
+    }
 
     @Override
     public List<Consulta> listagem() {
@@ -88,7 +97,9 @@ public class DAOConsulta implements Persistivel<Consulta> {
                 if (consulta.getAnimal().getNumeroDoPaciente().equals(numeroPaciente)) {
                   listConsulta.add(consulta);
                 }
-            } return listConsulta;
+            } if(listConsulta.size() == 0){
+                 throw new RuntimeException("Não há consultas para esse paciente");
+            }else return listConsulta;
         }catch (IOException e){
             e.printStackTrace();
         }

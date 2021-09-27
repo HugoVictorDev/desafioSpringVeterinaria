@@ -1,30 +1,8 @@
 [ {
-  "dataHora" : "2000-05-13",
+  "dataHora" : "1977-05-13",
   "motivo" : "motivo",
   "diagnostico" : "diagnostico",
-  "tratamento" : "tratamento normal",
-  "medico" : {
-    "cpfMedico" : "123456879",
-    "nomeMedico" : "Marco",
-    "sobrenomeMedico" : "da Rocha",
-    "numeroRegistro" : 456321201,
-    "especielidade" : "cardio"
-  },
-  "animal" : {
-    "numeroDoPaciente" : 2,
-    "especie" : "gato",
-    "raca" : "do mato",
-    "cor" : "preto",
-    "dataDeNascimento" : "1977-05-13",
-    "nome" : "felix",
-    "animals" : [ ]
-  }
-},
-  {
-  "dataHora" : "2000-05-13",
-  "motivo" : "motivo",
-  "diagnostico" : "diagnostico",
-  "tratamento" : "tratamento normal",
+  "tratamento" : "tratamento",
   "medico" : {
     "cpfMedico" : "123456879",
     "nomeMedico" : "Marco",
@@ -41,26 +19,25 @@
     "nome" : "felix",
     "animals" : [ ]
   }
-},
-  {
-    "dataHora" : "2000-05-13",
-    "motivo" : "motivo",
-    "diagnostico" : "diagnostico",
-    "tratamento" : "tratamento normal",
-    "medico" : {
-      "cpfMedico" : "123456879",
-      "nomeMedico" : "Marco",
-      "sobrenomeMedico" : "da Rocha",
-      "numeroRegistro" : 456321201,
-      "especielidade" : "cardio"
-    },
-    "animal" : {
-      "numeroDoPaciente" : 1,
-      "especie" : "gato",
-      "raca" : "do mato",
-      "cor" : "preto",
-      "dataDeNascimento" : "1977-05-13",
-      "nome" : "felix",
-      "animals" : [ ]
-    }
-  } ]
+}, {
+  "dataHora" : "1977-05-13",
+  "motivo" : "motivo",
+  "diagnostico" : "diagnostico",
+  "tratamento" : "tratamento",
+  "medico" : {
+    "cpfMedico" : "123456879",
+    "nomeMedico" : "Marco",
+    "sobrenomeMedico" : "da Rocha",
+    "numeroRegistro" : 456321201,
+    "especielidade" : "cardio"
+  },
+  "animal" : {
+    "numeroDoPaciente" : 2,
+    "especie" : "gato",
+    "raca" : "do mato",
+    "cor" : "preto",
+    "dataDeNascimento" : "1977-05-13",
+    "nome" : "felix",
+    "animals" : [ ]
+  }
+} ]

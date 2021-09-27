@@ -1,43 +1,37 @@
 package com.meli.desafiospringveterinaria.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.model.RespostaBase;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import com.meli.desafiospringveterinaria.services.DAOAnimal;
-import com.meli.desafiospringveterinaria.services.DAOcosulta;
-import com.meli.desafiospringveterinaria.services.DAOMedico;
-import com.meli.desafiospringveterinaria.services.DAOproprietarioAnimal;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import com.meli.desafiospringveterinaria.services.DAOConsulta;
+import com.meli.desafiospringveterinaria.services.DAOProprietarioAnimal;
 import org.springframework.web.bind.annotation.*;
-import java.io.File;
+
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/proprietario")
 public class ProprietarioController
 {
-    private Persistivel<ProprietarioAnimal> daOproprietarioAnimal;
-    private Persistivel<Animal> daOAnimal;
-    private Persistivel<Consulta> daOConsulta;
+    private Persistivel<ProprietarioAnimal> DAOProprietarioAnimal;
+    private Persistivel<Animal> DAOAnimal;
+    private Persistivel<Consulta> DAOConsulta;
 
     public ProprietarioController(){
-        daOproprietarioAnimal = new DAOproprietarioAnimal();
-        daOAnimal = new DAOAnimal();
-        daOConsulta = new DAOcosulta();
+        DAOProprietarioAnimal = new DAOProprietarioAnimal();
+        DAOAnimal = new DAOAnimal();
+        DAOConsulta = new DAOConsulta();
     }
 
 
     @GetMapping("/consulta")
     public RespostaBase obter(String identificador) throws IOException {
         RespostaBase retorno = new RespostaBase();
-        ProprietarioAnimal prop = daOproprietarioAnimal.obterPorIdentificador(identificador);
+        ProprietarioAnimal prop = DAOProprietarioAnimal.obterPorIdentificador(identificador);
 
         if(prop == null) {
             retorno.Sucesso = false;
@@ -88,7 +82,7 @@ public class ProprietarioController
             return retorno;
         }
 
-        Animal animal = daOAnimal.obter(proprietario.getAnimal());
+        Animal animal = Animal.obter(proprietario.getAnimal());
 
         if(animal == null){
             retorno.Erros.add("O Animal informado ainda não está cadastrado, favor cadastrar antes de registrarmos o proprietario.");
@@ -96,7 +90,8 @@ public class ProprietarioController
             return retorno;
         }
 
-        ProprietarioAnimal prop = daOproprietarioAnimal.obter(proprietario);
+        //ProprietarioAnimal prop = DAOProprietarioAnimal.obterAnimal(proprietario);
+        ProprietarioAnimal prop = DAOProprietarioAnimal.obter(proprietario);
 
         if(prop != null){
             retorno.Erros.add("Proprietario já cadastrado!");
@@ -104,7 +99,7 @@ public class ProprietarioController
             return retorno;
         }
 
-        daOproprietarioAnimal.cadastrar(proprietario);
+        DAOProprietarioAnimal.cadastrar(proprietario);
 
         retorno.Sucesso = true;
         return  retorno;
@@ -148,7 +143,8 @@ public class ProprietarioController
             return retorno;
         }
 
-        Animal animal = daOAnimal.obter(proprietario.getAnimal());
+        //Animal animal = DAOAnimal.obter(proprietario.getAnimal());
+        ProprietarioAnimal animal = DAOAnimal.obter(proprietario.getAnimal());
 
         if(animal == null){
             retorno.Erros.add("O Animal informado ainda não está cadastrado, favor cadastrar antes de registrarmos o proprietario.");
@@ -156,7 +152,7 @@ public class ProprietarioController
             return retorno;
         }
 
-        ProprietarioAnimal prop = daOproprietarioAnimal.obter(proprietario);
+        ProprietarioAnimal prop = DAOProprietarioAnimal.obter(proprietario);
 
         if(prop == null){
             retorno.Erros.add("Proprietario informado não cadastrado ainda!");
@@ -164,7 +160,7 @@ public class ProprietarioController
             return retorno;
         }
 
-        daOproprietarioAnimal.editar(proprietario);
+        DAOProprietarioAnimal.editar(proprietario);
 
         retorno.Sucesso = true;
         return  retorno;

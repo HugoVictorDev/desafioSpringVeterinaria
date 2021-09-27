@@ -2,7 +2,6 @@ package com.meli.desafiospringveterinaria.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -11,17 +10,15 @@ import java.io.File;
 import java.io.IOException;
 
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
     List<ProprietarioAnimal> proprietarioAnimalList;
     ObjectMapper objectMapper;
 
-    public DAOproprietarioAnimal(){
+    public DAOProprietarioAnimal(){
         objectMapper = new ObjectMapper();objectMapper.findAndRegisterModules();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         proprietarioAnimalList = new ArrayList<ProprietarioAnimal>();
@@ -72,6 +69,12 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
     @Override
     public ProprietarioAnimal obter(ProprietarioAnimal obj) {
+
+        return obj;
+    }
+
+
+    public ProprietarioAnimal obterAnimal(ProprietarioAnimal obj) {
         if(proprietarioAnimalList == null){
             return null;
         }
@@ -89,7 +92,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
         return null;
     }
 
-    @Override
+
     public ProprietarioAnimal obterPorIdentificador(String identificador){
         if(proprietarioAnimalList == null){
             return null;

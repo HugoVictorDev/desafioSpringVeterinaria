@@ -1,6 +1,7 @@
 package com.meli.desafiospringveterinaria.services;
 
 import com.meli.desafiospringveterinaria.model.Animal;
+import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 
 import java.util.ArrayList;
@@ -20,18 +21,14 @@ public class DAOAnimal implements Persistivel<Animal> {
     }
 
     @Override
-    public Animal editar(Animal obj) {
-        return  null;
-    }
+    public ProprietarioAnimal editar(Animal obj) {return null;};
 
     @Override
-    public Animal obter(Animal obj) {
-        return obj;
-    }
-    @Override
-    public Animal obterPorIdentificador(String identificador) {
+    public ProprietarioAnimal obter(Animal obj) {
         return null;
     }
+
+    public Animal obterPorIdentificador(String identificador) { return null;}
 
     @Override
     public List<Animal> listagem() {

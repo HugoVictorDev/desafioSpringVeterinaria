@@ -4,7 +4,11 @@ package com.meli.desafiospringveterinaria.controller;
 import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.services.DAOConsulta;
+
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/consulta")
@@ -23,6 +27,12 @@ public class ConsultaController {
     public Consulta consultar(@PathVariable("nome") String nome) {
         Consulta consulta = daOcosulta.consultarMedico(nome);
         return consulta;
+    }
+
+    @GetMapping("/listadeconsultas/{data}")
+    public List<Consulta> consultarPorData(@PathVariable("data") String data) {
+
+        return daOcosulta.listagem2(data);
     }
 
     @PutMapping("/editar")

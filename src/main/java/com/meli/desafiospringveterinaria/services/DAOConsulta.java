@@ -7,8 +7,11 @@ import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class DAOConsulta implements Persistivel<Consulta> {
@@ -64,7 +67,15 @@ public class DAOConsulta implements Persistivel<Consulta> {
 
     @Override
     public List<Consulta> listagem() {
-        return null;
+        return consultaList.stream()
+                .sorted(Comparator.comparing(lista -> lista.getDataHora()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Consulta> listagem2(String data) {
+        return consultaList.stream().filter(consulta -> consulta.getDataHora().toString().equals(data)).sorted(Comparator.comparing(lista -> lista.getDataHora())).collect(Collectors.toList());
+
+
     }
 
 

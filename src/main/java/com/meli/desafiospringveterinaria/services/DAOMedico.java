@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
+import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 
@@ -34,18 +35,18 @@ public class DAOMedico implements Persistivel<Medico> {
         if(validaMedico(objMedico.getNumeroRegistro())) {
             medicosList.add(objMedico);
             arquivoUtil.gravaArquivo(medicosList);
-         }else{throw new RuntimeException("Médico já cadastrado");
+        }else{throw new RuntimeException("Médico já cadastrado");
         }
     }
 
     @Override
-    public void editar(Medico obj) {
-
+    public Medico editar(Medico obj) {
+        return null;
     }
 
     @Override
     public List<Medico> listagem() {
-       return medicosList;
+        return medicosList;
     }
 
 
@@ -63,7 +64,7 @@ public class DAOMedico implements Persistivel<Medico> {
     }
 
 
-   // @Override
+    // @Override
     public Medico edita(Medico objMedico){
         mapearObjeto();
         try {
@@ -74,17 +75,23 @@ public class DAOMedico implements Persistivel<Medico> {
                     medicosList.add(objMedico);
                     objectMapper.writeValue(new File("medico.json"), medicosList);
                     return medico;
-                    }
-                }throw new RuntimeException("Médico não Atualizdo");
+                }
+            }throw new RuntimeException("Médico não Atualizdo");
         }catch (IOException e){
-                e.printStackTrace();
+            e.printStackTrace();
         }
         return null;
     }
 
 
     @Override
-    public void obter(Medico obj) {
+    public Medico obter(Medico obj) {
+        return obj;
+    }
+
+    @Override
+    public Medico obterPorIdentificador(String identificador){
+        return null;
     }
     //metodo que valida se o medico ja existe verificando o registro
     private boolean validaMedico(long registroMedico) {

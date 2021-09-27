@@ -20,13 +20,17 @@ public class DAOAnimal implements Persistivel<Animal> {
     }
 
     @Override
-    public void editar(Animal obj) {
-
+    public Animal editar(Animal obj) {
+        return  null;
     }
 
     @Override
-    public void obter(Animal obj) {
-
+    public Animal obter(Animal obj) {
+        return obj;
+    }
+    @Override
+    public Animal obterPorIdentificador(String identificador) {
+        return null;
     }
 
     @Override

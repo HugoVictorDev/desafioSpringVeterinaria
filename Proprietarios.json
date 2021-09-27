@@ -1,0 +1,65 @@
+[ {
+  "cpf" : "08765437654",
+  "nome" : "Jose",
+  "sobrenome" : "Joao",
+  "dataNascimento" : [ 1987, 9, 23 ],
+  "endereco" : "Rua PiresFernando, 50",
+  "telefone" : "55 11 9 1111-1111",
+  "animal" : {
+    "numeroDoPaciente" : 2,
+    "especie" : "22222",
+    "raca" : "222222313131",
+    "cor" : "1312523221",
+    "dataDeNascimento" : null,
+    "nome" : "123153441fsfw",
+    "animals" : [ ]
+  }
+}, {
+  "cpf" : "08765437654",
+  "nome" : "Roberto",
+  "sobrenome" : "Pires",
+  "dataNascimento" : [ 1967, 9, 23 ],
+  "endereco" : "Rua PiresFernando, 50",
+  "telefone" : "55 11 9 1111-1111",
+  "animal" : {
+    "numeroDoPaciente" : 2,
+    "especie" : "22222",
+    "raca" : "fila",
+    "cor" : "cor",
+    "dataDeNascimento" : null,
+    "nome" : "resques",
+    "animals" : [ ]
+  }
+}, {
+  "cpf" : "08765437654",
+  "nome" : "Roberto",
+  "sobrenome" : "Pires",
+  "dataNascimento" : [ 1967, 9, 23 ],
+  "endereco" : "Rua PiresFernando, 50",
+  "telefone" : "55 11 9 1111-1111",
+  "animal" : {
+    "numeroDoPaciente" : 2,
+    "especie" : "22222",
+    "raca" : "fila",
+    "cor" : "cor",
+    "dataDeNascimento" : null,
+    "nome" : "resques",
+    "animals" : [ ]
+  }
+}, {
+  "cpf" : "123497225555",
+  "nome" : "Clara",
+  "sobrenome" : "Joana",
+  "dataNascimento" : [ 1990, 9, 23 ],
+  "endereco" : "Rua Pires, 50",
+  "telefone" : "55 11 9 1111-1111",
+  "animal" : {
+    "numeroDoPaciente" : 2,
+    "especie" : "22222",
+    "raca" : "222222313131",
+    "cor" : "1312523221",
+    "dataDeNascimento" : null,
+    "nome" : "123153441fsfw",
+    "animals" : [ ]
+  }
+} ]

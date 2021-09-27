@@ -20,9 +20,9 @@ public class AnimalController {
         return ResponseEntity.ok(objAnimal);
     }
 
-    @GetMapping("/consultar")
-    public List<Animal> listarAnimal(){
-        return listaDeAnimal;
+    @GetMapping("/consultar/{numeroDoPaciente}")
+    public Animal consultarAnimal (@PathVariable("numeroDoPaciente") long numeroDoPaciente){
+        return daoAnimal.consultarAnimal(numeroDoPaciente);
     }
 
     @PutMapping("/editar")

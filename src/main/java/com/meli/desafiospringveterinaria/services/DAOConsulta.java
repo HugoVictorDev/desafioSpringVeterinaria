@@ -34,8 +34,25 @@ public class DAOConsulta implements Persistivel<Consulta> {
     }
 
     @Override
-    public void editar(Consulta obj) {
+    public void editar(Consulta obj) {}
 
+
+    public Consulta editarConsulta (Consulta objConsulta) {
+        mapearObjeto();
+        try {
+            consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
+            for (Consulta consulta : consultaList){
+                if (consulta.getAnimal().getNome().equals(objConsulta.getAnimal().getNome())) {
+                    consultaList.remove(consulta);
+                    consultaList.add(objConsulta);
+                    objectMapper.writeValue(new File("consulta.json"), consultaList);
+                   return consulta;
+                }
+            }throw new RuntimeException("Consulta não encotrada");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -62,4 +79,19 @@ public class DAOConsulta implements Persistivel<Consulta> {
         }return null;
     }
 
+    public List<Consulta> pacienteConsulta(int numeroPaciente) {
+        mapearObjeto();
+        List<Consulta >listConsulta = new ArrayList<>();
+        try {
+            consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
+            for (Consulta consulta : consultaList){
+                if (consulta.getAnimal().getNumeroDoPaciente().equals(numeroPaciente)) {
+                  listConsulta.add(consulta);
+                }
+            } return listConsulta;
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

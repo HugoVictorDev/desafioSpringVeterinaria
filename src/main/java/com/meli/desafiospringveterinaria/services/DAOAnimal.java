@@ -66,6 +66,7 @@ public class DAOAnimal implements Persistivel<Animal> {
 
 
     public Animal consultarAnimal (long numeroDoPaciente) {
+        mapearObjeto();
         try {
             listaAnimal = objectMapper.readValue(new File("animal.json"), new TypeReference<List<Animal>>() {});
             for (Animal animal : listaAnimal){
@@ -83,16 +84,6 @@ public class DAOAnimal implements Persistivel<Animal> {
         return listaAnimal;
     }
 
-
-    // validando se animal existe
-    private boolean validaAnimal(Integer numeroAnimal){
-        for(Animal animal: listagem()){
-            if (animal.getNumeroDoPaciente() == (numeroAnimal)){
-                return false;
-            }
-        }
-        return true;
-    }
 
     public Animal obter2(Animal obj) {
         return obj;

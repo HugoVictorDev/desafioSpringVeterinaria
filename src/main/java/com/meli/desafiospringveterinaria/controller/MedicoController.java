@@ -6,8 +6,10 @@ import com.meli.desafiospringveterinaria.services.DAOConsulta;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
-    @RestController
+
+@RestController
     @RequestMapping("/medico")
     public  class MedicoController {
 
@@ -22,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
         @GetMapping("/consulta/{numeroRegistro}")
         public Medico obterMedico(@PathVariable("numeroRegistro") Long numeroRegistro) {
-            return daomedico.obeterMedico(numeroRegistro);
+            return daomedico.obterMedico(numeroRegistro);
         }
 
         @PutMapping("/editar")
@@ -31,9 +33,9 @@ import org.springframework.web.bind.annotation.*;
             return objMedico;
 
         }
-        @DeleteMapping(value="/deleta/{numeroRegistro}}")
-        public void cadastro(@PathVariable("numeroRegistro}") Long numeroRegistro){
-          daomedico.remover(numeroRegistro);
+        @DeleteMapping(value="/deleta/{numeroRegistro}")
+        public void remove(@PathVariable("numeroRegistro") Long numeroRegistro){
+           daomedico.remover(numeroRegistro);
         }
     }
 

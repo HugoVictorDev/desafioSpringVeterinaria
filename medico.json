@@ -1,43 +1,13 @@
 [ {
-  "cpfMedico" : "123456879",
-  "nomeMedico" : "marco",
+  "cpfMedico" : "12456879",
+  "nomeMedico" : "Marco",
   "sobrenomeMedico" : "Rocha",
-  "numeroRegistro" : 3087456321,
-  "especielidade" : "cardio"
-}, {
-  "cpfMedico" : "123456879",
-  "nomeMedico" : "Vanessa",
-  "sobrenomeMedico" : "Rocha",
-  "numeroRegistro" : 874563456,
+  "numeroRegistro" : 1145634510,
   "especielidade" : "cardio"
 }, {
   "cpfMedico" : "12456879",
-  "nomeMedico" : "Vanessa",
+  "nomeMedico" : "Marco",
   "sobrenomeMedico" : "Rocha",
-  "numeroRegistro" : 874563456,
-  "especielidade" : "cardio"
-}, {
-  "cpfMedico" : "12456879",
-  "nomeMedico" : "Vanessa",
-  "sobrenomeMedico" : "Rocha",
-  "numeroRegistro" : 87456345699,
-  "especielidade" : "cardio"
-}, {
-  "cpfMedico" : "12456879",
-  "nomeMedico" : "Vanessa",
-  "sobrenomeMedico" : "Rocha",
-  "numeroRegistro" : 874563456,
-  "especielidade" : "cardio"
-}, {
-  "cpfMedico" : "12456879",
-  "nomeMedico" : "Vanessa",
-  "sobrenomeMedico" : "Rocha",
-  "numeroRegistro" : 874563456,
-  "especielidade" : "cardio"
-}, {
-  "cpfMedico" : "12456879",
-  "nomeMedico" : "Vanessa",
-  "sobrenomeMedico" : "Rocha",
-  "numeroRegistro" : 874563456,
+  "numeroRegistro" : 2000006000,
   "especielidade" : "cardio"
 } ]

@@ -25,6 +25,10 @@ public class Animal {
         this.nome = nome;
     }
 
+    public Animal() {
+
+    }
+
     public static Animal obter(Animal animal) {return null;
     }
 

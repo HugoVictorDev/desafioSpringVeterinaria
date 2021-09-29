@@ -44,14 +44,20 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
     }
 
     @Override
+    //Alterar para retornar objeto proprietarioAnimal
     public void cadastrar(ProprietarioAnimal obj) {
-        this.proprietarioAnimalList.add(obj);
+
 
         try {
+            this.proprietarioAnimalList.add(obj);
             objectMapper.writeValue(new File("Proprietarios.json"), proprietarioAnimalList);
         } catch (Exception exception) {
+
+
             String erro = exception.toString();
+            throw new RuntimeException("Erro no momento de cadastrar o proprietario");
         }
+        System.out.println("Proprietario cadastrado");
     }
 
     @Override

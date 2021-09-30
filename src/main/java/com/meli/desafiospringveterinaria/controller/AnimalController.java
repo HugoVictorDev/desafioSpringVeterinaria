@@ -1,6 +1,6 @@
 package com.meli.desafiospringveterinaria.controller;
+import com.meli.desafiospringveterinaria.dao.DAOAnimal;
 import com.meli.desafiospringveterinaria.model.Animal;
-import com.meli.desafiospringveterinaria.services.DAOAnimal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/paciente")
 public class AnimalController {
 
-    DAOAnimal daoAnimal = new DAOAnimal();
+   DAOAnimal daoAnimal = new DAOAnimal();
 
     @PostMapping("/cadastrar")
     public ResponseEntity<Animal> cadastrarAnimal(@RequestBody Animal objAnimal){

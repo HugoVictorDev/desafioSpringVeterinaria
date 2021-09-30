@@ -2,6 +2,7 @@ package com.meli.desafiospringveterinaria.dao;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.persistence.ConsultaPersistivel;
 
@@ -22,7 +23,7 @@ public class DAOConsulta extends ConsultaPersistivel {
     List<Consulta> consultaList = new ArrayList<>();
     ConsultaService consultaService = new ConsultaService();
 
-
+    ArquivoUtil arquivoUtil = new ArquivoUtil();
 
 
     public Consulta cadastrar(Consulta consulta) throws IOException {

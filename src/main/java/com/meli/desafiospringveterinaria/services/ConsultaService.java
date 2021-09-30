@@ -19,7 +19,7 @@ List<Consulta> consultaList2 = new ArrayList<>();
             consultaList2 = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>() {});
             for (Consulta consulta : consultaList2){
                 if (consulta.getAnimal().getNome().equals(nome)) {
-                    return true;
+
                 }else {return false;}
             }
 

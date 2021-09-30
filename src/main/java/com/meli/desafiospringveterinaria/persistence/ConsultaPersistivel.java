@@ -3,7 +3,7 @@ package com.meli.desafiospringveterinaria.persistence;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import java.util.List;
+
 
 public class ConsultaPersistivel {
 

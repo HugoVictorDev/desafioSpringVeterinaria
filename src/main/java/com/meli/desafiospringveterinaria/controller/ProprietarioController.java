@@ -1,8 +1,9 @@
 package com.meli.desafiospringveterinaria.controller;
 
+import com.meli.desafiospringveterinaria.dao.DAOAnimal;
 import com.meli.desafiospringveterinaria.model.*;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
-import com.meli.desafiospringveterinaria.services.DAOAnimal;
+
 
 import com.meli.desafiospringveterinaria.services.DAOProprietarioAnimal;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class ProprietarioController
 {
 
     DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
-    DAOAnimal daoAnimal = new DAOAnimal();
+   DAOAnimal daoAnimal = new DAOAnimal();
 
     @GetMapping("/consulta/{identificador}")
     public RespostaBase obter(@PathVariable ("identificador") String identificador) throws IOException {

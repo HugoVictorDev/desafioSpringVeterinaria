@@ -1,2 +1,4 @@
-package com.meli.desafiospringveterinaria.services;public class ProprietarioService {
+package com.meli.desafiospringveterinaria.services;
+
+public class ProprietarioService {
 }

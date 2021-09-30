@@ -1,10 +1,8 @@
 package com.meli.desafiospringveterinaria.controller;
 
 import com.meli.desafiospringveterinaria.model.*;
-import com.meli.desafiospringveterinaria.persistence.Persistivel;
-import com.meli.desafiospringveterinaria.services.DAOAnimal;
-import com.meli.desafiospringveterinaria.services.DAOConsulta;
-import com.meli.desafiospringveterinaria.services.DAOProprietarioAnimal;
+import com.meli.desafiospringveterinaria.dao.DAOAnimal;
+import com.meli.desafiospringveterinaria.dao.DAOProprietarioAnimal;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;

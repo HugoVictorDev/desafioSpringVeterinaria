@@ -25,9 +25,6 @@ public class Animal {
         this.nome = nome;
     }
 
-    public static Animal obter(Animal animal) {return null;
-    }
-
     @Override
     public String toString() {
         return "Animal{" +

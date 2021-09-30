@@ -2,7 +2,7 @@ package com.meli.desafiospringveterinaria.controller;
 
 
 import com.meli.desafiospringveterinaria.model.Consulta;
-import com.meli.desafiospringveterinaria.services.DAOConsulta;
+import com.meli.desafiospringveterinaria.dao.DAOConsulta;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;

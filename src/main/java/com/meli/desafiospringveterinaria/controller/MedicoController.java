@@ -1,12 +1,9 @@
 package com.meli.desafiospringveterinaria.controller;
 
 import com.meli.desafiospringveterinaria.model.Medico;
-import com.meli.desafiospringveterinaria.services.DAOMedico;
-import com.meli.desafiospringveterinaria.services.DAOConsulta;
+import com.meli.desafiospringveterinaria.dao.DAOMedico;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController

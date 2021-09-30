@@ -10,4 +10,10 @@
   "sobrenomeMedico" : "Rocha",
   "numeroRegistro" : 2000006000,
   "especielidade" : "cardio"
+}, {
+  "cpfMedico" : "144.155.411-15",
+  "nomeMedico" : "Hugo",
+  "sobrenomeMedico" : "Dias",
+  "numeroRegistro" : 1234,
+  "especielidade" : "Neuro"
 } ]

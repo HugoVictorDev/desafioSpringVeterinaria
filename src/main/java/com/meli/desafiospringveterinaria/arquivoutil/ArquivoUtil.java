@@ -1,17 +1,13 @@
-package com.meli.desafiospringveterinaria.ArquivoUtil;
+package com.meli.desafiospringveterinaria.arquivoutil;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.meli.desafiospringveterinaria.model.Consulta;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import com.meli.desafiospringveterinaria.model.Medico;
-import org.json.*;
 
 public class ArquivoUtil {
 

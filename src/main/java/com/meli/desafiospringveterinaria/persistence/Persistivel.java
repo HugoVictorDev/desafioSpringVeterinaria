@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface Persistivel<T> {
 
-    void cadastrar(T obj);
+    Animal cadastrar(T obj);
     void editar(T obj);
     void obter(T obj);
     List<T> listagem();

@@ -2,7 +2,7 @@ package com.meli.desafiospringveterinaria.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.meli.desafiospringveterinaria.model.Consulta;
+import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -14,7 +14,6 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
@@ -44,7 +43,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
     }
 
     @Override
-    public void cadastrar(ProprietarioAnimal obj) {
+    public Animal cadastrar(ProprietarioAnimal obj) {
         this.proprietarioAnimalList.add(obj);
 
         try {
@@ -52,6 +51,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
         } catch (Exception exception) {
             String erro = exception.toString();
         }
+        return null;
     }
 
     @Override

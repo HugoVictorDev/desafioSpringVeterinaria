@@ -19,6 +19,8 @@ public class DAOAnimal implements Persistivel<Animal> {
     ArquivoUtil arquivoUtil = new ArquivoUtil();
     ObjectMapper objectMapper = new ObjectMapper();
 
+    private static final String ANIMALJSON = "animal.json";
+
     private void mapearObjeto() {
         objectMapper.findAndRegisterModules();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -26,15 +28,17 @@ public class DAOAnimal implements Persistivel<Animal> {
     }
 
     @Override
-    public void cadastrar(Animal animal) {
+    public Animal cadastrar(Animal animal) {
         mapearObjeto();
         listaAnimal.add(animal);
         try {
-            objectMapper.writeValue(new File("animal.json"), listaAnimal);
+            objectMapper.writeValue(new File(ANIMALJSON), listaAnimal);
         }catch (IOException e){
             e.printStackTrace();
         }
+        return animal;
     }
+
 
     @Override
     public void editar(Animal obj) {
@@ -49,12 +53,12 @@ public class DAOAnimal implements Persistivel<Animal> {
     public Animal edita(Animal objAnimal) {
         mapearObjeto();
         try {
-            listaAnimal = objectMapper.readValue(new File("animal.json"), new TypeReference<List<Animal>>(){});
+            listaAnimal = objectMapper.readValue(new File(ANIMALJSON), new TypeReference<List<Animal>>(){});
             for (Animal animal : listaAnimal){
                 if (animal.getNumeroDoPaciente() == (objAnimal.getNumeroDoPaciente())){
                     listaAnimal.remove(animal);
                     listaAnimal.add(objAnimal);
-                    objectMapper.writeValue(new File("animal.json"), listaAnimal);
+                    objectMapper.writeValue(new File(ANIMALJSON), listaAnimal);
                     return animal;
                 }
             } throw new RuntimeException("Animal nao atualizado");
@@ -68,7 +72,7 @@ public class DAOAnimal implements Persistivel<Animal> {
     public Animal consultarAnimal (long numeroDoPaciente) {
         mapearObjeto();
         try {
-            listaAnimal = objectMapper.readValue(new File("animal.json"), new TypeReference<List<Animal>>() {});
+            listaAnimal = objectMapper.readValue(new File(ANIMALJSON), new TypeReference<List<Animal>>() {});
             for (Animal animal : listaAnimal){
                 if (animal.getNumeroDoPaciente() == (numeroDoPaciente)){
                     return animal;
@@ -83,7 +87,6 @@ public class DAOAnimal implements Persistivel<Animal> {
     public List<Animal> listagem() {
         return listaAnimal;
     }
-
 
     public Animal obter2(Animal obj) {
         return obj;

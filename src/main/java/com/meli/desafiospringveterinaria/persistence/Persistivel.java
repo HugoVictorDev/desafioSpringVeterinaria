@@ -11,6 +11,4 @@ public interface Persistivel<T> {
     void obter(T obj);
     List<T> listagem();
 
-
-//    T obterPorIdentificador(String identificador);
 }

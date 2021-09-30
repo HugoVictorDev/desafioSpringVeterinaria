@@ -1,8 +1,9 @@
 package com.meli.desafiospringveterinaria.controller;
 
 
+import com.meli.desafiospringveterinaria.dao.DAOConsulta;
 import com.meli.desafiospringveterinaria.model.Consulta;
-import com.meli.desafiospringveterinaria.services.DAOConsulta;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -15,9 +16,9 @@ public class ConsultaController {
     DAOConsulta daoConsulta = new DAOConsulta();
 
     @PostMapping("/cadastrar")
-    public Consulta cadastroConsulta(@RequestBody Consulta cosulta) {
-        daoConsulta.cadastrar(cosulta);
-        return cosulta;
+    public Consulta cadastroConsulta(@RequestBody Consulta consulta) throws IOException {
+        daoConsulta.cadastrar(consulta);
+        return consulta;
     }
 
     @PutMapping("/editar")

@@ -28,7 +28,7 @@ public class DAOAnimal implements Persistivel<Animal> {
     }
 
     @Override
-    public Animal cadastrar(Animal animal) {
+    public void cadastrar(Animal animal) {
         mapearObjeto();
         listaAnimal.add(animal);
         try {
@@ -36,7 +36,7 @@ public class DAOAnimal implements Persistivel<Animal> {
         }catch (IOException e){
             e.printStackTrace();
         }
-        return animal;
+
     }
 
 

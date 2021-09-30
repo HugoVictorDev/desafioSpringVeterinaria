@@ -43,7 +43,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
     }
 
     @Override
-    public Animal cadastrar(ProprietarioAnimal obj) {
+    public void cadastrar(ProprietarioAnimal obj) {
         this.proprietarioAnimalList.add(obj);
 
         try {
@@ -51,7 +51,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
         } catch (Exception exception) {
             String erro = exception.toString();
         }
-        return null;
+
     }
 
     @Override

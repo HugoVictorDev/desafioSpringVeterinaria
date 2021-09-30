@@ -1,10 +1,11 @@
-package com.meli.desafiospringveterinaria.services;
+package com.meli.desafiospringveterinaria.dao;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.*;
-import com.meli.desafiospringveterinaria.model.Animal;
+
 import com.meli.desafiospringveterinaria.model.Consulta;
-import com.meli.desafiospringveterinaria.persistence.Persistivel;
+import com.meli.desafiospringveterinaria.persistence.ConsultaPersistivel;
+
+import com.meli.desafiospringveterinaria.services.ConsultaService;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -15,40 +16,34 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class DAOConsulta implements Persistivel<Consulta> {
+public class DAOConsulta extends ConsultaPersistivel {
+
 
     List<Consulta> consultaList = new ArrayList<>();
+    ConsultaService consultaService = new ConsultaService();
 
-    ObjectMapper objectMapper = new ObjectMapper();
-    private void mapearObjeto() {
-        objectMapper.findAndRegisterModules();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-    }
 
-    @Override
-    public Animal cadastrar(Consulta consulta) {
+
+
+    public Consulta cadastrar(Consulta consulta) throws IOException {
         mapearObjeto();
-        consultaList.add(consulta);
         try {
-            objectMapper.writeValue(new File("consulta.json"), consultaList);
-        }catch (IOException e){
+            if(consultaService.validarConsulta(consulta.getAnimal().getNome())){
+                consultaList.add(consulta);
+                objectMapper.writeValue(new File("consulta.json"), consultaList);
+            }else{throw new RuntimeException("Consutada já cadastrada");
+            }
+
+        } catch (IOException e){
             e.printStackTrace();
         }
-        return null;
-    }
 
-    @Override
-    public void editar(Consulta obj) {
-    }
-
-    @Override
-    public void obter(Consulta obj) {
-
+        return consulta;
     }
 
 
-    public Consulta editarConsulta (Consulta objConsulta) {
+
+    public Consulta editarConsulta(Consulta objConsulta) {
         mapearObjeto();
         try {
             consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
@@ -63,7 +58,7 @@ public class DAOConsulta implements Persistivel<Consulta> {
         }catch (IOException e){
             e.printStackTrace();
         }
-        return null;
+        return objConsulta;
     }
 
 
@@ -118,7 +113,7 @@ public class DAOConsulta implements Persistivel<Consulta> {
     }
 
 
-    @Override
+
     public List<Consulta> listagem() {return null;}
 
 

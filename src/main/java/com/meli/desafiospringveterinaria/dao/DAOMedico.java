@@ -1,4 +1,4 @@
-package com.meli.desafiospringveterinaria.services;
+package com.meli.desafiospringveterinaria.dao;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -32,7 +32,7 @@ public class DAOMedico implements Persistivel<Medico> {
     ArquivoUtil arquivoUtil = new ArquivoUtil();
 
     @Override
-    public Animal cadastrar(Medico objMedico) {
+    public void cadastrar(Medico objMedico) {
         mapearObjeto();
         try {
             if(validaMedico(objMedico.getNumeroRegistro())){
@@ -43,7 +43,7 @@ public class DAOMedico implements Persistivel<Medico> {
         } catch (IOException e){
             e.printStackTrace();
         }
-        return null;
+
     }
 
     @Override

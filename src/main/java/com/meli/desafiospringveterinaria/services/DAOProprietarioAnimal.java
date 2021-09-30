@@ -91,14 +91,15 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
     }
 
 
-    public ProprietarioAnimal obterAnimal(ProprietarioAnimal obj) {
+    //public ProprietarioAnimal obterAnimal(ProprietarioAnimal obj) {
+    public ProprietarioAnimal obterAnimal(String cpfMedico) {
         if (proprietarioAnimalList == null) {
             return null;
         }
 
         try {
             for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
-                if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
+                if (proprietarioAnimal.getCpf().equals(cpfMedico)){//obj.getCpf())) {
                     return proprietarioAnimal;
                 }
             }

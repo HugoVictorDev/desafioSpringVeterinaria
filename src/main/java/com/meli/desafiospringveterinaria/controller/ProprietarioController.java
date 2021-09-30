@@ -81,7 +81,7 @@ public class ProprietarioController
         }
 
       //  ProprietarioAnimal prop = daoProprietarioAnimal.obter(proprietario);
-        ProprietarioAnimal prop = daoProprietarioAnimal.obterAnimal(proprietario);
+        ProprietarioAnimal prop = daoProprietarioAnimal.obterAnimal(proprietario.getCpf()); //Edenilson
 
         if(prop != null){
             retorno.Erros.add("Proprietario já cadastrado!");

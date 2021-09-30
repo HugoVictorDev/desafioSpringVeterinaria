@@ -1,15 +1,24 @@
 package com.meli.desafiospringveterinaria.services;
 
+import ch.qos.logback.core.read.ListAppender;
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.model.RespostaBase;
+import com.meli.desafiospringveterinaria.persistence.Persistivel;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class DAOProprietarioAnimalTest {
+
 
     //Teste do servico  mapear objeto Edenilson Mauricio
     @Test
@@ -22,25 +31,25 @@ public class DAOProprietarioAnimalTest {
 
     @Test
     void deve_cadastrar() throws ParseException {
-      //  ProprietarioAnimal mock = Mockito.mock(ProprietarioAnimal.class);
-        DAOProprietarioAnimal mock = Mockito.mock(DAOProprietarioAnimal.class);
-      //  DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
-        DAOAnimal daoAnimal = new DAOAnimal();
+
+        ArrayList<ProprietarioAnimal>  listaDeProprietarioAnimal = new ArrayList<>();
         Animal animal = new Animal(9876L,"Chiaua","Pink","Preta",LocalDate.now(),"toto");
 
+        //Mockito.when(mock.cadastrar(Mockito.any(ProprietarioAnimal.class))).thenReturn(listaDeProprietarioAnimal);
         ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal("09878998765","ednilson","Pinto",LocalDate.now(),"rua texte, ","11987654321",animal);
+        listaDeProprietarioAnimal.add(proprietarioAnimal);
 
-        //ProprietarioAnimal prop = daoProprietarioAnimal.obterPorIdentificador(identificador);
+        Persistivel mock = Mockito.mock(Persistivel.class);
 
 
-        Mockito.when(mock.cadastrar(Mockito.any(DAOProprietarioAnimal.class),ProprietarioAnimal proprietarioAnimal)
-                .thenReturn(proprietarioAnimal);
-        Mockito.when(mock.listagem())
-                .thenReturn(lista);
 
-        VendedorService vendedorService = new VendedorService(mock);
-        vendedorService.cadastrar(vendedor);
-        assertNotNull(vendedor.getCodigo());
-    }
+        DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
+       // Animal animalRetorno = new Animal();
+        daoProprietarioAnimal.cadastrar(proprietarioAnimal);
+
+        assert(daoProprietarioAnimal.cadastrar(proprietarioAnimal).equals(animal));
+
     }
 }
+
+

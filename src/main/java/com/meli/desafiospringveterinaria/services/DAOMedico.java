@@ -32,7 +32,7 @@ public class DAOMedico implements Persistivel<Medico> {
     ArquivoUtil arquivoUtil = new ArquivoUtil();
 
     @Override
-    public void cadastrar(Medico objMedico) {
+    public Animal cadastrar(Medico objMedico) {
         mapearObjeto();
         try {
             if(validaMedico(objMedico.getNumeroRegistro())){
@@ -43,6 +43,7 @@ public class DAOMedico implements Persistivel<Medico> {
         } catch (IOException e){
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override

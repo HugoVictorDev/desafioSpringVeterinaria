@@ -2,11 +2,12 @@ package com.meli.desafiospringveterinaria.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.meli.desafiospringveterinaria.model.Consulta;
+import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.SneakyThrows;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +15,11 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+@Service
 public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
+
+    private Persistivel persistivel;
 
     List<ProprietarioAnimal> proprietarioAnimalList;
     ObjectMapper objectMapper;
@@ -45,19 +48,19 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
     @Override
     //Alterar para retornar objeto proprietarioAnimal
-    public void cadastrar(ProprietarioAnimal obj) {
+    public Animal cadastrar(ProprietarioAnimal proprietarioAnimal) {
 
 
         try {
-            this.proprietarioAnimalList.add(obj);
+            this.proprietarioAnimalList.add(proprietarioAnimal);
             objectMapper.writeValue(new File("Proprietarios.json"), proprietarioAnimalList);
+            return proprietarioAnimal.getAnimal();
+
         } catch (Exception exception) {
-
-
-            String erro = exception.toString();
+            System.out.println("Proprietario cadastrado");
             throw new RuntimeException("Erro no momento de cadastrar o proprietario");
         }
-        System.out.println("Proprietario cadastrado");
+
     }
 
     @Override

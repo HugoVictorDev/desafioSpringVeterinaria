@@ -8,6 +8,7 @@ import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,19 +22,16 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
     private Persistivel persistivel;
 
-    List<ProprietarioAnimal> proprietarioAnimalList;
-    ObjectMapper objectMapper;
 
-    private void mapearObjeto() {
-        objectMapper.findAndRegisterModules();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-    }
+    //ObjectMapper objectMapper;
+
+
 
     public DAOProprietarioAnimal() {
         objectMapper = new ObjectMapper();
         mapearObjeto();
 
-        proprietarioAnimalList = new ArrayList<ProprietarioAnimal>();
+        ArrayList<ProprietarioAnimal> proprietarioAnimalList;
         try {
             proprietarioAnimalList = objectMapper.readValue(new File("Proprietarios.json"), new TypeReference<List<ProprietarioAnimal>>() {
             });
@@ -47,24 +45,13 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
     }
 
     @Override
-    //Alterar para retornar objeto proprietarioAnimal
-    public Animal cadastrar(ProprietarioAnimal proprietarioAnimal) {
-
-
-        try {
-            this.proprietarioAnimalList.add(proprietarioAnimal);
-            objectMapper.writeValue(new File("Proprietarios.json"), proprietarioAnimalList);
-            return proprietarioAnimal.getAnimal();
-
-        } catch (Exception exception) {
-            System.out.println("Proprietario cadastrado");
-            throw new RuntimeException("Erro no momento de cadastrar o proprietario");
-        }
-
+    public Animal cadastrar(ProprietarioAnimal obj) {
+        return null;
     }
 
     @Override
     public void editar(ProprietarioAnimal obj) {
+
     }
 
     @Override
@@ -72,45 +59,12 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
     }
 
-
-    public ProprietarioAnimal edita(ProprietarioAnimal obj) {
-        try {
-            for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
-                if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
-                    proprietarioAnimalList.remove(proprietarioAnimal);
-                    proprietarioAnimalList.add(obj);
-                    objectMapper.writeValue(new File("Proprietarios.json"), proprietarioAnimalList);
-                    return proprietarioAnimal;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    @Override
+    public List<ProprietarioAnimal> listagem() {
         return null;
     }
-
-
-    //public ProprietarioAnimal obterAnimal(ProprietarioAnimal obj) {
-    public ProprietarioAnimal obterAnimal(String cpfMedico) {
-        if (proprietarioAnimalList == null) {
-            return null;
-        }
-
-        try {
-            for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
-                if (proprietarioAnimal.getCpf().equals(cpfMedico)){//obj.getCpf())) {
-                    return proprietarioAnimal;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
-    public ProprietarioAnimal obterPorIdentificador(String identificador) {
+    @Override
+    public ProprietarioAnimal obterPorIdentificador(String cpf) {
         if (proprietarioAnimalList == null) {
             return null;
         }
@@ -125,19 +79,6 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
             e.printStackTrace();
         }
         return null;
-    }
-
-    @Override
-    public List<ProprietarioAnimal> listagem() {
-        return proprietarioAnimalList;
-    }
-
-
-    @SneakyThrows
-    public List<ProprietarioAnimal> listagemConsulta(){
-        mapearObjeto();
-        proprietarioAnimalList = objectMapper.readValue(new File("Proprietarios.json"), new TypeReference<List<ProprietarioAnimal>>(){});
-        return proprietarioAnimalList;
     }
 }
 

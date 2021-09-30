@@ -109,6 +109,3 @@ public class DAOProprietarioAnimalTest {
         assert(daoProprietarioAnimal.obterAnimal(proprietarioAnimal.getCpf()).equals("09878998765"));
 
     }
-}
-
-

@@ -1,24 +1,19 @@
 package com.meli.desafiospringveterinaria.ArquivoUtil;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.meli.desafiospringveterinaria.model.Consulta;
 
-import com.meli.desafiospringveterinaria.model.Medico;
-import org.json.*;
+import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 
 public class ArquivoUtil {
 
     ObjectMapper objectMapper = new ObjectMapper();
+
 
     private void mapearObjeto() {
         objectMapper.findAndRegisterModules();
@@ -26,22 +21,21 @@ public class ArquivoUtil {
     }
 
 
-    public List<Medico> carregaArquivo() throws IOException {
+    public List<Object> carregaArquivo(String nomeArquivo) throws IOException {
         mapearObjeto();
         try {
-            List<Medico> list;
-            list = objectMapper.readValue(new File("medico.json"), new TypeReference<List<Medico>>() {});
-            return list;
+
+            return objectMapper.readValue(new File(nomeArquivo), new TypeReference<List<Object>>() {});
         } catch (IOException e) {
             e.printStackTrace();
         }
     return null;
     }
 
-    public void gravaArquivo(List<Medico> medicosList) {
+    public void gravaArquivo(List<Object> List, String nomeArquivo) {
         mapearObjeto();
         try {
-            objectMapper.writeValue(new File("medico.json"), medicosList);
+            objectMapper.writeValue(new File(nomeArquivo), List);
         } catch (IOException e) {
             e.printStackTrace();
         }

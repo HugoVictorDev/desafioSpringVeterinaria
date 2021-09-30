@@ -1,10 +1,9 @@
 package com.meli.desafiospringveterinaria.controller;
 
 import com.meli.desafiospringveterinaria.model.*;
-import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import com.meli.desafiospringveterinaria.services.DAOAnimal;
-import com.meli.desafiospringveterinaria.services.DAOConsulta;
 import com.meli.desafiospringveterinaria.services.DAOProprietarioAnimal;
+import com.meli.desafiospringveterinaria.services.ProprietarioService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -81,7 +80,12 @@ public class ProprietarioController
         }
 
       //  ProprietarioAnimal prop = daoProprietarioAnimal.obter(proprietario);
-        ProprietarioAnimal prop = daoProprietarioAnimal.obterAnimal(proprietario.getCpf()); //Edenilson
+        Animal prop = new Animal(); //Edenilson
+        try {
+            prop = ProprietarioService.obterAnimal(proprietario.getCpf());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if(prop != null){
             retorno.Erros.add("Proprietario já cadastrado!");
@@ -98,7 +102,7 @@ public class ProprietarioController
 
 
     @PutMapping("/editar")
-    public RespostaBase atualizarProprietario( @RequestBody ProprietarioAnimal proprietario) {
+    public RespostaBase atualizarProprietario( @RequestBody ProprietarioAnimal proprietario, @RequestBody ProprietarioAnimal proprietario2) {
         RespostaBase retorno = new RespostaBase();
 
         if(proprietario == null) {
@@ -134,7 +138,7 @@ public class ProprietarioController
             return retorno;
         }
 
-        daoProprietarioAnimal.edita(proprietario);
+        ProprietarioService.edita(proprietario, proprietario1);
 
         retorno.Sucesso = true;
         retorno.Data = proprietario;

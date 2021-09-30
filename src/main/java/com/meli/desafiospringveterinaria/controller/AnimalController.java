@@ -28,5 +28,10 @@ public class AnimalController {
         daoAnimal.edita(objAnimal);
         return objAnimal;
     }
+
+    @GetMapping("/consultar")
+    public List<Animal> listarAnimal(){
+        return daoAnimal.listagem();
+    }
 }
 

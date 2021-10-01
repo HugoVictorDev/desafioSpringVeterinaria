@@ -23,7 +23,7 @@ public class ProprietarioServiceTest {
     DAOAnimal animalDao = null;
 
 
-    @Before
+    @Before // Configuracao das variaveis de teste
     public  void setUp(){
         proprietarioAnimalDao = mock(DAOProprietarioAnimal.class);
         animalDao = mock(DAOAnimal.class);
@@ -31,8 +31,8 @@ public class ProprietarioServiceTest {
         service = new ProprietarioService(proprietarioAnimalDao, animalDao);
     }
 
-    @Test
-    public void obterPorIdentificadorTest() throws ParseException {
+    @Test //Teste OK do metodo proprietarioAnimalDao.obterPorIdentificador(identificador)
+    public void deve_obterPorIdentificadorTest() throws ParseException {
         String identificador = "123456789";
         String identificador2 = "1234567892";
 
@@ -54,6 +54,28 @@ public class ProprietarioServiceTest {
 
         assertEquals(true, respostaBase.Sucesso);
         //assertEquals(true, respostaBase2.Sucesso); // Caso de erro
+    }
+
+    @Test //Teste de Recusa do metodo obterPorIdentificador(identificador)
+    public void nao_deve_obterPorIdentificadorTest() throws ParseException {
+        String identificador = "1234567892";
+
+        when(proprietarioAnimalDao.obterPorIdentificador(identificador))
+                .thenReturn(
+                        new ProprietarioAnimal(
+                                identificador,
+                                "Teste",
+                                "Mockado",
+                                LocalDate.now(),
+                                "Rua Teste Unitario",
+                                "11999999999",
+                                null
+                        ));
+
+
+        RespostaBase respostaBase = service.obterPorIdentificador(identificador);
+
+        assertEquals(true, respostaBase.Sucesso); // Caso de erro
     }
 
     @Test

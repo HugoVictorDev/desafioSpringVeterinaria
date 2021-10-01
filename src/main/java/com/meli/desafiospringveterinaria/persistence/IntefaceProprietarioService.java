@@ -8,4 +8,6 @@ public interface IntefaceProprietarioService {
     RespostaBase cadastrarProprietario(ProprietarioAnimal proprietario);
     RespostaBase atualizarProprietario(ProprietarioAnimal proprietario);
     RespostaBase listagemConsulta();
+
 }
+

@@ -1,7 +1,9 @@
 package com.meli.desafiospringveterinaria.dao;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.meli.desafiospringveterinaria.arquivoutil.InterfaceAquivoUtil;
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
@@ -17,24 +19,27 @@ import java.util.List;
 
 public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
+    InterfaceAquivoUtil iAquivoUtil;
+
     List<ProprietarioAnimal> proprietarioAnimalList;
     ObjectMapper objectMapper;
+
 
     private void mapearObjeto() {
         objectMapper.findAndRegisterModules();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
+    com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil
     public DAOProprietarioAnimal() {
         objectMapper = new ObjectMapper();
         mapearObjeto();
 
         proprietarioAnimalList = new ArrayList<ProprietarioAnimal>();
         try {
-            proprietarioAnimalList = objectMapper.readValue(new File("Proprietarios.json"), new TypeReference<List<ProprietarioAnimal>>() {
-            });
-
-        } catch (Exception exception) { }
+            // Carregando a lista com o arquivo existente
+            proprietarioAnimalList = (List<ProprietarioAnimal>) iAquivoUtil.carregaArquivo("Proprietarios.json");
+        } catch (RuntimeException exception) { }
 
         if (proprietarioAnimalList == null)
             proprietarioAnimalList = new ArrayList<ProprietarioAnimal>();
@@ -45,7 +50,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
         this.proprietarioAnimalList.add(obj);
 
         try {
-            objectMapper.writeValue(new File("Proprietarios.json"), proprietarioAnimalList);
+            pobjectMapper.writeValue(new File("Proprietarios.json"), proprietarioAnimalList);
         } catch (Exception exception) {
             String erro = exception.toString();
         }
@@ -82,7 +87,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
                     return proprietarioAnimal;
                 }
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             e.printStackTrace();
         }
         return null;

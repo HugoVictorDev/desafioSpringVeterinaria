@@ -1,5 +1,4 @@
-package com.meli.desafiospringveterinaria.services;
-
+package com.meli.desafiospringveterinaria.dao;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,7 +31,7 @@ public class DAOMedico implements Persistivel<Medico> {
     ArquivoUtil arquivoUtil = new ArquivoUtil();
 
     @Override
-    public Animal cadastrar(Medico objMedico) {
+    public Medico cadastrar(Medico objMedico) {
         mapearObjeto();
         try {
             if(validaMedico(objMedico.getNumeroRegistro())){
@@ -47,10 +46,10 @@ public class DAOMedico implements Persistivel<Medico> {
     }
 
     @Override
-    public void editar(Medico obj) {}
+    public Medico editar(Medico obj) { return null;}
 
     @Override
-    public void obter(Medico obj) {}
+    public Medico obter(Medico obj) { return null; }
 
 
     @Override

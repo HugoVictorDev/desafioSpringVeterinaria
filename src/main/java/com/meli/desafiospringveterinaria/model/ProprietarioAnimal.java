@@ -24,7 +24,7 @@ public class ProprietarioAnimal {
     public ProprietarioAnimal(String cpfProprietario, String nomeProprietario, String sobrenomeProprietario, LocalDate dataNascimentoProprietario, String endereco, String
             telefone, Animal animal) throws ParseException {
 
-        this.cpf = arquivoUtil.formatarCpf(cpfProprietario);
+        this.cpf = (cpfProprietario);
         this.nome = nomeProprietario;
         this.sobrenome = sobrenomeProprietario;
         this.dataNascimento = dataNascimentoProprietario;

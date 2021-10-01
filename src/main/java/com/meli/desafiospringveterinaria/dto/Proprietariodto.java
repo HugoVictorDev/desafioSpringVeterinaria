@@ -1,9 +1,7 @@
 package com.meli.desafiospringveterinaria.dto;
 
 import com.meli.desafiospringveterinaria.model.Animal;
-import com.meli.desafiospringveterinaria.services.IntefaceProprietarioService;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 
 public class Proprietariodto {
@@ -37,7 +35,7 @@ public class Proprietariodto {
         public LocalDate GetdataNascimento(){ return dataNascimento; };
         public String Getendereco(){ return endereco; };
         public String Gettelefone(){ return telefone; };
-        public String Getanimal(){ return animal; };
+        public Animal Getanimal(){ return animal; };
 
 
     public String getProprietario() {

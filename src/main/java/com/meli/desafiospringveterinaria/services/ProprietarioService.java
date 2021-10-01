@@ -1,30 +1,26 @@
 package com.meli.desafiospringveterinaria.services;
 
 
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
-import com.meli.desafiospringveterinaria.persistence.Persistivel;
-import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.SneakyThrows;
-import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.io.IOException;
 
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 
-public class ProprietarioService {
+public class ProprietarioService implements IntefaceProprietarioService {
 
     private static ArquivoUtil arquivoUtil;
     List<ProprietarioAnimal> proprietarioAnimalList;
 
-    @Override
+
     //Alterar para retornar objeto proprietarioAnimal
     public Animal cadastrar(ProprietarioAnimal proprietarioAnimal) {
 
@@ -41,75 +37,48 @@ public class ProprietarioService {
 
     }
 
-    @Override
+
     public void editar(ProprietarioAnimal obj) {
     }
 
-    @Override
+
     public void obter(ProprietarioAnimal obj) {
 
     }
 
 
-    public static ProprietarioAnimal edita(ProprietarioAnimal obj, ProprietarioAnimal obj2) throws IOException {
 
+    public ProprietarioAnimal obterPorIdentificador(String identificador) throws ParseException {
         List<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<>();
-        //proprietarioAnimalList;
-        proprietarioAnimalList.add((ProprietarioAnimal) arquivoUtil.carregaArquivo("Proprietarios.json"));
-
-        for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
-            if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
-                proprietarioAnimalList.remove(proprietarioAnimal);
-                proprietarioAnimalList.add(obj2);
-                proprietarioAnimalList.add(proprietarioAnimal);
-
-                return proprietarioAnimal;
-            }
-        }
-
-        return null;
-    }
-
-
-    //public ProprietarioAnimal obterAnimal(ProprietarioAnimal obj) {
-    public static Animal obterAnimal(String cpfMedico) throws IOException {
-
-
-        List<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<>();
-        //proprietarioAnimalList;
-        proprietarioAnimalList.add((ProprietarioAnimal) arquivoUtil.carregaArquivo("Proprietarios.json"));
-
-        if (proprietarioAnimalList == null) {
-            return null;
-        }
+        ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal();
 
         try {
-            for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
-                if (proprietarioAnimal.getCpf().equals(cpfMedico)){//obj.getCpf())) {
-                    return proprietarioAnimal.getAnimal();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            proprietarioAnimalList.add((ProprietarioAnimal) arquivoUtil.carregaArquivo("Proprietarios.json"));
+        }catch (IOException e){
+
         }
-        return null;
+
+        proprietarioAnimalList.stream().filter(p -> p.getProprietario().equals(identificador));
+
+        for (ProprietarioAnimal p : proprietarioAnimalList) {
+            if (proprietarioAnimal.getProprietario() != null){
+                return p;
+            }
+        }
+       return null;
     }
+}
 
 
-    public ProprietarioAnimal obterPorIdentificador(String identificador) {
+    public List<ProprietarioAnimal> listagem() throws IOException {
+        List<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<>();
 
-    }
-
-    @Override
-    public List<ProprietarioAnimal> listagem() {
+        proprietarioAnimalList.add((ProprietarioAnimal) arquivoUtil.carregaArquivo("Proprietarios.json"));
         return proprietarioAnimalList;
     }
 
 
-    @SneakyThrows
     public List<ProprietarioAnimal> listagemConsulta(){
-        mapearObjeto();
-        proprietarioAnimalList = objectMapper.readValue(new File("Proprietarios.json"), new TypeReference<List<ProprietarioAnimal>>(){});
-        return proprietarioAnimalList;
+
     }
 }

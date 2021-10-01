@@ -1,9 +1,7 @@
 package com.meli.desafiospringveterinaria.services;
 
-import ch.qos.logback.core.read.ListAppender;
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
-import com.meli.desafiospringveterinaria.model.RespostaBase;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 
 import org.junit.jupiter.api.Test;
@@ -13,7 +11,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -68,9 +65,13 @@ public class DAOProprietarioAnimalTest {
 
 
 
-        DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
+        ProprietarioService daoProprietarioAnimal = new ProprietarioService();
         // Animal animalRetorno = new Animal();
-        daoProprietarioAnimal.edita(proprietarioAnimal);
+        try {
+            daoProprietarioAnimal.edita(proprietarioAnimal, proprietarioAnimal);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         assert(daoProprietarioAnimal.cadastrar(proprietarioAnimal).equals(animal));
 
@@ -78,7 +79,7 @@ public class DAOProprietarioAnimalTest {
 
 
     @Test
-    void deve_obterAnimal() throws ParseException {
+    void deve_obterAnimal() throws ParseException, IOException {
 
 
         //Mockito.when(mock.cadastrar(Mockito.any(ProprietarioAnimal.class))).thenReturn(listaDeProprietarioAnimal);
@@ -89,23 +90,24 @@ public class DAOProprietarioAnimalTest {
 
 
 
-        DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
+        ProprietarioService daoProprietarioAnimal = new ProprietarioService();
         // Animal animalRetorno = new Animal();
-        daoProprietarioAnimal.obterAnimal(proprietarioAnimal.getCpf()); //Edenilson
+        ProprietarioService.obterAnimal(proprietarioAnimal.getCpf()); //Edenilson
 
-        assert(daoProprietarioAnimal.obterAnimal(proprietarioAnimal.getCpf()).equals(animal));
+        assert(ProprietarioService.obterAnimal(proprietarioAnimal.getCpf()).equals(animal));
 
     }
     //POR CPF
     @Test
-    void deve_obterProprietarioPorIdentificador() throws ParseException {
+    void deve_obterProprietarioPorIdentificador() throws ParseException, IOException {
 
         Persistivel mock = Mockito.mock(Persistivel.class);
 
-        DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
+        IntefaceProprietarioService proprietarioService;
         // Animal animalRetorno = new Animal();
-        daoProprietarioAnimal.obterAnimal("09878998765"); //Edenilson
 
-        assert(daoProprietarioAnimal.obterAnimal(proprietarioAnimal.getCpf()).equals("09878998765"));
+        IntefaceProprietarioService.obterAnimal("09878998765"); //Edenilson
 
+        assert (IntefaceProprietarioService.obterAnimal(proprietarioAnimal.getCpf()).equals("09878998765"));
     }
+}

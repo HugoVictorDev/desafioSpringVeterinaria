@@ -1,12 +1,16 @@
 package com.meli.desafiospringveterinaria.controller;
 
+import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
+import com.meli.desafiospringveterinaria.dto.Proprietariodto;
 import com.meli.desafiospringveterinaria.model.*;
 import com.meli.desafiospringveterinaria.services.DAOAnimal;
 import com.meli.desafiospringveterinaria.services.DAOProprietarioAnimal;
+import com.meli.desafiospringveterinaria.services.IntefaceProprietarioService;
 import com.meli.desafiospringveterinaria.services.ProprietarioService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,13 +19,16 @@ import java.util.List;
 public class ProprietarioController
 {
 
-    DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
+    ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal();
     DAOAnimal daoAnimal = new DAOAnimal();
 
+    public ProprietarioController() throws ParseException {
+    }
+
     @GetMapping("/consulta/{identificador}")
-    public RespostaBase obter(@PathVariable ("identificador") String identificador) throws IOException {
+    public RespostaBase obter(@PathVariable ("identificador") String identificador) throws IOException, ParseException {
         RespostaBase retorno = new RespostaBase();
-        ProprietarioAnimal prop = daoProprietarioAnimal.obterPorIdentificador(identificador);
+        ProprietarioAnimal prop = IntefaceProprietarioService.obterPorIdentificador(identificador);
 
         if(prop == null) {
             retorno.Sucesso = false;
@@ -34,9 +41,14 @@ public class ProprietarioController
         return retorno;
     }
 
+    public DAOAnimal getDaoAnimal() { //Edenilson
+        return daoAnimal;
+    }
+
     @PostMapping("/cadastrar")
     public RespostaBase cadastrarProprietario( @RequestBody ProprietarioAnimal proprietario) {
         RespostaBase retorno = new RespostaBase();
+        ArquivoUtil arquivoUtil = new ArquivoUtil();
 
         if(proprietario == null) {
             retorno.Erros.add("Favor fornecer os dados do proprietario");
@@ -79,18 +91,17 @@ public class ProprietarioController
             return retorno;
         }
 
-      //  ProprietarioAnimal prop = daoProprietarioAnimal.obter(proprietario);
-        Animal prop = new Animal(); //Edenilson
+        // ProprietarioAnimal prop = daoProprietarioAnimal.obter(proprietario);
+        Animal propinter; //Edenilson
         try {
-            prop = ProprietarioService.obterAnimal(proprietario.getCpf());
+            String prop = proprietarioAnimal.getProprietario();
+            if(prop != null){
+                retorno.Erros.add("Proprietario já cadastrado!");
+                retorno.Sucesso = false;
+                return retorno;
+            }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        if(prop != null){
-            retorno.Erros.add("Proprietario já cadastrado!");
-            retorno.Sucesso = false;
-            return retorno;
         }
 
         daoProprietarioAnimal.cadastrar(proprietario);
@@ -102,7 +113,7 @@ public class ProprietarioController
 
 
     @PutMapping("/editar")
-    public RespostaBase atualizarProprietario( @RequestBody ProprietarioAnimal proprietario, @RequestBody ProprietarioAnimal proprietario2) {
+    public RespostaBase atualizarProprietario( @RequestBody ProprietarioAnimal proprietario, @RequestBody ProprietarioAnimal proprietario1) throws IOException {
         RespostaBase retorno = new RespostaBase();
 
         if(proprietario == null) {
@@ -147,7 +158,7 @@ public class ProprietarioController
 
     @GetMapping("/consulta/pacientes")
     public List<ProprietarioAnimal> listarProprietario() {
-        return daoProprietarioAnimal.listagemConsulta();
+        return daoProprietarioAnimal.listagem();
     }
 
 

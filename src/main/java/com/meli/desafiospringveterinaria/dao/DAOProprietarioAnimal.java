@@ -1,26 +1,22 @@
 package com.meli.desafiospringveterinaria.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
-import com.fasterxml.jackson.core.type.TypeReference;
-import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
+
 import java.io.IOException;
-
-
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
-    private Persistivel persistivel;
+    @Autowired
+    private IntefaceProprietarioService intefaceProprietarioService;
 
 
     //ObjectMapper objectMapper;
@@ -28,20 +24,18 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
 
     public DAOProprietarioAnimal() {
-        objectMapper = new ObjectMapper();
-        mapearObjeto();
-
-        ArrayList<ProprietarioAnimal> proprietarioAnimalList;
+        ProprietarioService proprietarioService = new ProprietarioService();
+        List<ProprietarioAnimal> proprietarioAnimalList;
         try {
-            proprietarioAnimalList = objectMapper.readValue(new File("Proprietarios.json"), new TypeReference<List<ProprietarioAnimal>>() {
-            });
+            proprietarioAnimalList =  intefaceProprietarioService.listagem();//objectMapper.readValue(new File("Proprietarios.json"), new TypeReference<List<ProprietarioAnimal>>() {
+            if (proprietarioAnimalList == null)
+                throw new RuntimeException("Sem Proprietário na Lista");
 
         } catch (Exception exception) {
             String a = "";
         }
 
-        if (proprietarioAnimalList == null)
-            proprietarioAnimalList = new ArrayList<ProprietarioAnimal>();
+
     }
 
     @Override
@@ -63,15 +57,23 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
     public List<ProprietarioAnimal> listagem() {
         return null;
     }
-    @Override
+
     public ProprietarioAnimal obterPorIdentificador(String cpf) {
+        ArrayList<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<>();
+
+        try {
+            proprietarioAnimalList.add(IntefaceProprietarioService.obterPorIdentificador(cpf));
+        }catch (ParseException p){
+            p.printStackTrace();
+        }
+
         if (proprietarioAnimalList == null) {
             return null;
         }
 
         try {
             for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
-                if (proprietarioAnimal.getCpf().equals(identificador)) {
+                if (proprietarioAnimal.getCpf().equals(cpf)) {
                     return proprietarioAnimal;
                 }
             }

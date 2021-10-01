@@ -1,11 +1,12 @@
 package com.meli.desafiospringveterinaria.controller;
 
+import com.meli.desafiospringveterinaria.dao.DAOMedico;
 import com.meli.desafiospringveterinaria.model.Medico;
-import com.meli.desafiospringveterinaria.services.DAOMedico;
 import com.meli.desafiospringveterinaria.services.DAOConsulta;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -15,26 +16,25 @@ import java.util.List;
 
         DAOMedico daomedico = new DAOMedico();
 
-        //responseEnity retorna um status
         @PostMapping("/cadastrar")
-        public ResponseEntity<Medico> cadastroMedico(@RequestBody Medico objMedico){
+        public ResponseEntity<Medico> cadastroMedico(@RequestBody Medico objMedico) throws IOException {
             daomedico.cadastrar(objMedico);
             return ResponseEntity.ok(objMedico);
         }
 
         @GetMapping("/consulta/{numeroRegistro}")
         public Medico obterMedico(@PathVariable("numeroRegistro") Long numeroRegistro) {
-            return daomedico.obterMedico(numeroRegistro);
+            return daomedico.obter(numeroRegistro);
         }
 
         @PutMapping("/editar")
         public Medico atualizarMedico(@RequestBody Medico objMedico){
-            daomedico.edita(objMedico);
+            daomedico.editar(objMedico);
             return objMedico;
 
         }
         @DeleteMapping(value="/deleta/{numeroRegistro}")
-        public void remove(@PathVariable("numeroRegistro") Long numeroRegistro){
+        public void remove(@PathVariable("numeroRegistro") Long numeroRegistro) throws IOException {
            daomedico.remover(numeroRegistro);
         }
     }

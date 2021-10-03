@@ -15,30 +15,32 @@ import java.io.IOException;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
+public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal>, InterfaceProprietarioAnimal {
 
     InterfaceAquivoUtil iAquivoUtil;
 
     List<ProprietarioAnimal> proprietarioAnimalList;
-    ObjectMapper objectMapper;
+/*    ObjectMapper objectMapper;
 
 
     private void mapearObjeto() {
         objectMapper.findAndRegisterModules();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
+*/
+  //  com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil
+    @Override
+    public void DAOProprietarioAnimal() {
+//        objectMapper = new ObjectMapper();
+//        mapearObjeto();
 
-    com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil
-    public DAOProprietarioAnimal() {
-        objectMapper = new ObjectMapper();
-        mapearObjeto();
-
-        proprietarioAnimalList = new ArrayList<ProprietarioAnimal>();
+        List<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<ProprietarioAnimal>();
         try {
             // Carregando a lista com o arquivo existente
-            proprietarioAnimalList = (List<ProprietarioAnimal>) iAquivoUtil.carregaArquivo("Proprietarios.json");
+            proprietarioAnimalList = (List<ProprietarioAnimal>) iAquivoUtil.carregaArquivo("Proprietarios.json", proprietarioAnimalList);
         } catch (RuntimeException exception) { }
 
         if (proprietarioAnimalList == null)
@@ -50,7 +52,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
         this.proprietarioAnimalList.add(obj);
 
         try {
-            pobjectMapper.writeValue(new File("Proprietarios.json"), proprietarioAnimalList);
+            iAquivoUtil.gravaArquivo(Collections.singletonList((List<ProprietarioAnimal>) proprietarioAnimalList), "Proprietarios.json");
         } catch (Exception exception) {
             String erro = exception.toString();
         }
@@ -59,17 +61,18 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
 
     @Override
     public ProprietarioAnimal editar(ProprietarioAnimal obj) {
-        try {
-            for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
-                if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
-                    proprietarioAnimalList.remove(proprietarioAnimal);
-                    proprietarioAnimalList.add(obj);
-                    objectMapper.writeValue(new File("Proprietarios.json"), proprietarioAnimalList);
-                    return proprietarioAnimal;
-                }
+        return null;
+    }
+
+    @Override
+    public ProprietarioAnimal editar(ProprietarioAnimal obj, ProprietarioAnimal obj2) throws IOException { // Edenilson - Correcao de parametros
+        for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
+            if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
+                proprietarioAnimalList.remove(proprietarioAnimal);
+                proprietarioAnimalList.add(obj2);
+                iAquivoUtil.gravaArquivo(Collections.singletonList((List<ProprietarioAnimal>) proprietarioAnimalList), "Proprietarios.json");
+                return proprietarioAnimal;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
         return null;
@@ -93,6 +96,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
         return null;
     }
 
+    @Override
     public ProprietarioAnimal obterProprietarioAnimal(ProprietarioAnimal obj) {
         if (proprietarioAnimalList == null) {
             return null;
@@ -111,6 +115,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal> {
     }
 
 
+    @Override
     public ProprietarioAnimal obterPorIdentificador(String identificador) {
         if (proprietarioAnimalList == null) {
             return null;

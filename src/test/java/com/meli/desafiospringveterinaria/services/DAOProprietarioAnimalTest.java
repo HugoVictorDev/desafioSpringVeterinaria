@@ -61,12 +61,13 @@ public class DAOProprietarioAnimalTest {
                         LocalDate.now(),"rua texte, ",
                         "11987654321",
                         animal);
-
         assert(daoProprietarioAnimal.editar(proprietarioAnimal).equals(proprietarioAnimal));
+
     }
 
     @Test
     void deve_obterProprietarioAnimal() throws ParseException, IOException {
+        setUp();
         assert(daoProprietarioAnimal.obterProprietarioAnimal(proprietarioAnimal).equals(proprietarioAnimal));
 
     }

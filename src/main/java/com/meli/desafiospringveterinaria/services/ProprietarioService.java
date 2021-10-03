@@ -9,11 +9,12 @@ import com.meli.desafiospringveterinaria.model.RespostaBase;
 import com.meli.desafiospringveterinaria.persistence.IntefaceProprietarioService;
 
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 
-public class ProprietarioService implements IntefaceProprietarioService {
+public abstract class ProprietarioService implements IntefaceProprietarioService {
 
     private static ArquivoUtil arquivoUtil;
     List<ProprietarioAnimal> proprietarioAnimalList;
@@ -110,7 +111,7 @@ public class ProprietarioService implements IntefaceProprietarioService {
         return retorno;
     }
 
-    public  RespostaBase atualizarProprietario(ProprietarioAnimal proprietario)
+    public  RespostaBase atualizarProprietario(ProprietarioAnimal proprietario, ProprietarioAnimal proprietario2)
     {
         RespostaBase retorno = new RespostaBase();
 
@@ -148,6 +149,8 @@ public class ProprietarioService implements IntefaceProprietarioService {
         }
 
         ProprietarioAnimal prop = daoProprietarioAnimal.obterProprietarioAnimal(proprietario);
+        ProprietarioAnimal prop2 = daoProprietarioAnimal.obterProprietarioAnimal(proprietario2);
+
 
         if(prop == null)
         {
@@ -155,8 +158,12 @@ public class ProprietarioService implements IntefaceProprietarioService {
             retorno.Sucesso = false;
             return retorno;
         }
+        try {
+            daoProprietarioAnimal.editar(prop, prop2);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
-        daoProprietarioAnimal.editar(proprietario);
 
         retorno.Sucesso = true;
         retorno.Data = proprietario;

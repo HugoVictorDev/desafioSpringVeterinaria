@@ -28,7 +28,12 @@ public class ProprietarioServiceTest {
         proprietarioAnimalDao = mock(DAOProprietarioAnimal.class);
         animalDao = mock(DAOAnimal.class);
 
-        service = new ProprietarioService(proprietarioAnimalDao, animalDao);
+        service = new ProprietarioService(proprietarioAnimalDao, animalDao) {
+            @Override
+            public RespostaBase atualizarProprietario(ProprietarioAnimal proprietario, ProprietarioAnimal proprietario2) {
+                return null;
+            }
+        };
     }
 
     @Test //Teste OK do metodo proprietarioAnimalDao.obterPorIdentificador(identificador)
@@ -139,14 +144,14 @@ public class ProprietarioServiceTest {
         when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal))
                 .thenReturn(proprietarioAnimal);
 
-        RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal);
+        RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal, proprietarioAnimal);
 
         assertEquals(true, respostaBase.Sucesso);
     }
 
     @Test
     public void listagemConsultaTest() throws ParseException {
-        List<ProprietarioAnimal> lista =  new ArrayList<ProprietarioAnimal>();
+        List<ProprietarioAnimal> lista =  new ArrayList<>();
 
         when(proprietarioAnimalDao.listagem()).thenReturn(lista);
 

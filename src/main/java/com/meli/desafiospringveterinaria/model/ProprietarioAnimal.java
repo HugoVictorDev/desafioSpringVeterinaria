@@ -41,4 +41,5 @@ public class ProprietarioAnimal {
     public String getProprietario() {
         return nome;
     }
+    public void editar(ProprietarioAnimal proprietarioAnimal, ProprietarioAnimal proprietarioAnimal2){ }
 }

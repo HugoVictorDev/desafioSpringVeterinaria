@@ -20,7 +20,12 @@ public class ProprietarioController
     public ProprietarioController() throws ParseException {
         DAOAnimal animal = new DAOAnimal();
         DAOProprietarioAnimal proprietarioAnimal = new DAOProprietarioAnimal();
-        intefaceProprietarioService = new ProprietarioService(proprietarioAnimal, animal);
+        intefaceProprietarioService = new ProprietarioService(proprietarioAnimal, animal) {
+            @Override
+            public RespostaBase atualizarProprietario(ProprietarioAnimal proprietario, ProprietarioAnimal proprietario2) {
+                return null;
+            }
+        };
     }
 
     @GetMapping("/consulta/{identificador}")
@@ -34,8 +39,8 @@ public class ProprietarioController
     }
 
     @PutMapping("/editar")
-    public RespostaBase atualizarProprietario( @RequestBody ProprietarioAnimal proprietario) throws IOException {
-        return intefaceProprietarioService.atualizarProprietario(proprietario);
+    public RespostaBase atualizarProprietario( @RequestBody ProprietarioAnimal proprietario, @RequestBody ProprietarioAnimal proprietarioNovo) throws IOException {
+        return intefaceProprietarioService.atualizarProprietario(proprietario, proprietarioNovo);
     }
 
     @GetMapping("/consulta/proprietarios")

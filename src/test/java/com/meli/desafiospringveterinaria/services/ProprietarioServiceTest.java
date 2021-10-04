@@ -29,10 +29,7 @@ public class ProprietarioServiceTest {
         animalDao = mock(DAOAnimal.class);
 
         service = new ProprietarioService(proprietarioAnimalDao, animalDao) {
-            @Override
-            public RespostaBase atualizarProprietario(ProprietarioAnimal proprietario, ProprietarioAnimal proprietario2) {
-                return null;
-            }
+
         };
     }
 
@@ -84,7 +81,7 @@ public class ProprietarioServiceTest {
     }
 
     @Test
-    public void cadastrarProprietarioTeste() throws ParseException {
+    public void deve_cadastrarProprietarioTeste() throws ParseException {
 
         Animal animal = new Animal(
                 123456789L,
@@ -117,9 +114,51 @@ public class ProprietarioServiceTest {
 
         assertEquals(true, respostaBase.Sucesso);
     }
+    @Test
+    public void nao_deve_cadastrarProprietarioTeste() throws ParseException {
+
+        Animal animal = new Animal(
+                123456789L,
+                "Cachorro",
+                "Yorkshire",
+                "preto",
+                LocalDate.now(),
+                "Fadinha"
+        );
+
+        ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal(
+                "123456789",
+                "Teste",
+                "Mockado",
+                LocalDate.now(),
+                "Rua Teste Unitario",
+                "11999999999",
+                null
+        );
+
+        when(animalDao
+                .obter2(animal))
+                .thenReturn(animal);
+
+        when(proprietarioAnimalDao
+                .obterProprietarioAnimal(proprietarioAnimal))
+                .thenReturn(null);
+
+        RespostaBase respostaBase = service.cadastrarProprietario(proprietarioAnimal);
+
+        assertEquals(false, respostaBase.Sucesso);
+    }
+    @Test
+    public void nao_deve_cadastrarProprietario2Teste() throws ParseException {
+
+
+        RespostaBase respostaBase = service.cadastrarProprietario(null);
+
+        assertEquals(false, respostaBase.Sucesso);
+    }
 
     @Test
-    public void atualizarProprietarioTeste() throws ParseException {
+    public void deve_atualizarProprietarioTeste() throws ParseException {
         Animal animal = new Animal(
                 123456789L,
                 "Cachorro",
@@ -149,6 +188,89 @@ public class ProprietarioServiceTest {
         assertEquals(true, respostaBase.Sucesso);
     }
 
+    @Test
+    public void nao_deve_atualizarProprietarioTeste() throws ParseException {
+
+        Animal animal = new Animal(
+                123456789L,
+                "Cachorro",
+                "Yorkshire",
+                "preto",
+                LocalDate.now(),
+                "Fadinha"
+        );
+
+        ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal(
+                "123456789",
+                "Teste",
+                "Mockado",
+                LocalDate.now(),
+                "Rua Teste Unitario",
+                "11999999999",
+                animal
+        );
+
+        ProprietarioAnimal proprietarioAnimal2 = new ProprietarioAnimal(
+                null,
+                null,
+                null,
+                LocalDate.now(),
+                null,
+                null,
+                animal
+        );
+
+        when(animalDao.obter2(animal)).thenReturn(animal);
+
+        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal))
+                .thenReturn(proprietarioAnimal);
+
+        RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal, proprietarioAnimal2);
+
+        assertEquals(false, respostaBase.Sucesso);
+    }
+
+    @Test
+    public void nao_deve_atualizar2ProprietarioTeste() throws ParseException {
+
+        Animal animal = new Animal(
+                123456789L,
+                "Cachorro",
+                "Yorkshire",
+                "preto",
+                LocalDate.now(),
+                "Fadinha"
+        );
+
+        ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal(
+                null,
+                null,
+                null,
+                LocalDate.now(),
+                null,
+                null,
+                animal
+        );
+
+        ProprietarioAnimal proprietarioAnimal2 = new ProprietarioAnimal(
+                null,
+                null,
+                null,
+                LocalDate.now(),
+                null,
+                null,
+                animal
+        );
+
+        when(animalDao.obter2(animal)).thenReturn(animal);
+
+        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal))
+                .thenReturn(proprietarioAnimal);
+
+        RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal, proprietarioAnimal2);
+
+        assertEquals(false, respostaBase.Sucesso);
+    }
     @Test
     public void listagemConsultaTest() throws ParseException {
         List<ProprietarioAnimal> lista =  new ArrayList<>();

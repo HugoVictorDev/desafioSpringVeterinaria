@@ -118,6 +118,7 @@ public abstract class ProprietarioService implements IntefaceProprietarioService
         if(proprietario == null) {
             retorno.Erros.add("Favor fornecer os dados do proprietario");
         }
+
         else if(proprietario.getCpf() == null || proprietario.getCpf().length() <= 0) {
             retorno.Erros.add("Favor fornecer o CPF do proprietario");
         }
@@ -143,6 +144,37 @@ public abstract class ProprietarioService implements IntefaceProprietarioService
             retorno.Erros.add("Favor fornecer os dados do Animal do proprietario");
         }
 
+
+        //Validacao do proprietario2
+
+        if(proprietario2 == null) {
+            retorno.Erros.add("Favor fornecer os dados do proprietario2");
+        }
+
+        else if(proprietario2.getCpf() == null || proprietario2.getCpf().length() <= 0) {
+            retorno.Erros.add("Favor fornecer o CPF do proprietario2");
+        }
+        else if(proprietario2.getNome() == null || proprietario2.getNome().length() <= 0) {
+            retorno.Erros.add("Favor fornecer o Nome do proprietario2");
+        }
+        else if(proprietario2.getSobrenome() == null || proprietario2.getSobrenome().length() <= 0) {
+            retorno.Erros.add("Favor fornecer o Sobrenome do proprietario2");
+        }
+        else if(proprietario2.getDataNascimento() == null || proprietario2.getDataNascimento().equals(LocalDate.MIN)) {
+            retorno.Erros.add("Favor fornecer a Data de Nascimento do proprietario2");
+        }
+        else if(proprietario2.getEndereco() == null || proprietario2.getEndereco().length() <= 0) {
+            retorno.Erros.add("Favor fornecer o endereço do proprietario2");
+        }
+        else if(proprietario2.getTelefone() == null || proprietario2.getTelefone().length() <= 0) {
+            retorno.Erros.add("Favor fornecer o telefone do proprietario2");
+        }
+        else if(proprietario2.getAnimal() == null) {
+            retorno.Erros.add("Favor fornecer os dados do Animal do proprietario2");
+        }
+        else if(proprietario2.getAnimal().getNumeroDoPaciente() <= 0) {
+            retorno.Erros.add("Favor fornecer os dados do Animal do proprietario2");
+        }
         if(retorno.Erros.size() > 0){
             retorno.Sucesso = false;
             return retorno;

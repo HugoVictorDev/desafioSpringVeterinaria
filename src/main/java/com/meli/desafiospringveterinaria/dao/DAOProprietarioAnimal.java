@@ -71,7 +71,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal>, I
                 proprietarioAnimalList.remove(proprietarioAnimal);
                 proprietarioAnimalList.add(obj2);
                 iAquivoUtil.gravaArquivo(Collections.singletonList((List<ProprietarioAnimal>) proprietarioAnimalList), "Proprietarios.json");
-                return proprietarioAnimal;
+                return obj2;
             }
         }
 

@@ -20,7 +20,7 @@ public class ProprietarioAnimal {
     private String telefone;
     private Animal animal;
 
-    ArquivoUtil arquivoUtil = new ArquivoUtil();
+    //ArquivoUtil arquivoUtil = new ArquivoUtil();
     public ProprietarioAnimal(String cpfProprietario, String nomeProprietario, String sobrenomeProprietario, LocalDate dataNascimentoProprietario, String endereco, String
             telefone, Animal animal) throws ParseException {
 
@@ -41,5 +41,5 @@ public class ProprietarioAnimal {
     public String getProprietario() {
         return nome;
     }
-    public void editar(ProprietarioAnimal proprietarioAnimal, ProprietarioAnimal proprietarioAnimal2){ }
+
 }

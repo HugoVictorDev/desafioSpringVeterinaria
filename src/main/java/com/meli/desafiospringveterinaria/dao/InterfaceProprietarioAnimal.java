@@ -19,7 +19,7 @@ public interface InterfaceProprietarioAnimal {
 
     ProprietarioAnimal cadastrar(ProprietarioAnimal obj);
 
-    ProprietarioAnimal editar(ProprietarioAnimal obj);
+    //ProprietarioAnimal editar(ProprietarioAnimal obj);
 
     ProprietarioAnimal editar(ProprietarioAnimal obj, ProprietarioAnimal obj2) throws IOException;
 

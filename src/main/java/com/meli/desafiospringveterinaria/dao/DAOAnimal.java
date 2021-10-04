@@ -1,9 +1,10 @@
-package com.meli.desafiospringveterinaria.dao;
+package com.meli.desafiospringveterinaria.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.meli.desafiospringveterinaria.arquivoutil.ArquivoUtil;
+import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.model.Animal;
+import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import lombok.Getter;
 
 import java.io.File;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class DAOAnimal {
+public class DAOAnimal implements Persistivel<Animal> {
 
     List<Animal> listaAnimal = new ArrayList<>();
     ArquivoUtil arquivoUtil = new ArquivoUtil();
@@ -26,6 +27,7 @@ public class DAOAnimal {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     }
 
+    @Override
     public Animal cadastrar(Animal animal) {
         mapearObjeto();
         listaAnimal.add(animal);
@@ -37,7 +39,18 @@ public class DAOAnimal {
         return animal;
     }
 
-    public Animal editar(Animal objAnimal) {
+
+    @Override
+    public void editar(Animal obj) {
+    }
+
+    @Override
+    public void obter(Animal obj) {
+
+    }
+
+
+    public Animal edita(Animal objAnimal) {
         mapearObjeto();
         try {
             listaAnimal = objectMapper.readValue(new File(ANIMALJSON), new TypeReference<List<Animal>>(){});
@@ -70,6 +83,7 @@ public class DAOAnimal {
         } return null;
     }
 
+    @Override
     public List<Animal> listagem() {
         return listaAnimal;
     }

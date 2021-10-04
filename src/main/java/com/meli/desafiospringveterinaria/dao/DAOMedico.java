@@ -1,140 +1,117 @@
 package com.meli.desafiospringveterinaria.dao;
 
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.arquivoutil.ArquivoUtil;
-import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.model.Medico;
-import com.meli.desafiospringveterinaria.persistence.Persistivel;
+import com.meli.desafiospringveterinaria.persistence.MedicoPersistivel;
 
+import com.meli.desafiospringveterinaria.services.MedicoService;
 import lombok.Getter;
 import lombok.SneakyThrows;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
-public class DAOMedico implements Persistivel<Medico> {
+public class DAOMedico implements MedicoPersistivel<Medico> {
+
 
     List<Medico> medicosList = new ArrayList<>();
     ObjectMapper objectMapper = new ObjectMapper();
+    ArquivoUtil arquivoUtil;
+    MedicoService medicoService;
+
+    //Gestão de dependencia
+    public DAOMedico(ArquivoUtil arquivoUtil){
+        this.arquivoUtil = arquivoUtil;
+    }
+    public DAOMedico(MedicoService medicoService){
+        this.medicoService = medicoService;
+    }
+    public DAOMedico(ArquivoUtil arquivoUtil, MedicoService medicoService){
+        this.arquivoUtil = arquivoUtil;
+        this.medicoService = medicoService;
+    }
+
+    public DAOMedico(){
+    }
 
     private void mapearObjeto() {
         objectMapper.findAndRegisterModules();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    ArquivoUtil arquivoUtil = new ArquivoUtil();
 
-    @Override
-    public Animal cadastrar(Medico objMedico) {
+    public Medico cadastrar(Medico objMedico) throws IOException {
+        mapearObjeto();
+        if(medicoService.validarMedico(objMedico.getNumeroRegistro())){
+            medicosList.add(objMedico);
+            arquivoUtil.gravaArquivo(medicosList);
+        //    arquivoUtil.gravaQualquerArquivo(Collections.singletonList(medicosList),"medico2.json");
+            return objMedico;
+            }else {throw new RuntimeException("Medico já cadastrado");}
+    }
+
+
+    public Medico obter(Long numeroRegistro) {
         mapearObjeto();
         try {
-            if(validaMedico(objMedico.getNumeroRegistro())){
-                medicosList.add(objMedico);
-                objectMapper.writeValue(new File("medico.json"), medicosList);
-            }else{throw new RuntimeException("Medico já cadastrado");}
-            //        }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
+            medicosList = arquivoUtil.carregaArquivo("medico.json");
+//            medicosList.add((Medico) arquivoUtil.carregaQualquerArquivo("medico2.json"));
 
-    @Override
-    public void editar(Medico obj) {}
-
-    @Override
-    public void obter(Medico obj) {}
-
-
-    @Override
-    public List<Medico> listagem() {
-        return null;
-    }
-
-
-    public Medico obterMedico(Long numeroRegistro) {
-        try {
-            medicosList = objectMapper.readValue(new File("medico.json"), new TypeReference<List<Medico>>() {
-            });
             for (Medico medico : medicosList) {
                 if (medico.getNumeroRegistro() == (numeroRegistro)) {
                     return medico;
                 }
-            }
-            throw new RuntimeException("Médico não encontrado");
+            }throw new RuntimeException("Médico não encontrado");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
 
-    public Medico edita(Medico objMedico) {
+    public Medico editar(Medico objMedico) {
         mapearObjeto();
         try {
-            medicosList = objectMapper.readValue(new File("medico.json"), new TypeReference<List<Medico>>() {
-            });
+            medicosList = arquivoUtil.carregaArquivo("medico.json");
             for (Medico medico : medicosList) {
                 if (medico.getNumeroRegistro() == (objMedico.getNumeroRegistro())) {
                     medicosList.remove(medico);
                     medicosList.add(objMedico);
-                    objectMapper.writeValue(new File("medico.json"), medicosList);
-                    return medico;
+                    arquivoUtil.gravaArquivo(medicosList);
+                   return medico;
                 }
-            }
-            throw new RuntimeException("Médico não Atualizdo");
+            }throw new RuntimeException("Médico não Atualizdo");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
-    private boolean validaMedico(long registroMedico) {
-        mapearObjeto();
-        try {
-            medicosList = objectMapper.readValue(new File("medico.json"), new TypeReference<List<Medico>>() {});
-            for (Medico medico : medicosList){
-                if (medico.getNumeroRegistro() == (registroMedico)) {
-                    return false;
-                }
-            }
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-
-    @SneakyThrows
-    public List<Medico> remover(Long numeroRegistro) {
+    public List<Medico> remover(Long numeroRegistro) throws IOException {
         mapearObjeto();
         List<Consulta> listConsulta;
-        medicosList = objectMapper.readValue(new File("medico.json"), new TypeReference<List<Medico>>() {});
         try {
+            medicosList = arquivoUtil.carregaArquivo("medico.json");
             for (Medico medico : medicosList) {
                 if (medico.getNumeroRegistro() == (numeroRegistro)) {
-                    listConsulta = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>() {
-                    });
+                    listConsulta = arquivoUtil.carregaArquivoConsulta(  "consulta.json");
                     for (Consulta consulta : listConsulta) {
                         if (consulta.getMedico().getNumeroRegistro() == (numeroRegistro)) {
                             throw new RuntimeException("Medico em consulta, ele não pode ser deletado!");
                         }
                     }  medicosList.remove(medico);
-                    objectMapper.writeValue(new File("medico.json"), medicosList);
+                    arquivoUtil.gravaArquivo(medicosList);
+                    arquivoUtil.gravaQualquerArquivo(Collections.singletonList(medicosList),"medico2.json");
                     throw new RuntimeException("Medico deletado!");
                 }
             }throw new RuntimeException("Medico não cadastrado!");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 }

@@ -1,4 +1,2 @@
-package com.meli.desafiospringveterinaria.services;
-
-public class MedicoService {
+package com.meli.desafiospringveterinaria.services;public class MedicoService {
 }

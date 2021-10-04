@@ -1,11 +1,9 @@
 package com.meli.desafiospringveterinaria.controller;
-import com.meli.desafiospringveterinaria.dao.DAOAnimal;
 import com.meli.desafiospringveterinaria.model.Animal;
-import com.meli.desafiospringveterinaria.services.AnimalService;
+import com.meli.desafiospringveterinaria.services.DAOAnimal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -15,7 +13,7 @@ public class AnimalController {
     DAOAnimal daoAnimal = new DAOAnimal();
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Animal> cadastrarAnimal(@RequestBody Animal objAnimal) throws IOException {
+    public ResponseEntity<Animal> cadastrarAnimal(@RequestBody Animal objAnimal){
         daoAnimal.cadastrar(objAnimal);
         return ResponseEntity.ok(objAnimal);
     }
@@ -27,7 +25,7 @@ public class AnimalController {
 
     @PutMapping("/editar")
     public Animal  editarAnimal(@RequestBody Animal objAnimal){
-        daoAnimal.editar(objAnimal);
+        daoAnimal.edita(objAnimal);
         return objAnimal;
     }
 

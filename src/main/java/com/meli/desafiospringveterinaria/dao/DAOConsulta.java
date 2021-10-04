@@ -27,7 +27,7 @@ public class DAOConsulta implements Persistivel<Consulta> {
     }
 
     @Override
-    public Animal cadastrar(Consulta consulta) {
+    public Consulta cadastrar(Consulta consulta) {
         mapearObjeto();
         consultaList.add(consulta);
         try {
@@ -39,12 +39,13 @@ public class DAOConsulta implements Persistivel<Consulta> {
     }
 
     @Override
-    public void editar(Consulta obj) {
+    public Consulta editar(Consulta obj) {
+        return null;
     }
 
     @Override
-    public void obter(Consulta obj) {
-
+    public Consulta obter(Consulta obj) {
+        return null;
     }
 
 

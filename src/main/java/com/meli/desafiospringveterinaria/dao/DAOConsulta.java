@@ -2,8 +2,8 @@ package com.meli.desafiospringveterinaria.dao;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
-import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.Consulta;
+import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import lombok.SneakyThrows;
 
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class DAOConsulta implements Persistivel<Consulta> {
+public class DAOConsulta implements Persistivel<Persistivel> {
 
     List<Consulta> consultaList = new ArrayList<>();
 
@@ -26,7 +26,7 @@ public class DAOConsulta implements Persistivel<Consulta> {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     }
 
-    @Override
+
     public Consulta cadastrar(Consulta consulta) {
         mapearObjeto();
         consultaList.add(consulta);
@@ -38,15 +38,6 @@ public class DAOConsulta implements Persistivel<Consulta> {
         return null;
     }
 
-    @Override
-    public Consulta editar(Consulta obj) {
-        return null;
-    }
-
-    @Override
-    public Consulta obter(Consulta obj) {
-        return null;
-    }
 
 
     public Consulta editarConsulta (Consulta objConsulta) {
@@ -120,7 +111,24 @@ public class DAOConsulta implements Persistivel<Consulta> {
 
 
     @Override
-    public List<Consulta> listagem() {return null;}
+    public ProprietarioAnimal cadastrar(Persistivel obj) {
+        return null;
+    }
+
+    @Override
+    public ProprietarioAnimal editar(Persistivel obj) {
+    return null;
+    }
+
+    @Override
+    public ProprietarioAnimal obter(Persistivel obj) {
+      return null;
+    }
+
+    @Override
+    public List<Persistivel> listagem() {
+        return null;
+    }
 
 
 }

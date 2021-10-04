@@ -25,6 +25,10 @@ public class Consulta {
         this.animal = animal;
     }
 
+    public Consulta() {
+
+    }
+
 
     @Override
     public String toString() {

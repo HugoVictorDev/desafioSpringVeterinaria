@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.arquivoutil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.model.Animal;
+import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 import lombok.Getter;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class DAOAnimal implements Persistivel<Animal> {
+public class DAOAnimal implements Persistivel {
 
     List<Animal> listaAnimal = new ArrayList<>();
     ArquivoUtil arquivoUtil = new ArquivoUtil();
@@ -28,7 +29,6 @@ public class DAOAnimal implements Persistivel<Animal> {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     }
 
-    @Override
     public Animal cadastrar(Animal animal) {
         mapearObjeto();
         listaAnimal.add(animal);
@@ -40,16 +40,6 @@ public class DAOAnimal implements Persistivel<Animal> {
         return animal;
     }
 
-
-    @Override
-    public Animal editar(Animal obj) {
-        return null;
-    }
-
-    @Override
-    public Animal obter(Animal obj) {
-        return null;
-    }
 
 
     public Animal edita(Animal objAnimal) {
@@ -83,6 +73,21 @@ public class DAOAnimal implements Persistivel<Animal> {
         } catch (IOException e){
             e.printStackTrace();
         } return null;
+    }
+
+    @Override
+    public ProprietarioAnimal cadastrar(Object obj) {
+        return null;
+    }
+
+    @Override
+    public ProprietarioAnimal editar(Object obj) {
+        return null;
+    }
+
+    @Override
+    public ProprietarioAnimal obter(Object obj) {
+        return null;
     }
 
     @Override

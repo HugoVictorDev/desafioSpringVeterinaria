@@ -2,7 +2,7 @@ package com.meli.desafiospringveterinaria.model;
 
 
 
-import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
+import com.meli.desafiospringveterinaria.arquivoutil.ArquivoUtil;
 import lombok.Getter;
 
 import javax.swing.text.MaskFormatter;

@@ -1,8 +1,8 @@
 package com.meli.desafiospringveterinaria.services;
 
-import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
+import com.meli.desafiospringveterinaria.arquivoutil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.dao.DAOAnimal;
-import com.meli.desafiospringveterinaria.dao.DAOProprietarioAnimal;
+import com.meli.desafiospringveterinaria.dao.*;
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.model.RespostaBase;

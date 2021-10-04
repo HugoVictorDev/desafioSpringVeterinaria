@@ -2,7 +2,8 @@ package com.meli.desafiospringveterinaria.dao;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
+
+import com.meli.desafiospringveterinaria.arquivoUtil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.persistence.ConsultaPersistivel;
 
@@ -20,22 +21,19 @@ import java.util.stream.Collectors;
 @Getter
 public class DAOConsulta extends ConsultaPersistivel {
 
-
     List<Consulta> consultaList = new ArrayList<>();
     ConsultaService consultaService = new ConsultaService();
 
-    ArquivoUtil arquivoUtil = new ArquivoUtil();
+ArquivoUtil arquivoUtil = new ArquivoUtil();
 
 
-<<<<<<< HEAD
+
     public Consulta cadastrar(Consulta consulta) throws IOException {
         consultaService.mapearObjeto();
-=======
-    @Override
-    public Consulta cadastrar(Consulta consulta) {
-        mapearObjeto();
+
+
         consultaList.add(consulta);
->>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
+
         try {
             if(consultaService.validarConsulta(consulta.getAnimal().getNome())){
                 consultaList.add(consulta);
@@ -47,39 +45,32 @@ public class DAOConsulta extends ConsultaPersistivel {
             e.printStackTrace();
         }
 
-<<<<<<< HEAD
+
         return consulta;
     }
 
-=======
-    @Override
-    public Consulta editar(Consulta obj) {
-        return null;
-    }
 
-    @Override
-    public Consulta obter(Consulta obj) {
-        return null;
-    }
->>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
+
+
+
 
 
     public Consulta editarConsulta(Consulta objConsulta) {
         consultaService.mapearObjeto();
         try {
-            consultaList = consultaService.objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
+            consultaList = arquivoUtil.carregaArquivoConsulta1("consulta.json");
             for (Consulta consulta : consultaList){
                 if (consulta.getAnimal().getNome().equals(objConsulta.getAnimal().getNome())) {
                     consultaList.remove(consulta);
                     consultaList.add(objConsulta);
-                    consultaService.objectMapper.writeValue(new File("consulta.json"), consultaList);
+                    arquivoUtil.gravaArquivoConsulta1(consultaList);
                     return consulta;
                 }
             }throw new RuntimeException("Consulta não encotrada");
         }catch (IOException e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return objConsulta;
+
     }
 
 
@@ -126,8 +117,7 @@ public class DAOConsulta extends ConsultaPersistivel {
     public List<Consulta> listagemPorData(String data) {
 
         consultaService.mapearObjeto();
-        consultaList = consultaService.objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>() {
-        });
+        consultaList = arquivoUtil.carregaArquivoConsulta1("consulta.json");
         return consultaList.stream().filter(consulta -> consulta.getDataHora().toString()
                 .equals(data)).sorted(Comparator.comparing(lista -> lista.getDataHora()))
                 .collect(Collectors.toList());

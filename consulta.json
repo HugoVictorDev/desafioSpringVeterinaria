@@ -1,61 +1,61 @@
 [ {
-  "dataHora" : "1977-05-21",
-  "motivo" : "cancer",
-  "diagnostico" : "dffdsdsdfd",
-  "tratamento" : "dsdsds",
+  "dataHora" : [ 2021, 10, 4 ],
+  "motivo" : "doenca",
+  "diagnostico" : "di",
+  "tratamento" : "remedio",
   "medico" : {
-    "cpfMedico" : "123456879",
-    "nomeMedico" : "Joao",
-    "sobrenomeMedico" : "da Rocha",
-    "numeroRegistro" : 55555555,
-    "especielidade" : "fdfdfd"
+    "cpfMedico" : "404313928",
+    "nomeMedico" : "hugo",
+    "sobrenomeMedico" : "Victor",
+    "numeroRegistro" : 12345,
+    "especielidade" : "medico"
   },
   "animal" : {
-    "numeroDoPaciente" : 1,
-    "especie" : "gato223355",
-    "raca" : "do mato",
-    "cor" : "preto",
-    "dataDeNascimento" : "1977-05-13",
-    "nome" : "felix"
+    "numeroDoPaciente" : 1232323,
+    "especie" : "gato",
+    "raca" : "boaa",
+    "cor" : "amarelo",
+    "dataDeNascimento" : [ 2021, 10, 4 ],
+    "nome" : "dsds"
   }
 }, {
-  "dataHora" : "2021-10-04",
-  "motivo" : "cancer",
-  "diagnostico" : "dffdsdsdfd",
-  "tratamento" : "dsdsds",
+  "dataHora" : [ 2021, 10, 4 ],
+  "motivo" : "doenca",
+  "diagnostico" : "di",
+  "tratamento" : "remedio",
   "medico" : {
-    "cpfMedico" : "123456879",
-    "nomeMedico" : "Joao",
-    "sobrenomeMedico" : "da Rocha",
-    "numeroRegistro" : 55555555,
-    "especielidade" : "fdfdfd"
+    "cpfMedico" : "404313928",
+    "nomeMedico" : "hugo",
+    "sobrenomeMedico" : "Victor",
+    "numeroRegistro" : 12345,
+    "especielidade" : "medico"
   },
   "animal" : {
-    "numeroDoPaciente" : 1,
-    "especie" : "gato223355",
-    "raca" : "do mato",
-    "cor" : "preto",
-    "dataDeNascimento" : "1977-05-13",
-    "nome" : "felix"
+    "numeroDoPaciente" : 1232323,
+    "especie" : "gato",
+    "raca" : "boaa",
+    "cor" : "amarelo",
+    "dataDeNascimento" : [ 2021, 10, 4 ],
+    "nome" : "dsdsds"
   }
 }, {
-  "dataHora" : "2021-04-10",
-  "motivo" : "cancer",
-  "diagnostico" : "dffdsdsdfd",
-  "tratamento" : "dsdsds",
+  "dataHora" : [ 2021, 10, 4 ],
+  "motivo" : "doenca",
+  "diagnostico" : "di",
+  "tratamento" : "remedio",
   "medico" : {
-    "cpfMedico" : "123456879",
-    "nomeMedico" : "Joao",
-    "sobrenomeMedico" : "da Rocha",
-    "numeroRegistro" : 55555555,
-    "especielidade" : "fdfdfd"
+    "cpfMedico" : "404313928",
+    "nomeMedico" : "hugo",
+    "sobrenomeMedico" : "Victor",
+    "numeroRegistro" : 12345,
+    "especielidade" : "medico"
   },
   "animal" : {
-    "numeroDoPaciente" : 1,
-    "especie" : "gato223355",
-    "raca" : "do mato",
-    "cor" : "preto",
-    "dataDeNascimento" : "1977-05-13",
+    "numeroDoPaciente" : 1232323,
+    "especie" : "gato",
+    "raca" : "boaa",
+    "cor" : "amarelo",
+    "dataDeNascimento" : [ 2021, 10, 4 ],
     "nome" : "felix"
   }
 } ]

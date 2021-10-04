@@ -1,18 +1,11 @@
 package com.meli.desafiospringveterinaria.controller;
 
 import com.meli.desafiospringveterinaria.dao.DAOAnimal;
-<<<<<<< HEAD
-import com.meli.desafiospringveterinaria.model.*;
-import com.meli.desafiospringveterinaria.persistence.Persistivel;
-
-
-import com.meli.desafiospringveterinaria.services.DAOProprietarioAnimal;
-=======
 import com.meli.desafiospringveterinaria.dao.DAOProprietarioAnimal;
-import com.meli.desafiospringveterinaria.model.*;
-import com.meli.desafiospringveterinaria.services.ProprietarioService;
+import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
+import com.meli.desafiospringveterinaria.model.RespostaBase;
 import com.meli.desafiospringveterinaria.persistence.IntefaceProprietarioService;
->>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
+import com.meli.desafiospringveterinaria.services.ProprietarioService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -22,11 +15,11 @@ import java.text.ParseException;
 @RequestMapping("/proprietario")
 public class ProprietarioController
 {
-<<<<<<< HEAD
+
 
     DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
    DAOAnimal daoAnimal = new DAOAnimal();
-=======
+
     IntefaceProprietarioService intefaceProprietarioService;
 
 
@@ -40,7 +33,7 @@ public class ProprietarioController
             }
         };
     }
->>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
+
 
     @GetMapping("/consulta/{identificador}")
     public RespostaBase obter(@PathVariable ("identificador") String identificador) throws IOException, ParseException {

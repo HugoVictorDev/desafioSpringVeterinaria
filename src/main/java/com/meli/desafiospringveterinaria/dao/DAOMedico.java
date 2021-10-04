@@ -3,14 +3,13 @@ package com.meli.desafiospringveterinaria.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.meli.desafiospringveterinaria.arquivoutil.ArquivoUtil;
-import com.meli.desafiospringveterinaria.model.Consulta;
+
+import com.meli.desafiospringveterinaria.arquivoUtil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.persistence.MedicoPersistivel;
 
 import com.meli.desafiospringveterinaria.services.MedicoService;
 import lombok.Getter;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,30 +46,14 @@ public class DAOMedico implements MedicoPersistivel<Medico> {
     }
 
 
-<<<<<<< HEAD
-    @Override
-    public void cadastrar(Medico objMedico) {
-        mapearObjeto();
-        try {
-            if(validaMedico(objMedico.getNumeroRegistro())){
-                medicosList.add(objMedico);
-                objectMapper.writeValue(new File("medico.json"), medicosList);
-            }else{throw new RuntimeException("Medico já cadastrado");}
-            //        }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-=======
     public Medico cadastrar(Medico objMedico) throws IOException {
         mapearObjeto();
         if(medicoService.validarMedico(objMedico.getNumeroRegistro())){
             medicosList.add(objMedico);
             arquivoUtil.gravaArquivo(medicosList);
-        //    arquivoUtil.gravaQualquerArquivo(Collections.singletonList(medicosList),"medico2.json");
+            //    arquivoUtil.gravaQualquerArquivo(Collections.singletonList(medicosList),"medico2.json");
             return objMedico;
-            }else {throw new RuntimeException("Medico já cadastrado");}
->>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
+        }else {throw new RuntimeException("Medico já cadastrado");}
     }
 
 
@@ -100,7 +83,7 @@ public class DAOMedico implements MedicoPersistivel<Medico> {
                     medicosList.remove(medico);
                     medicosList.add(objMedico);
                     arquivoUtil.gravaArquivo(medicosList);
-                   return medico;
+                    return medico;
                 }
             }throw new RuntimeException("Médico não Atualizdo");
         } catch (IOException e) {
@@ -110,14 +93,14 @@ public class DAOMedico implements MedicoPersistivel<Medico> {
 
     public List<Medico> remover(Long numeroRegistro) throws IOException {
         mapearObjeto();
-        List<Consulta> listConsulta;
+        List<Medico> listConsulta;
         try {
             medicosList = arquivoUtil.carregaArquivo("medico.json");
             for (Medico medico : medicosList) {
                 if (medico.getNumeroRegistro() == (numeroRegistro)) {
-                    listConsulta = arquivoUtil.carregaArquivoConsulta(  "consulta.json");
-                    for (Consulta consulta : listConsulta) {
-                        if (consulta.getMedico().getNumeroRegistro() == (numeroRegistro)) {
+                    listConsulta = arquivoUtil.carregaArquivo(  "consulta.json");
+                    for (Medico consulta : listConsulta) {
+                        if (consulta.getNumeroRegistro() == (numeroRegistro)) {
                             throw new RuntimeException("Medico em consulta, ele não pode ser deletado!");
                         }
                     }  medicosList.remove(medico);

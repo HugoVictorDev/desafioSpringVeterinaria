@@ -19,7 +19,6 @@ public class ConsultaService extends ConsultaPersistivel {
     public void mapearObjeto() {
         objectMapper.findAndRegisterModules();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     }
 
 

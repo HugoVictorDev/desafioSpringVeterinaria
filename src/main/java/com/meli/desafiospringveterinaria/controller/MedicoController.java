@@ -2,10 +2,9 @@ package com.meli.desafiospringveterinaria.controller;
 
 import com.meli.desafiospringveterinaria.dao.DAOMedico;
 import com.meli.desafiospringveterinaria.model.Medico;
-<<<<<<< HEAD
-=======
+
 import com.meli.desafiospringveterinaria.dao.*;
->>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

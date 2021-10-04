@@ -1,19 +1,18 @@
-package com.meli.desafiospringveterinaria.services;
+package com.meli.desafiospringveterinaria.dao;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
+
+
+import com.meli.desafiospringveterinaria.arquivoUtil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.dao.DAOConsulta;
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.model.Medico;
-import com.meli.desafiospringveterinaria.persistence.Persistivel;
+import com.meli.desafiospringveterinaria.services.ConsultaService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.io.File;
 import java.io.IOException;
-import java.sql.ClientInfoStatus;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ public class DAOConsultaTest  {
 
     Consulta consulta1 = new Consulta(LocalDate.of(2021,10,04), "doenca","di","remedio",
             new Medico( "404313928", "hugo", "Victor", 12345, "medico"),
-            new Animal(1232323L, "gato", "boaa", "amarelo",LocalDate.of(2021,10,04),"gatin"));
+            new Animal(1232323L, "gato", "boaa", "amarelo",LocalDate.of(2021,10,04),"felix"));
 
     Consulta consulta2 = new Consulta(LocalDate.of(2021,10,04), "cancer","di","cirurgia",new Medico( "404313928", "hugo", "Victor", 12345, "medico"),
             new Animal(12323234L, "cachorro", "boaa", "amarelo",LocalDate.of(2021,10,04),"gatin"));
@@ -60,7 +59,7 @@ public class DAOConsultaTest  {
 
     @Test
     public void testCadastrarConsultaNaoOk() throws IOException {
-        listDeConsultas.add(consulta);
+        listDeConsultas.add(consulta1);
 
         consultaService = Mockito.mock(ConsultaService.class);
 
@@ -79,33 +78,55 @@ public class DAOConsultaTest  {
 
     //testar editar consulta
     @Test
-    public void testarEditarConsulta() throws IOException {
+    public void testarEditarConsultaOK() throws IOException {
 
         listDeConsultas.add(consulta2);
 
         arquivoUtil = Mockito.mock(ArquivoUtil.class);
-        Mockito.when(arquivoUtil.carregaArquivo(Mockito.anyString())).thenReturn(listDeConsultas);
-        Mockito.when(arquivoUtil.gravaArquivo(listDeConsultas)).thenReturn(listDeConsultas);
+        Mockito.when(arquivoUtil.carregaArquivoConsulta(Mockito.anyString())).thenReturn(listDeConsultas);
+        Mockito.when(arquivoUtil.gravaArquivoConsulta1(listDeConsultas)).thenReturn(listDeConsultas);
 
 
 
         daoConsulta.editarConsulta(consulta1);
-
-        assert(daoConsulta.getConsultaList().contains(consulta1));
+        assert(daoConsulta.getConsultaList().contains(consulta1) && daoConsulta.getConsultaList().size() == 3);
 
     }
+    //editar medico nao OK
+
+
+    @Test
+    public void testEditarConsultaNok() throws IOException {
+
+        listDeConsultas.add(consulta2);
+
+
+        Mockito.when(arquivoUtil.carregaArquivoConsulta(Mockito.anyString())).thenReturn(listDeConsultas);
+        Mockito.when(arquivoUtil.gravaArquivoConsulta1(listDeConsultas)).thenReturn(listDeConsultas);
+
+
+        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()->{ daoConsulta.editarConsulta(consulta1);});
+
+        mensagem = "Consulta não encotrada";
+        mensagemSystem = exception.getMessage();
+
+        assert (mensagem.contains(mensagemSystem));
+    }
+
 
     //listagem por data
     @Test
     public void obterListaDeConsultaPorData() throws IOException {
-
-        arquivoUtil = Mockito.mock(ArquivoUtil.class);
-        Mockito.when(arquivoUtil.carregaArquivo(Mockito.anyString())).thenReturn(listDeConsultas);
-
-
         listDeConsultas.add(consulta1);
-      daoConsulta.listagemPorData("2021-10-04");
+        listDeConsultas.add(consulta2);
+        arquivoUtil = Mockito.mock(ArquivoUtil.class);
+        Mockito.when(arquivoUtil.carregaArquivoConsulta(Mockito.anyString())).thenReturn(listDeConsultas);
 
-        assert(daoConsulta.listagemPorData("2021-10-04").contains(consulta1));
+
+
+      daoConsulta.listagemPorData(consulta1.getDataHora().toString());
+
+   assert(daoConsulta.getConsultaList().contains(consulta1));
+
     }
 }

@@ -3,7 +3,8 @@ package com.meli.desafiospringveterinaria.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.meli.desafiospringveterinaria.arquivoutil.ArquivoUtil;
+import com.meli.desafiospringveterinaria.arquivoUtil.ArquivoUtil;
+
 import com.meli.desafiospringveterinaria.model.Medico;
 
 import java.io.IOException;

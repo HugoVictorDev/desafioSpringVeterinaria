@@ -1,14 +1,15 @@
 package com.meli.desafiospringveterinaria.services;
 
+
 import com.meli.desafiospringveterinaria.dao.DAOAnimal;
 import com.meli.desafiospringveterinaria.model.Animal;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class AnimalControllerTest {
 
@@ -28,7 +29,7 @@ public class AnimalControllerTest {
     public void deveEditarAnimal(){
         Animal animal = new Animal(1111L, "Felino", "SRD", "Preto", LocalDate.parse("2020-05-01"), "Pingo");
         listaAnimal.add(animal);
-        assert(daoAnimal.editar(animal).equals(animal));
+        assert(daoAnimal.edita(animal).equals(animal));
 
     }
 
@@ -37,15 +38,10 @@ public class AnimalControllerTest {
         DAOAnimal mock = Mockito.mock(DAOAnimal.class);
     }
 
-//    @Test
-//    public void deveConsultarPorNum(Animal novoAnimal){
-//
-//        for (Animal animal : listaAnimal) {
-//            if (animal.getNumeroDoPaciente() == novoAnimal.getNumeroDoPaciente()){
-//                daoAnimal.consultarAnimal(1111);
-//            }
-//        }
-//
-//    }
+    @Test
+    public void deveConsultarPorNum() throws ParseException {
+        assert (daoAnimal.consultarAnimal(animal.getNumeroDoPaciente()).equals(animal));
+
+    }
 
 }

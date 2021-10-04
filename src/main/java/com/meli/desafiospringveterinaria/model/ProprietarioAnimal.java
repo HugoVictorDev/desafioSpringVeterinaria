@@ -2,6 +2,7 @@ package com.meli.desafiospringveterinaria.model;
 
 
 
+import com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil;
 import lombok.Getter;
 
 import javax.swing.text.MaskFormatter;
@@ -19,11 +20,11 @@ public class ProprietarioAnimal {
     private String telefone;
     private Animal animal;
 
-
+    //ArquivoUtil arquivoUtil = new ArquivoUtil();
     public ProprietarioAnimal(String cpfProprietario, String nomeProprietario, String sobrenomeProprietario, LocalDate dataNascimentoProprietario, String endereco, String
             telefone, Animal animal) throws ParseException {
 
-        this.cpf = formatarCpf(cpfProprietario);
+        this.cpf = (cpfProprietario);
         this.nome = nomeProprietario;
         this.sobrenome = sobrenomeProprietario;
         this.dataNascimento = dataNascimentoProprietario;
@@ -35,11 +36,10 @@ public class ProprietarioAnimal {
     }
 
 
-    public String formatarCpf(String cpf) throws ParseException {
-        MaskFormatter mf = new MaskFormatter("###.###.###-##");
-        mf.setValueContainsLiteralCharacters(false);
-        return mf.valueToString(cpf);
-    }
 
+
+    public String getProprietario() {
+        return nome;
+    }
 
 }

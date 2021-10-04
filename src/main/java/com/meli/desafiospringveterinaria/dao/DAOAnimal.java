@@ -1,4 +1,5 @@
-package com.meli.desafiospringveterinaria.services;
+package com.meli.desafiospringveterinaria.dao;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -41,12 +42,13 @@ public class DAOAnimal implements Persistivel<Animal> {
 
 
     @Override
-    public void editar(Animal obj) {
+    public Animal editar(Animal obj) {
+        return null;
     }
 
     @Override
-    public void obter(Animal obj) {
-
+    public Animal obter(Animal obj) {
+        return null;
     }
 
 

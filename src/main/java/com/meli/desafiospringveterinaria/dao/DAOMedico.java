@@ -23,16 +23,17 @@ public class DAOMedico implements MedicoPersistivel<Medico> {
 
     List<Medico> medicosList = new ArrayList<>();
     ObjectMapper objectMapper = new ObjectMapper();
-    ArquivoUtil arquivoUtil;
-    MedicoService medicoService;
+    ArquivoUtil arquivoUtil = new ArquivoUtil();
+    MedicoService medicoService = new MedicoService();
 
-    //Gestão de dependencia
+    //injeção de dependencia
     public DAOMedico(ArquivoUtil arquivoUtil){
         this.arquivoUtil = arquivoUtil;
     }
     public DAOMedico(MedicoService medicoService){
         this.medicoService = medicoService;
     }
+
     public DAOMedico(ArquivoUtil arquivoUtil, MedicoService medicoService){
         this.arquivoUtil = arquivoUtil;
         this.medicoService = medicoService;
@@ -40,6 +41,7 @@ public class DAOMedico implements MedicoPersistivel<Medico> {
 
     public DAOMedico(){
     }
+
 
     private void mapearObjeto() {
         objectMapper.findAndRegisterModules();
@@ -49,12 +51,10 @@ public class DAOMedico implements MedicoPersistivel<Medico> {
 
     public Medico cadastrar(Medico objMedico) throws IOException {
         mapearObjeto();
-        if(medicoService.validarMedico(objMedico.getNumeroRegistro())){
-            medicosList.add(objMedico);
-            arquivoUtil.gravaArquivo(medicosList);
-        //    arquivoUtil.gravaQualquerArquivo(Collections.singletonList(medicosList),"medico2.json");
-            return objMedico;
-            }else {throw new RuntimeException("Medico já cadastrado");}
+        medicosList = medicoService.validarMedico(objMedico.getNumeroRegistro());
+        medicosList.add(objMedico);
+        arquivoUtil.gravaArquivo(medicosList, "medico.json");
+        return objMedico;
     }
 
 
@@ -62,8 +62,6 @@ public class DAOMedico implements MedicoPersistivel<Medico> {
         mapearObjeto();
         try {
             medicosList = arquivoUtil.carregaArquivo("medico.json");
-//            medicosList.add((Medico) arquivoUtil.carregaQualquerArquivo("medico2.json"));
-
             for (Medico medico : medicosList) {
                 if (medico.getNumeroRegistro() == (numeroRegistro)) {
                     return medico;
@@ -79,12 +77,13 @@ public class DAOMedico implements MedicoPersistivel<Medico> {
         mapearObjeto();
         try {
             medicosList = arquivoUtil.carregaArquivo("medico.json");
+
             for (Medico medico : medicosList) {
                 if (medico.getNumeroRegistro() == (objMedico.getNumeroRegistro())) {
                     medicosList.remove(medico);
                     medicosList.add(objMedico);
-                    arquivoUtil.gravaArquivo(medicosList);
-                   return medico;
+                    arquivoUtil.gravaArquivo(medicosList, "medico.json");
+                    return medico;
                 }
             }throw new RuntimeException("Médico não Atualizdo");
         } catch (IOException e) {
@@ -105,8 +104,7 @@ public class DAOMedico implements MedicoPersistivel<Medico> {
                             throw new RuntimeException("Medico em consulta, ele não pode ser deletado!");
                         }
                     }  medicosList.remove(medico);
-                    arquivoUtil.gravaArquivo(medicosList);
-                    arquivoUtil.gravaQualquerArquivo(Collections.singletonList(medicosList),"medico2.json");
+                    arquivoUtil.gravaArquivo(medicosList, "medico.json");
                     throw new RuntimeException("Medico deletado!");
                 }
             }throw new RuntimeException("Medico não cadastrado!");

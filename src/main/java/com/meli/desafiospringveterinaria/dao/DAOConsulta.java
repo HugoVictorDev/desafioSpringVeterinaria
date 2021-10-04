@@ -27,8 +27,15 @@ public class DAOConsulta extends ConsultaPersistivel {
     ArquivoUtil arquivoUtil = new ArquivoUtil();
 
 
+<<<<<<< HEAD
     public Consulta cadastrar(Consulta consulta) throws IOException {
         consultaService.mapearObjeto();
+=======
+    @Override
+    public Consulta cadastrar(Consulta consulta) {
+        mapearObjeto();
+        consultaList.add(consulta);
+>>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
         try {
             if(consultaService.validarConsulta(consulta.getAnimal().getNome())){
                 consultaList.add(consulta);
@@ -40,9 +47,21 @@ public class DAOConsulta extends ConsultaPersistivel {
             e.printStackTrace();
         }
 
+<<<<<<< HEAD
         return consulta;
     }
 
+=======
+    @Override
+    public Consulta editar(Consulta obj) {
+        return null;
+    }
+
+    @Override
+    public Consulta obter(Consulta obj) {
+        return null;
+    }
+>>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
 
 
     public Consulta editarConsulta(Consulta objConsulta) {

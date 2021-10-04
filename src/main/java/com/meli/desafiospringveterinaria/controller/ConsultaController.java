@@ -1,9 +1,14 @@
 package com.meli.desafiospringveterinaria.controller;
 
+<<<<<<< HEAD
 
 import com.meli.desafiospringveterinaria.dao.DAOConsulta;
 import com.meli.desafiospringveterinaria.model.Consulta;
 
+=======
+import com.meli.desafiospringveterinaria.dao.DAOConsulta;
+import com.meli.desafiospringveterinaria.model.Consulta;
+>>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -39,6 +44,6 @@ public class ConsultaController {
 
     @GetMapping("/consultasporcpf/{cpfDoMedico}")
     public List<Consulta> listagemMedicoConsultas(@PathVariable("cpfDoMedico") String cpfDoMedico) throws IOException {
-    return daoConsulta.listagemMedicoConsulta(cpfDoMedico);
+        return daoConsulta.listagemMedicoConsulta(cpfDoMedico);
     }
 }

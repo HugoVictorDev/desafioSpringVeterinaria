@@ -1,151 +1,65 @@
 package com.meli.desafiospringveterinaria.controller;
 
 import com.meli.desafiospringveterinaria.dao.DAOAnimal;
+<<<<<<< HEAD
 import com.meli.desafiospringveterinaria.model.*;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
 
 
 import com.meli.desafiospringveterinaria.services.DAOProprietarioAnimal;
+=======
+import com.meli.desafiospringveterinaria.dao.DAOProprietarioAnimal;
+import com.meli.desafiospringveterinaria.model.*;
+import com.meli.desafiospringveterinaria.services.ProprietarioService;
+import com.meli.desafiospringveterinaria.persistence.IntefaceProprietarioService;
+>>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/proprietario")
 public class ProprietarioController
 {
+<<<<<<< HEAD
 
     DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
    DAOAnimal daoAnimal = new DAOAnimal();
+=======
+    IntefaceProprietarioService intefaceProprietarioService;
+
+
+    public ProprietarioController() throws ParseException {
+        DAOAnimal animal = new DAOAnimal();
+        DAOProprietarioAnimal proprietarioAnimal = new DAOProprietarioAnimal();
+        intefaceProprietarioService = new ProprietarioService(proprietarioAnimal, animal) {
+            @Override
+            public RespostaBase atualizarProprietario(ProprietarioAnimal proprietario, ProprietarioAnimal proprietario2) {
+                return null;
+            }
+        };
+    }
+>>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
 
     @GetMapping("/consulta/{identificador}")
-    public RespostaBase obter(@PathVariable ("identificador") String identificador) throws IOException {
-        RespostaBase retorno = new RespostaBase();
-        ProprietarioAnimal prop = daoProprietarioAnimal.obterPorIdentificador(identificador);
-
-        if(prop == null) {
-            retorno.Sucesso = false;
-            retorno.Erros.add("Proprietario não localizado");
-            return retorno;
-        }
-
-        retorno.Sucesso = true;
-        retorno.Data = prop;
-        return retorno;
+    public RespostaBase obter(@PathVariable ("identificador") String identificador) throws IOException, ParseException {
+        return intefaceProprietarioService.obterPorIdentificador(identificador);
     }
 
     @PostMapping("/cadastrar")
     public RespostaBase cadastrarProprietario( @RequestBody ProprietarioAnimal proprietario) {
-        RespostaBase retorno = new RespostaBase();
-
-        if(proprietario == null) {
-            retorno.Erros.add("Favor fornecer os dados do proprietario");
-        }
-        else if(proprietario.getCpf() == null || proprietario.getCpf().length() <= 0) {
-            retorno.Erros.add("Favor fornecer o CPF do proprietario");
-        }
-        else if(proprietario.getNome() == null || proprietario.getNome().length() <= 0) {
-            retorno.Erros.add("Favor fornecer o Nome do proprietario");
-        }
-        else if(proprietario.getSobrenome() == null || proprietario.getSobrenome().length() <= 0) {
-            retorno.Erros.add("Favor fornecer o Sobrenome do proprietario");
-        }
-        else if(proprietario.getDataNascimento() == null || proprietario.getDataNascimento().equals(LocalDate.MIN)) {
-            retorno.Erros.add("Favor fornecer a Data de Nascimento do proprietario");
-        }
-        else if(proprietario.getEndereco() == null || proprietario.getEndereco().length() <= 0) {
-            retorno.Erros.add("Favor fornecer o endereço do proprietario");
-        }
-        else if(proprietario.getTelefone() == null || proprietario.getTelefone().length() <= 0) {
-            retorno.Erros.add("Favor fornecer o telefone do proprietario");
-        }
-        else if(proprietario.getAnimal() == null) {
-            retorno.Erros.add("Favor fornecer os dados do Animal do proprietario");
-        }
-        else if(proprietario.getAnimal().getNumeroDoPaciente() <= 0) {
-            retorno.Erros.add("Favor fornecer os dados do Animal do proprietario");
-        }
-
-        if(retorno.Erros.size() > 0){
-            retorno.Sucesso = false;
-            return retorno;
-        }
-
-        Animal animal = daoAnimal.obter2(proprietario.getAnimal());
-
-        if(animal == null){
-            retorno.Erros.add("O Animal informado ainda não está cadastrado, favor cadastrar antes de registrarmos o proprietario.");
-            retorno.Sucesso = false;
-            return retorno;
-        }
-
-      //  ProprietarioAnimal prop = daoProprietarioAnimal.obter(proprietario);
-        ProprietarioAnimal prop = daoProprietarioAnimal.obterAnimal(proprietario);
-
-        if(prop != null){
-            retorno.Erros.add("Proprietario já cadastrado!");
-            retorno.Sucesso = false;
-            return retorno;
-        }
-
-        daoProprietarioAnimal.cadastrar(proprietario);
-
-        retorno.Sucesso = true;
-        retorno.Data = proprietario;
-        return retorno;
+        return intefaceProprietarioService.cadastrarProprietario(proprietario);
     }
-
 
     @PutMapping("/editar")
-    public RespostaBase atualizarProprietario( @RequestBody ProprietarioAnimal proprietario) {
-        RespostaBase retorno = new RespostaBase();
-
-        if(proprietario == null) {
-            retorno.Erros.add("Favor fornecer os dados do proprietario");
-        }
-        else if(proprietario.getCpf() == null || proprietario.getCpf().length() <= 0) {
-            retorno.Erros.add("Favor fornecer o CPF do proprietario");
-        }
-        else if(proprietario.getNome() == null || proprietario.getNome().length() <= 0) {
-            retorno.Erros.add("Favor fornecer o Nome do proprietario");
-        }
-        else if(proprietario.getSobrenome() == null || proprietario.getSobrenome().length() <= 0) {
-            retorno.Erros.add("Favor fornecer o Sobrenome do proprietario");
-        }
-        else if(proprietario.getDataNascimento() == null || proprietario.getDataNascimento().equals(LocalDate.MIN)) {
-            retorno.Erros.add("Favor fornecer a Data de Nascimento do proprietario");
-        }
-        else if(proprietario.getEndereco() == null || proprietario.getEndereco().length() <= 0) {
-            retorno.Erros.add("Favor fornecer o endereço do proprietario");
-        }
-        else if(proprietario.getTelefone() == null || proprietario.getTelefone().length() <= 0) {
-            retorno.Erros.add("Favor fornecer o telefone do proprietario");
-        }
-        else if(proprietario.getAnimal() == null) {
-            retorno.Erros.add("Favor fornecer os dados do Animal do proprietario");
-        }
-        else if(proprietario.getAnimal().getNumeroDoPaciente() <= 0) {
-            retorno.Erros.add("Favor fornecer os dados do Animal do proprietario");
-        }
-
-        if(retorno.Erros.size() > 0){
-            retorno.Sucesso = false;
-            return retorno;
-        }
-
-        daoProprietarioAnimal.edita(proprietario);
-
-        retorno.Sucesso = true;
-        retorno.Data = proprietario;
-        return retorno;
+    public RespostaBase atualizarProprietario( @RequestBody ProprietarioAnimal proprietario, @RequestBody ProprietarioAnimal proprietarioNovo) throws IOException {
+        return intefaceProprietarioService.atualizarProprietario(proprietario, proprietarioNovo);
     }
 
-    @GetMapping("/consulta/pacientes")
-    public List<ProprietarioAnimal> listarProprietario() {
-        return daoProprietarioAnimal.listagemConsulta();
+    @GetMapping("/consulta/proprietarios")
+    public RespostaBase listarProprietario()
+    {
+        return intefaceProprietarioService.listagemConsulta();
     }
-
-
 }

@@ -1,6 +1,12 @@
 package com.meli.desafiospringveterinaria.controller;
+<<<<<<< HEAD
 import com.meli.desafiospringveterinaria.dao.DAOAnimal;
 import com.meli.desafiospringveterinaria.model.Animal;
+=======
+
+import com.meli.desafiospringveterinaria.model.Animal;
+import com.meli.desafiospringveterinaria.dao.DAOAnimal;
+>>>>>>> 35da861b5219956d0996adbfc20a75adfa3b9179
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,4 +40,3 @@ public class AnimalController {
         return daoAnimal.listagem();
     }
 }
-

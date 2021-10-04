@@ -1,15 +1,13 @@
 package com.meli.desafiospringveterinaria.arquivoutil;
 
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.google.gson.Gson;
-import com.meli.desafiospringveterinaria.model.Consulta;
+
 
 import com.meli.desafiospringveterinaria.model.Medico;
 

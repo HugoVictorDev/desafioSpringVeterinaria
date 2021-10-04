@@ -7,6 +7,7 @@ import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.persistence.ConsultaPersistivel;
 
 import com.meli.desafiospringveterinaria.services.ConsultaService;
+import lombok.Getter;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -16,7 +17,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Getter
 public class DAOConsulta extends ConsultaPersistivel {
 
 
@@ -27,11 +28,11 @@ public class DAOConsulta extends ConsultaPersistivel {
 
 
     public Consulta cadastrar(Consulta consulta) throws IOException {
-        mapearObjeto();
+        consultaService.mapearObjeto();
         try {
             if(consultaService.validarConsulta(consulta.getAnimal().getNome())){
                 consultaList.add(consulta);
-                objectMapper.writeValue(new File("consulta.json"), consultaList);
+                consultaService.objectMapper.writeValue(new File("consulta.json"), consultaList);
             }else{throw new RuntimeException("Consutada já cadastrada");
             }
 
@@ -45,14 +46,14 @@ public class DAOConsulta extends ConsultaPersistivel {
 
 
     public Consulta editarConsulta(Consulta objConsulta) {
-        mapearObjeto();
+        consultaService.mapearObjeto();
         try {
-            consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
+            consultaList = consultaService.objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
             for (Consulta consulta : consultaList){
                 if (consulta.getAnimal().getNome().equals(objConsulta.getAnimal().getNome())) {
                     consultaList.remove(consulta);
                     consultaList.add(objConsulta);
-                    objectMapper.writeValue(new File("consulta.json"), consultaList);
+                    consultaService.objectMapper.writeValue(new File("consulta.json"), consultaList);
                     return consulta;
                 }
             }throw new RuntimeException("Consulta não encotrada");
@@ -64,9 +65,9 @@ public class DAOConsulta extends ConsultaPersistivel {
 
 
     public Consulta consultarMedico(String nome) {
-        mapearObjeto();
+        consultaService.mapearObjeto();
         try {
-            consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
+            consultaList = consultaService.objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
             for (Consulta cosulta : consultaList){
                 if (cosulta.getMedico().getNomeMedico().equals(nome)) {
                     return cosulta;
@@ -79,16 +80,16 @@ public class DAOConsulta extends ConsultaPersistivel {
 
     @SneakyThrows
     public List<Consulta> listagemMedicoConsulta(String cpfDoMedico) {
-        mapearObjeto();
-        consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
+        consultaService.mapearObjeto();
+        consultaList = consultaService.objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
         return consultaList.stream().filter(consulta -> consulta.getMedico().getCpfMedico().equals(cpfDoMedico)).collect(Collectors.toList());
     }
 
     public List<Consulta> pacienteConsulta(int numeroPaciente) {
-        mapearObjeto();
+        consultaService.mapearObjeto();
         List<Consulta >listConsulta = new ArrayList<>();
         try {
-            consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
+            consultaList = consultaService.objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
             for (Consulta consulta : consultaList){
                 if (consulta.getAnimal().getNumeroDoPaciente().equals(numeroPaciente)) {
                     listConsulta.add(consulta);
@@ -103,10 +104,10 @@ public class DAOConsulta extends ConsultaPersistivel {
     }
 
     @SneakyThrows
-    public List<Consulta> listagem2(String data) {
+    public List<Consulta> listagemPorData(String data) {
 
-        mapearObjeto();
-        consultaList = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>() {
+        consultaService.mapearObjeto();
+        consultaList = consultaService.objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>() {
         });
         return consultaList.stream().filter(consulta -> consulta.getDataHora().toString()
                 .equals(data)).sorted(Comparator.comparing(lista -> lista.getDataHora()))
@@ -115,7 +116,7 @@ public class DAOConsulta extends ConsultaPersistivel {
 
 
 
-    public List<Consulta> listagem() {return null;}
+
 
 
 

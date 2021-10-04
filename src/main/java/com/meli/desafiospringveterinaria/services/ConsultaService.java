@@ -1,6 +1,8 @@
 package com.meli.desafiospringveterinaria.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.model.Consulta;
 
 import com.meli.desafiospringveterinaria.persistence.ConsultaPersistivel;
@@ -12,7 +14,16 @@ import java.util.List;
 
 public class ConsultaService extends ConsultaPersistivel {
 
-List<Consulta> consultaList2 = new ArrayList<>();
+    public ObjectMapper objectMapper = new ObjectMapper();
+
+    public void mapearObjeto() {
+        objectMapper.findAndRegisterModules();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+    }
+
+
+    List<Consulta> consultaList2 = new ArrayList<>();
     public boolean validarConsulta(String nome) {
         mapearObjeto();
         try {

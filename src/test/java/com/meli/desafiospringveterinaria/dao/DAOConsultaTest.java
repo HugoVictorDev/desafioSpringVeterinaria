@@ -24,12 +24,12 @@ public class DAOConsultaTest  {
      ConsultaService consultaService = new ConsultaService();
      ArquivoUtil arquivoUtil = new ArquivoUtil();
 
-    Consulta consulta1 = new Consulta(LocalDate.of(2021,10,04), "doenca","di","remedio",
+    Consulta consulta1 = new Consulta(LocalDate.of(2021,11,04), "doenca","di","remedio",
             new Medico( "404313928", "hugo", "Victor", 12345, "medico"),
             new Animal(1232323L, "gato", "boaa", "amarelo",LocalDate.of(2021,10,04),"felix"));
 
-    Consulta consulta2 = new Consulta(LocalDate.of(2021,10,04), "cancer","di","cirurgia",new Medico( "404313928", "hugo", "Victor", 12345, "medico"),
-            new Animal(12323234L, "cachorro", "boaa", "amarelo",LocalDate.of(2021,10,04),"gatin"));
+    Consulta consulta2 = new Consulta(LocalDate.of(2021,10,05), "cancer","di","cirurgia",new Medico( "404313928", "hugo", "Victor", 12345, "medico"),
+            new Animal(12323234L, "cachorro", "boaa", "amarelo",LocalDate.of(2021,10,04),"felix"));
 
     List<Consulta> listDeConsultas = new ArrayList<>();
 
@@ -83,28 +83,27 @@ public class DAOConsultaTest  {
         listDeConsultas.add(consulta2);
 
         arquivoUtil = Mockito.mock(ArquivoUtil.class);
-        Mockito.when(arquivoUtil.carregaArquivoConsulta(Mockito.anyString())).thenReturn(listDeConsultas);
+
+        Mockito.when(arquivoUtil.carregaArquivoConsulta1(Mockito.anyString())).thenReturn(listDeConsultas);
         Mockito.when(arquivoUtil.gravaArquivoConsulta1(listDeConsultas)).thenReturn(listDeConsultas);
 
-
+        daoConsulta = new DAOConsulta(arquivoUtil);
 
         daoConsulta.editarConsulta(consulta1);
-        assert(daoConsulta.getConsultaList().contains(consulta1) && daoConsulta.getConsultaList().size() == 3);
+        assert(daoConsulta.getConsultaList().contains(consulta1) && daoConsulta.getConsultaList().size() == 1);
 
     }
     //editar medico nao OK
-
-
     @Test
     public void testEditarConsultaNok() throws IOException {
 
-        listDeConsultas.add(consulta2);
-
+        listDeConsultas.add(consulta1);
+        arquivoUtil = Mockito.mock(ArquivoUtil.class);
 
         Mockito.when(arquivoUtil.carregaArquivoConsulta(Mockito.anyString())).thenReturn(listDeConsultas);
         Mockito.when(arquivoUtil.gravaArquivoConsulta1(listDeConsultas)).thenReturn(listDeConsultas);
 
-
+        daoConsulta = new DAOConsulta(arquivoUtil);
         RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()->{ daoConsulta.editarConsulta(consulta1);});
 
         mensagem = "Consulta não encotrada";
@@ -117,16 +116,37 @@ public class DAOConsultaTest  {
     //listagem por data
     @Test
     public void obterListaDeConsultaPorData() throws IOException {
+
         listDeConsultas.add(consulta1);
-        listDeConsultas.add(consulta2);
+
         arquivoUtil = Mockito.mock(ArquivoUtil.class);
-        Mockito.when(arquivoUtil.carregaArquivoConsulta(Mockito.anyString())).thenReturn(listDeConsultas);
+        Mockito.when(arquivoUtil.carregaArquivoConsulta1(Mockito.anyString())).thenReturn(listDeConsultas);
+
+        daoConsulta = new DAOConsulta(arquivoUtil);
+
+      daoConsulta.listagemPorData("2021-11-04");
 
 
+      assert(daoConsulta.consultaList2.contains(consulta1));
 
-      daoConsulta.listagemPorData(consulta1.getDataHora().toString());
+    }
 
-   assert(daoConsulta.getConsultaList().contains(consulta1));
+
+//listagem por cpfmedico
+    @Test
+    public void obterConsultaPorCpfDoMedicoOK() throws IOException {
+
+        listDeConsultas.add(consulta1);
+
+        arquivoUtil = Mockito.mock(ArquivoUtil.class);
+        Mockito.when(arquivoUtil.carregaArquivoConsulta1(Mockito.anyString())).thenReturn(listDeConsultas);
+
+        daoConsulta = new DAOConsulta(arquivoUtil);
+
+        daoConsulta.listagemMedicoConsulta("404313928");
+
+
+        assert(daoConsulta.consultaList2.contains(consulta1));
 
     }
 }

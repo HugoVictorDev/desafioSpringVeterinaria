@@ -3,11 +3,14 @@ package com.meli.desafiospringveterinaria.dao;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.desafiospringveterinaria.arquivoUtil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.model.Consulta;
+import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.persistence.ConsultaPersistivel;
 
 import com.meli.desafiospringveterinaria.services.ConsultaService;
+import com.meli.desafiospringveterinaria.services.MedicoService;
 import lombok.Getter;
 import lombok.SneakyThrows;
 
@@ -23,8 +26,28 @@ public class DAOConsulta extends ConsultaPersistivel {
 
     List<Consulta> consultaList = new ArrayList<>();
     ConsultaService consultaService = new ConsultaService();
+    ObjectMapper objectMapper = new ObjectMapper();
+    ArquivoUtil arquivoUtil = new ArquivoUtil();
+    List<Consulta> consultaList2 = new ArrayList<>();
 
-ArquivoUtil arquivoUtil = new ArquivoUtil();
+
+    //Gestão de dependencia
+    public DAOConsulta(ArquivoUtil arquivoUtil){
+        this.arquivoUtil = arquivoUtil;
+    }
+    public DAOConsulta(ConsultaService consultaService){
+        this.consultaService = consultaService;
+    }
+
+    public DAOConsulta(ArquivoUtil arquivoUtil, ConsultaService consultaService){
+        this.arquivoUtil = arquivoUtil;
+        this.consultaService = consultaService;
+    }
+
+    public DAOConsulta(){
+    }
+
+
 
 
 
@@ -50,11 +73,6 @@ ArquivoUtil arquivoUtil = new ArquivoUtil();
     }
 
 
-
-
-
-
-
     public Consulta editarConsulta(Consulta objConsulta) {
         consultaService.mapearObjeto();
         try {
@@ -74,25 +92,14 @@ ArquivoUtil arquivoUtil = new ArquivoUtil();
     }
 
 
-    public Consulta consultarMedico(String nome) {
-        consultaService.mapearObjeto();
-        try {
-            consultaList = consultaService.objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
-            for (Consulta cosulta : consultaList){
-                if (cosulta.getMedico().getNomeMedico().equals(nome)) {
-                    return cosulta;
-                }
-            }throw new RuntimeException("Não há consultas para esse Médico");
-        }catch (IOException e){
-            e.printStackTrace();
-        }return null;
-    }
+
 
     @SneakyThrows
     public List<Consulta> listagemMedicoConsulta(String cpfDoMedico) {
         consultaService.mapearObjeto();
         consultaList = consultaService.objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>(){});
-        return consultaList.stream().filter(consulta -> consulta.getMedico().getCpfMedico().equals(cpfDoMedico)).collect(Collectors.toList());
+        return
+       consultaList2 = consultaList.stream().filter(consulta -> consulta.getMedico().getCpfMedico().equals(cpfDoMedico)).collect(Collectors.toList());
     }
 
     public List<Consulta> pacienteConsulta(int numeroPaciente) {
@@ -118,9 +125,10 @@ ArquivoUtil arquivoUtil = new ArquivoUtil();
 
         consultaService.mapearObjeto();
         consultaList = arquivoUtil.carregaArquivoConsulta1("consulta.json");
-        return consultaList.stream().filter(consulta -> consulta.getDataHora().toString()
+        consultaList2 = consultaList.stream().filter(consulta -> consulta.getDataHora().toString()
                 .equals(data)).sorted(Comparator.comparing(lista -> lista.getDataHora()))
                 .collect(Collectors.toList());
+        return  consultaList2;
     }
 
 

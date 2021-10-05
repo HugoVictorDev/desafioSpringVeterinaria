@@ -14,29 +14,38 @@ import java.util.List;
 public class MedicoService {
 
     ObjectMapper objectMapper = new ObjectMapper();
-    ArquivoUtil arquivoUtil;
+    ArquivoUtil arquivoUtil = new ArquivoUtil();
 
-    List<Medico> medicosList = new ArrayList<>();
+    List<Medico> medicosListService = new ArrayList<>();
+
+    public MedicoService(ArquivoUtil arquivoUtil) {
+        this.arquivoUtil = arquivoUtil;
+    }
+
+    public MedicoService() {
+    }
 
     private void mapearObjeto() {
         objectMapper.findAndRegisterModules();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    public boolean validarMedico(long registroMedico) throws IOException {
+
+    public List validarMedico(long registroMedico) throws IOException {
         mapearObjeto();
         try {
-            medicosList = arquivoUtil.carregaArquivo("medico.json");
-            for (Medico medico : medicosList){
-                if (medico.getNumeroRegistro() == (registroMedico)) {
-                    return false;
+            medicosListService = arquivoUtil.carregaArquivo("medico.json");
+            if(medicosListService.size() == 0){
+                return medicosListService;
+            }else{
+                for (Medico medico : medicosListService){
+                    if (medico.getNumeroRegistro() == (registroMedico)) {
+                        throw new RuntimeException("Medico já cadastrado");
+                    }
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        }return true;
+            throw new RuntimeException(e);
+        }return medicosListService;
     }
-
-
-
 }

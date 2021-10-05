@@ -1,15 +1,15 @@
 [ {
   "numeroDoPaciente" : 1111,
-  "especie" : "Equino",
+  "especie" : "Canina",
   "raca" : "SRD",
-  "cor" : "Branco/Preto",
-  "dataDeNascimento" : "2021-05-01",
-  "nome" : "Brutus"
+  "cor" : "Preto",
+  "dataDeNascimento" : "2020-05-01",
+  "nome" : "Pingo"
 }, {
-  "numeroDoPaciente" : 2222,
-  "especie" : "Equino",
+  "numeroDoPaciente" : 1111,
+  "especie" : "Canina",
   "raca" : "SRD",
-  "cor" : "Branco/Preto",
-  "dataDeNascimento" : "2021-05-01",
-  "nome" : "Brutus"
+  "cor" : "Preto",
+  "dataDeNascimento" : "2020-05-01",
+  "nome" : "Pingo"
 } ]

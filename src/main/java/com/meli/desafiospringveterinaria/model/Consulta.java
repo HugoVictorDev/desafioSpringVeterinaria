@@ -18,5 +18,21 @@ public class Consulta {
     private Medico medico;
     private Animal animal;
 
-public Consulta(){}
+    public Consulta() {
+
+    }
+
+
+    @Override
+    public String toString() {
+        return
+                "Data da Consulta: " + dataHora +
+                ", motivo: " + motivo +
+                ", diagnostico: " + diagnostico +
+                ", tratamento: " + tratamento + "\n" +
+                "medico associado: " + medico + "\n" +
+                "animal associado: " + animal
+                ;
+    }
+
 }

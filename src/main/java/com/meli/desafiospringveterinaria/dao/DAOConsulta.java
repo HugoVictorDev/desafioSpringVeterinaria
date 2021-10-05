@@ -54,13 +54,13 @@ public class DAOConsulta extends ConsultaPersistivel {
         consultaService.mapearObjeto();
         consultaList.add(consulta);
 
-            if(consultaService.validarConsulta(consulta.getAnimal().getNome())){
-                consultaList.add(consulta);
-                arquivoUtil.gravaArquivoConsulta1(consultaList);
-                return consulta;
-            }else{throw new RuntimeException("Consulta já cadastrada");}
+        if(consultaService.validarConsulta(consulta.getAnimal().getNome())){
+            consultaList.add(consulta);
+            arquivoUtil.gravaArquivoConsulta1(consultaList);
+            return consulta;
+        }else{throw new RuntimeException("Consulta já cadastrada");}
 
-        }
+    }
 
 
 
@@ -91,7 +91,7 @@ public class DAOConsulta extends ConsultaPersistivel {
         consultaService.mapearObjeto();
         consultaList = arquivoUtil.carregaArquivoConsulta1("consulta.json");
 
-       consultaList2 = consultaList.stream().filter(consulta -> consulta.getMedico().getCpfMedico().equals(cpfDoMedico)).collect(Collectors.toList());
+        consultaList2 = consultaList.stream().filter(consulta -> consulta.getMedico().getCpfMedico().equals(cpfDoMedico)).collect(Collectors.toList());
         return consultaList2;
     }
 
@@ -113,7 +113,7 @@ public class DAOConsulta extends ConsultaPersistivel {
         consultaService.mapearObjeto();
         consultaList = arquivoUtil.carregaArquivoConsulta1("consulta.json");
         consultaList2 = consultaList.stream().filter(consulta -> consulta.getDataHora().toString()
-                .equals(data)).sorted(Comparator.comparing(lista -> lista.getDataHora()))
+                        .equals(data)).sorted(Comparator.comparing(lista -> lista.getDataHora()))
                 .collect(Collectors.toList());
         return  consultaList2;
     }

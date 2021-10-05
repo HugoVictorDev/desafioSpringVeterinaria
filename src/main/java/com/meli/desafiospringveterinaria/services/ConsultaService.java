@@ -41,4 +41,3 @@ public class ConsultaService extends ConsultaPersistivel {
         return true;
     }
 }
-

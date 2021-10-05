@@ -1,12 +1,9 @@
 package com.meli.desafiospringveterinaria.model;
 
-import lombok.Getter;
-
+import lombok.Data;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-@Getter
+@Data
 public class Animal {
     private long numeroDoPaciente;
     private String especie;
@@ -25,12 +22,14 @@ public class Animal {
         this.nome = nome;
     }
 
+
     public Animal() {
 
     }
 
     public static Animal obter(Animal animal) {return null;
     }
+
 
     @Override
     public String toString() {

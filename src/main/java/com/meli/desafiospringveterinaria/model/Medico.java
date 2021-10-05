@@ -22,9 +22,6 @@ public class Medico {
         this.especielidade = especielidade;
     }
 
-    public Medico(){};
-
-
     @Override
     public String toString() {
         return "cpfMedico: " + this.cpfMedico + ", nomeMedico: " + this.nomeMedico + ", sobrenomeMedico: " + this.sobrenomeMedico + ", numeroRegistro: " + this.numeroRegistro + ", especielidade: " + this.especielidade;

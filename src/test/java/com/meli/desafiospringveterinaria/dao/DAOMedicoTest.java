@@ -9,11 +9,11 @@ import com.meli.desafiospringveterinaria.services.MedicoService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class DAOMedicoTest {
 
@@ -32,30 +32,6 @@ public class DAOMedicoTest {
     String mensagem = "java.io.IOException";
     String mensagemSystem = "";
 
-
-    @Test
-    public void testCadastraMedicoNok() throws IOException {
-        list.add(medico);
-
-     //   arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
-        medicoService = Mockito.mock(MedicoService.class);
-
-      //  Mockito.when(arquivoUtilMock.carregaArquivo(Mockito.anyString())).thenReturn(list);
-      //  Mockito.when(arquivoUtilMock.gravaArquivo(Mockito.anyList())).thenReturn(list);
-        Mockito.when(medicoService.validarMedico(Mockito.anyLong())).thenReturn(false);
-
-     //   daoMedico= new DAOMedico(arquivoUtilMock);
-        daoMedico= new DAOMedico(medicoService);
-
-        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()->
-        { daoMedico.cadastrar(medico);});
-
-        mensagem = "Medico já cadastrado";
-        mensagemSystem = exception.getMessage();
-
-        assert (mensagem.contains(mensagemSystem));
-    }
-
     @Test
     public void testCadastraMedicoOk() throws IOException {
         Medico medico1 = new Medico("98745666","Eli","Silva", 600000000, "psico");
@@ -64,8 +40,7 @@ public class DAOMedicoTest {
         arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
         medicoService = Mockito.mock(MedicoService.class);
 
-        Mockito.when(arquivoUtilMock.gravaArquivo(Mockito.anyList())).thenReturn(list);
-        Mockito.when(medicoService.validarMedico(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(medicoService.validarMedico(Mockito.anyLong())).thenReturn(list);
 
         daoMedico = new DAOMedico(arquivoUtilMock, medicoService);
 
@@ -95,7 +70,7 @@ public class DAOMedicoTest {
 
         arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
         Mockito.when(arquivoUtilMock.carregaArquivo(Mockito.anyString())).thenReturn(list);
-        
+
         daoMedico = new DAOMedico(arquivoUtilMock);
 
         RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()->
@@ -114,14 +89,12 @@ public class DAOMedicoTest {
 
         arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
         Mockito.when(arquivoUtilMock.carregaArquivo(Mockito.anyString())).thenReturn(list);
-        Mockito.when(arquivoUtilMock.gravaArquivo(list)).thenReturn(list);
 
         daoMedico = new DAOMedico(arquivoUtilMock);
 
         daoMedico.editar(medico);
 
         assert(daoMedico.getMedicosList().contains(medico) && daoMedico.getMedicosList().size() == 1);
-
     }
 
     @Test
@@ -131,7 +104,6 @@ public class DAOMedicoTest {
 
         arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
         Mockito.when(arquivoUtilMock.carregaArquivo(Mockito.anyString())).thenReturn(list);
-        Mockito.when(arquivoUtilMock.gravaArquivo(list)).thenReturn(list);
 
         daoMedico = new DAOMedico(arquivoUtilMock);
 
@@ -151,7 +123,6 @@ public class DAOMedicoTest {
         arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
         Mockito.when(arquivoUtilMock.carregaArquivo(Mockito.anyString())).thenReturn(list);
         Mockito.when(arquivoUtilMock.carregaArquivoConsulta(Mockito.anyString())).thenReturn(consultaList);
-        Mockito.when(arquivoUtilMock.gravaArquivo(list)).thenReturn(list);
 
         daoMedico = new DAOMedico(arquivoUtilMock);
 
@@ -171,7 +142,6 @@ public class DAOMedicoTest {
         arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
         Mockito.when(arquivoUtilMock.carregaArquivo(Mockito.anyString())).thenReturn(list);
         Mockito.when(arquivoUtilMock.carregaArquivoConsulta(Mockito.anyString())).thenReturn(consultaList);
-        Mockito.when(arquivoUtilMock.gravaArquivo(list)).thenReturn(list);
 
         daoMedico = new DAOMedico(arquivoUtilMock);
 
@@ -191,10 +161,9 @@ public class DAOMedicoTest {
         medicoList.add(medico);
         consultaList.add(consulta);
 
-       arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
+        arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
         Mockito.when(arquivoUtilMock.carregaArquivo(Mockito.anyString())).thenReturn(medicoList);
         Mockito.when(arquivoUtilMock.carregaArquivoConsulta(Mockito.anyString())).thenReturn(consultaList);
-        Mockito.when(arquivoUtilMock.gravaArquivo(medicoList)).thenReturn(medicoList);
 
         daoMedico = new DAOMedico(arquivoUtilMock);
 

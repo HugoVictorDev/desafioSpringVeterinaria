@@ -21,8 +21,8 @@ public class DAOConsultaTest  {
 
     Consulta consulta = new Consulta();
     DAOConsulta daoConsulta = new DAOConsulta();
-     ConsultaService consultaService = new ConsultaService();
-     ArquivoUtil arquivoUtil = new ArquivoUtil();
+    ConsultaService consultaService = new ConsultaService();
+    ArquivoUtil arquivoUtil = new ArquivoUtil();
 
     Consulta consulta1 = new Consulta(LocalDate.of(2021,11,04), "doenca","di","remedio",
             new Medico( "404313928", "hugo", "Victor", 12345, "medico"),
@@ -126,15 +126,15 @@ public class DAOConsultaTest  {
 
         daoConsulta = new DAOConsulta(arquivoUtil);
 
-      daoConsulta.listagemPorData("2021-11-04");
+        daoConsulta.listagemPorData("2021-11-04");
 
 
-      assert(daoConsulta.consultaList2.contains(consulta1));
+        assert(daoConsulta.consultaList2.contains(consulta1));
 
     }
 
 
-//obter listagem por cpfmedico
+    //obter listagem por cpfmedico
     @Test
     public void obterConsultaPorCpfDoMedicoOK() throws IOException {
 
@@ -152,7 +152,7 @@ public class DAOConsultaTest  {
 
     }
 
-        //Teste por paciente
+    //Teste por paciente
     @Test
     public void obterConsultaPorPacienteOk() throws IOException {
 

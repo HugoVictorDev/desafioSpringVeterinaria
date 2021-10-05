@@ -1,16 +1,10 @@
 package com.meli.desafiospringveterinaria.dao;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.arquivoutil.InterfaceAquivoUtil;
-import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.persistence.Persistivel;
-import com.fasterxml.jackson.core.type.TypeReference;
-import lombok.SneakyThrows;
 
-import java.io.File;
 import java.io.IOException;
 
 
@@ -47,7 +41,7 @@ public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal>, I
             proprietarioAnimalList = new ArrayList<ProprietarioAnimal>();
     }
 
-    @Override
+
     public ProprietarioAnimal cadastrar(ProprietarioAnimal obj) {
 
         this.proprietarioAnimalList.add(obj);

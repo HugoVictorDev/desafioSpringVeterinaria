@@ -54,14 +54,13 @@ public class ArquivoUtil {
 
 
 
-    public List gravaArquivo(List<Medico> medicosList) {
+    public void gravaArquivo(List<Medico> list, String nomeArquivo) {
         mapearObjeto();
         try {
-            objectMapper.writeValue(new File("medico.json"), medicosList);
-            return medicosList;
+            objectMapper.writeValue(new File(nomeArquivo), list);
         }catch (IOException e) {
             e.printStackTrace();
-        }return null;
+        }
     }
 
 

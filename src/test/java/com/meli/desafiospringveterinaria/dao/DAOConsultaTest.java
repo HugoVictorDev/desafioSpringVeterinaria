@@ -38,33 +38,34 @@ public class DAOConsultaTest  {
 
 //-- ----------- tests ------------------------//
 
+    //CADASTRAR CONSULTA OK
     @Test
     public void cadastrandoConsultaOK() throws IOException {
 
-        listDeConsultas.add(consulta1);
+//        listDeConsultas.add(consulta1);
 
+        arquivoUtil = Mockito.mock(ArquivoUtil.class);
         consultaService = Mockito.mock(ConsultaService.class);
 
-        Mockito.when(consultaService.validarConsulta(Mockito.anyString())).thenReturn(false);
+        Mockito.when(arquivoUtil.gravaArquivoConsulta1(Mockito.anyList())).thenReturn(listDeConsultas);
+        Mockito.when(consultaService.validarConsulta(Mockito.anyString())).thenReturn(true);
 
+        daoConsulta = new DAOConsulta(arquivoUtil, consultaService);
+        daoConsulta.cadastrar(consulta2);
 
-        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()->
-        { daoConsulta.cadastrar(consulta1);});
-
-        mensagem = "Consutada já cadastrada";
-        mensagemSystem = exception.getMessage();
-
-        assert (mensagem.contains(mensagemSystem));
+        assert(daoConsulta.getConsultaList().contains(consulta2));
     }
 
+
+    //CADASTRAR CONSULTA NOK
     @Test
     public void testCadastrarConsultaNaoOk() throws IOException {
-        listDeConsultas.add(consulta1);
+        listDeConsultas.add(consulta2);
 
         consultaService = Mockito.mock(ConsultaService.class);
 
         Mockito.when(consultaService.validarConsulta(Mockito.anyString())).thenReturn(false);
-
+        daoConsulta = new DAOConsulta(consultaService);
 
         RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()->
         { daoConsulta.cadastrar(consulta2);});
@@ -100,11 +101,11 @@ public class DAOConsultaTest  {
         listDeConsultas.add(consulta1);
         arquivoUtil = Mockito.mock(ArquivoUtil.class);
 
-        Mockito.when(arquivoUtil.carregaArquivoConsulta(Mockito.anyString())).thenReturn(listDeConsultas);
+        Mockito.when(arquivoUtil.carregaArquivoConsulta1(Mockito.anyString())).thenReturn(listDeConsultas);
         Mockito.when(arquivoUtil.gravaArquivoConsulta1(listDeConsultas)).thenReturn(listDeConsultas);
 
         daoConsulta = new DAOConsulta(arquivoUtil);
-        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()->{ daoConsulta.editarConsulta(consulta1);});
+        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()->{ daoConsulta.editarConsulta(consulta2);});
 
         mensagem = "Consulta não encotrada";
         mensagemSystem = exception.getMessage();
@@ -113,7 +114,7 @@ public class DAOConsultaTest  {
     }
 
 
-    //listagem por data
+    //obter listagem por data
     @Test
     public void obterListaDeConsultaPorData() throws IOException {
 
@@ -132,7 +133,7 @@ public class DAOConsultaTest  {
     }
 
 
-//listagem por cpfmedico
+//obter listagem por cpfmedico
     @Test
     public void obterConsultaPorCpfDoMedicoOK() throws IOException {
 

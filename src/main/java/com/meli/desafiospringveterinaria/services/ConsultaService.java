@@ -3,6 +3,7 @@ package com.meli.desafiospringveterinaria.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.meli.desafiospringveterinaria.arquivoUtil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.model.Consulta;
 
 import com.meli.desafiospringveterinaria.persistence.ConsultaPersistivel;
@@ -14,7 +15,8 @@ import java.util.List;
 
 public class ConsultaService extends ConsultaPersistivel {
 
-    public ObjectMapper objectMapper = new ObjectMapper();
+    ObjectMapper objectMapper;
+    ArquivoUtil arquivoUtil;
 
     public void mapearObjeto() {
         objectMapper.findAndRegisterModules();
@@ -22,12 +24,12 @@ public class ConsultaService extends ConsultaPersistivel {
     }
 
 
-    List<Consulta> consultaList2 = new ArrayList<>();
+    List<Consulta> consultaList = new ArrayList<>();
     public boolean validarConsulta(String nome) {
         mapearObjeto();
         try {
-            consultaList2 = objectMapper.readValue(new File("consulta.json"), new TypeReference<List<Consulta>>() {});
-            for (Consulta consulta : consultaList2){
+            consultaList = arquivoUtil.carregaArquivoConsulta1("consulta.json");
+            for (Consulta consulta : consultaList){
                 if (consulta.getAnimal().getNome().equals(nome)) {
 
                 }else {return false;}

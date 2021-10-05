@@ -64,6 +64,8 @@ public class ArquivoUtil {
         }return null;
     }
 
+
+
     public List gravaArquivoConsulta1(List<Consulta> consultaList) {
         mapearObjeto();
         try {

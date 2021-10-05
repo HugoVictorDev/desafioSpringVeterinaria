@@ -95,22 +95,16 @@ public class DAOConsulta extends ConsultaPersistivel {
         return consultaList2;
     }
 
-    public List<Consulta> pacienteConsulta(Long numeroDoPaciente) {
+    @SneakyThrows
+    public List<Consulta> pacienteConsulta(long numeroDoPaciente) {
         consultaService.mapearObjeto();
 
-        try {
-            consultaList = arquivoUtil.carregaArquivoConsulta1("consulta.json");
-            for (Consulta consulta : consultaList){
-                if (consulta.getAnimal().getNumeroDoPaciente()== (numeroDoPaciente)) {
-                    consultaList.add(consulta);
-                }
-            } if(consultaList.size() == 0){
-                throw new RuntimeException("Não há consultas para esse paciente");
-            }else return consultaList;
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return null;
+        consultaList = arquivoUtil.carregaArquivoConsulta1("consulta.json");
+
+        consultaList2 = consultaList.stream().filter(consulta -> consulta.getAnimal().getNumeroDoPaciente() == (numeroDoPaciente))
+                .sorted(Comparator.comparing(lista -> lista.getDataHora()))
+                .collect(Collectors.toList());
+        return  consultaList2;
     }
 
     @SneakyThrows

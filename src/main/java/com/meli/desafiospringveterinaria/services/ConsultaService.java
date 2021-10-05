@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ConsultaService extends ConsultaPersistivel {
 
-    ObjectMapper objectMapper;
+    ObjectMapper objectMapper = new ObjectMapper();
     ArquivoUtil arquivoUtil;
 
     public void mapearObjeto() {

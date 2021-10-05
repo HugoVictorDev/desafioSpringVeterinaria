@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 public class Animal {
-    private Long numeroDoPaciente;
+    private long numeroDoPaciente;
     private String especie;
     private String raca;
     private String cor;

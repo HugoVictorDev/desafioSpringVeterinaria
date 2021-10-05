@@ -32,8 +32,8 @@ public class ConsultaController {
         return consulta;
     }
 
-    @GetMapping("/paciente/{numeroPaciente}")
-    public List<Consulta> consultar(@PathVariable("numeroPaciente") Long numeroDoPaciente) {
+    @GetMapping("/paciente/{numeroDoPaciente}")
+    public List<Consulta> consultar(@PathVariable("numeroDoPaciente") long numeroDoPaciente) throws IOException {
         return  daoConsulta.pacienteConsulta(numeroDoPaciente);
     }
 

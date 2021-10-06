@@ -2,7 +2,6 @@ package com.meli.desafiospringveterinaria.dao;
 
 
 import com.meli.desafiospringveterinaria.model.Animal;
-import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 
 import com.meli.desafiospringveterinaria.services.ProprietarioService;
@@ -60,7 +59,8 @@ public class DAOProprietarioAnimalTest {
     }
 
     @Test
-    void deve_edita() throws ParseException {
+    void deve_edita() throws ParseException, IOException {
+
         ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal
                 ("09878998765",
                         "ednilson",
@@ -68,7 +68,22 @@ public class DAOProprietarioAnimalTest {
                         LocalDate.now(),"rua texte, ",
                         "11987654321",
                         animal);
-        assert(daoProprietarioAnimal.editar(proprietarioAnimal).equals(proprietarioAnimal));
+
+        //Mockito.when(proprietarioService.cadastrarProprietario(Mockito.any())).thenReturn(proprietarioAnimal);
+        daoProprietarioAnimal = new DAOProprietarioAnimal(arquivoUtilMock, proprietarioService);
+
+
+        ProprietarioAnimal proprietarioAnimal1 = new ProprietarioAnimal
+                ("09878998765",
+                        "ednilson",
+                        "Grande",
+                        LocalDate.now(),"rua texte, ",
+                        "11987654321",
+                        animal);
+
+
+        assertTrue(daoProprietarioAnimal.editar(proprietarioAnimal, proprietarioAnimal1).equals(proprietarioAnimal1));
+        //assert(resultado);
 
     }
 

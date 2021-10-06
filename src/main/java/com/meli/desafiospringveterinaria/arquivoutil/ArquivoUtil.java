@@ -109,4 +109,17 @@ public class ArquivoUtil {
         return Collections.singletonList(ObjetolList);
     }
 
+    public List<ProprietarioAnimal> metodoCarregaArquivo(String nomeArquivo) throws IOException {
+        mapearObjeto();
+        try {
+            List<ProprietarioAnimal> list;
+            list = objectMapper.readValue(new File(nomeArquivo), new TypeReference<List<ProprietarioAnimal>>(){});
+            return list;
+        }catch (IOException e){
+            e.printStackTrace();
+        } return null;
+    }
+
+
+
 }

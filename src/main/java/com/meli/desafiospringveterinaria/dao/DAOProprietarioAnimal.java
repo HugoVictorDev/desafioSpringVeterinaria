@@ -25,7 +25,7 @@ public class DAOProprietarioAnimal implements IntefaceProprietarioService<Propri
     ProprietarioService  proprietarioService;
 
 
-    ArrayList<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<>();
+    List<ProprietarioAnimal> proprietarioAnimalList;
 
     public DAOProprietarioAnimal(ArquivoUtil arquivoUtil){this.arquivoUtil = arquivoUtil;}
     public DAOProprietarioAnimal(ProprietarioService proprietarioService){this.proprietarioService = proprietarioService;}
@@ -44,7 +44,7 @@ public class DAOProprietarioAnimal implements IntefaceProprietarioService<Propri
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    public ProprietarioAnimal cadastrarProprietario(ProprietarioAnimal obj) {
+    public ProprietarioAnimal cadastrarProprietario(ProprietarioAnimal obj) { // OK
 
         this.proprietarioAnimalList.add(obj);
 
@@ -70,6 +70,10 @@ public class DAOProprietarioAnimal implements IntefaceProprietarioService<Propri
 
 
     public ProprietarioAnimal editar(ProprietarioAnimal obj, ProprietarioAnimal obj2) throws IOException { // Edenilson - Correcao de parametros
+
+
+
+        proprietarioAnimalList = arquivoUtil.metodoCarregaArquivo("Proprietario.json");
         for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
             if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
                 proprietarioAnimalList.remove(proprietarioAnimal);
@@ -101,7 +105,9 @@ public class DAOProprietarioAnimal implements IntefaceProprietarioService<Propri
     }
 
 
-    public ProprietarioAnimal obterProprietarioAnimal(ProprietarioAnimal obj) {
+    public ProprietarioAnimal obterProprietarioAnimal(ProprietarioAnimal obj) throws IOException {
+
+        proprietarioAnimalList =arquivoUtil.metodoCarregaArquivo("Proprietario.json");
         if (proprietarioAnimalList == null) {
             return null;
         }

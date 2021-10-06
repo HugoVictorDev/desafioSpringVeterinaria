@@ -74,9 +74,9 @@ public class DAOMedicoTest {
         daoMedico = new DAOMedico(arquivoUtilMock);
 
         RuntimeException exception = Assertions.assertThrows(RuntimeException.class, ()->
-        { daoMedico.obter(777000000L);});
+        { daoMedico.obter(7770023000L);});
 
-        mensagem = "Médico não encontrado";
+        mensagem = "Médico nao encontrado";
         mensagemSystem = exception.getMessage();
 
         assert (mensagem.contains(mensagemSystem));

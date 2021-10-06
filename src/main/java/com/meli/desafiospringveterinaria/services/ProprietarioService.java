@@ -56,8 +56,7 @@ public class ProprietarioService {
         return prop;
     }
 
-    public RespostaBase cadastrarProprietario(ProprietarioAnimal proprietario)
-    {
+    public RespostaBase cadastrarProprietario(ProprietarioAnimal proprietario) throws IOException {
         RespostaBase retorno = new RespostaBase();
 
         if(proprietario == null) {
@@ -117,8 +116,7 @@ public class ProprietarioService {
         return retorno;
     }
 
-    public  RespostaBase atualizarProprietario(ProprietarioAnimal proprietario, ProprietarioAnimal proprietario2)
-    {
+    public  RespostaBase atualizarProprietario(ProprietarioAnimal proprietario, ProprietarioAnimal proprietario2) throws IOException {
         RespostaBase retorno = new RespostaBase();
 
         if(proprietario == null) {

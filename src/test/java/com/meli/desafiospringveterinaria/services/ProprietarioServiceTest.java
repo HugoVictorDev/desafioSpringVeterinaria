@@ -8,6 +8,7 @@ import com.meli.desafiospringveterinaria.model.RespostaBase;
 import com.meli.desafiospringveterinaria.persistence.IntefaceProprietarioService;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -86,7 +87,7 @@ public class ProprietarioServiceTest {
     }
 
     @Test
-    public void deve_cadastrarProprietarioTeste() throws ParseException {
+    public void deve_cadastrarProprietarioTeste() throws ParseException, IOException {
 
         Animal animal = new Animal(
                 123456789L,
@@ -118,7 +119,7 @@ public class ProprietarioServiceTest {
         assertEquals(true, respostaBase);
     }
     @Test
-    public void nao_deve_cadastrarProprietarioTeste() throws ParseException {
+    public void nao_deve_cadastrarProprietarioTeste() throws ParseException, IOException {
 
         Animal animal = new Animal(
                 123456789L,
@@ -162,7 +163,7 @@ public class ProprietarioServiceTest {
     }
 
     @Test
-    public void deve_atualizarProprietarioTeste() throws ParseException {
+    public void deve_atualizarProprietarioTeste() throws ParseException, IOException {
         Animal animal = new Animal(
                 123456789L,
                 "Cachorro",
@@ -193,7 +194,7 @@ public class ProprietarioServiceTest {
     }
 
     @Test
-    public void nao_deve_atualizarProprietarioTeste() throws ParseException {
+    public void nao_deve_atualizarProprietarioTeste() throws ParseException, IOException {
 
         Animal animal = new Animal(
                 123456789L,
@@ -235,7 +236,7 @@ public class ProprietarioServiceTest {
     }
 
     @Test
-    public void nao_deve_atualizar2ProprietarioTeste() throws ParseException {
+    public void nao_deve_atualizar2ProprietarioTeste() throws ParseException, IOException {
 
         Animal animal = new Animal(
                 123456789L,
@@ -278,7 +279,7 @@ public class ProprietarioServiceTest {
 
 
     @Test
-    public void nao_deve_atualizar3ProprietarioTeste() throws ParseException {
+    public void nao_deve_atualizar3ProprietarioTeste() throws ParseException, IOException {
 
         Animal animal = new Animal(
                 123456789L,

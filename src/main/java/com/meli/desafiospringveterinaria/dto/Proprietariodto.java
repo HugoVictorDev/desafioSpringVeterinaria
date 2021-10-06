@@ -1,8 +1,10 @@
 package com.meli.desafiospringveterinaria.dto;
 
 import com.meli.desafiospringveterinaria.model.Animal;
+import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
+
 
 public class Proprietariodto {
 
@@ -39,6 +41,7 @@ public class Proprietariodto {
 
 
     public String getProprietario() {
+
         return this.Getnome();
     }
 }

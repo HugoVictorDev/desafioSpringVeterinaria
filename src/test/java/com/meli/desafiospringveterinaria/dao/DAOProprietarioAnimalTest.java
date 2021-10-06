@@ -1,11 +1,11 @@
-package com.meli.desafiospringveterinaria.services;
+package com.meli.desafiospringveterinaria.dao;
 
 
-import com.meli.desafiospringveterinaria.dao.DAOProprietarioAnimal;
 import com.meli.desafiospringveterinaria.model.Animal;
+import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
-import com.meli.desafiospringveterinaria.persistence.Persistivel;
 
+import com.meli.desafiospringveterinaria.services.ProprietarioService;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -13,33 +13,37 @@ import org.mockito.Mockito;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
+import com.meli.desafiospringveterinaria.arquivoUtil.ArquivoUtil;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class DAOProprietarioAnimalTest {
-    Animal animal = null;
-    ProprietarioAnimal proprietarioAnimal = null;
-    DAOProprietarioAnimal daoProprietarioAnimal = null;
+    Animal animal;
+    ProprietarioAnimal proprietarioAnimal;
+    DAOProprietarioAnimal daoProprietarioAnimal;
+    InterfaceProprietarioAnimal interfaceProprietarioAnimal;
+    ArquivoUtil arquivoUtilMock;
+    ProprietarioService proprietarioService;
 
     @Before
     public void setUp() throws ParseException {
         animal =  new Animal(9876L,"Chiaua","Pink","Preta",LocalDate.now(),"toto");
         proprietarioAnimal = new ProprietarioAnimal("09878998765","ednilson","Pinto",LocalDate.now(),"rua texte, ","11987654321",animal);
         daoProprietarioAnimal = new DAOProprietarioAnimal();
-    }
-
-    //Teste do servico  mapear objeto Edenilson Mauricio
-    @Test
-    void deve_mapearObjeto() throws IOException {
         ProprietarioAnimal mock = Mockito.mock(ProprietarioAnimal.class);
+        //list.add(medico1);
 
-        //Terminar servico
+        arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
+        proprietarioService = Mockito.mock(ProprietarioService.class);
     }
+
 
 
     @Test
     void deve_cadastrar() throws ParseException {
+        setUp();
         ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal
                 ("09878998765",
                         "ednilson",
@@ -48,7 +52,10 @@ public class DAOProprietarioAnimalTest {
                         "11987654321",
                         animal);
 
-        assert(daoProprietarioAnimal.cadastrar(proprietarioAnimal).equals(proprietarioAnimal));
+        //Mockito.when(proprietarioService.cadastrarProprietario(Mockito.any())).thenReturn(proprietarioAnimal);
+        daoProprietarioAnimal = new DAOProprietarioAnimal(arquivoUtilMock, proprietarioService);
+
+        assertTrue(daoProprietarioAnimal.cadastrarProprietario(proprietarioAnimal).equals(proprietarioAnimal));
 
     }
 

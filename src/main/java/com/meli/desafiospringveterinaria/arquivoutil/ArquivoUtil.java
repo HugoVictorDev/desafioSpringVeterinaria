@@ -2,12 +2,15 @@ package com.meli.desafiospringveterinaria.arquivoUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.model.Consulta;
 import com.meli.desafiospringveterinaria.model.Medico;
+import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 
 
 public class ArquivoUtil {
@@ -95,4 +98,15 @@ public class ArquivoUtil {
             e.printStackTrace();
         }return null;
     }
+
+    public List<Object> carregaArquivo(List<Object> ObjetolList, String nomeArquivo) {
+        ArrayList<Object> objectArrayList = new ArrayList<>(ObjetolList.size());
+        for (Object o : (ObjetolList)) {
+            objectArrayList.add(o);
+        }
+
+        this.gravaQualquerArquivo(objectArrayList, nomeArquivo);
+        return Collections.singletonList(ObjetolList);
+    }
+
 }

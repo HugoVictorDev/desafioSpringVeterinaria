@@ -1,9 +1,14 @@
 package com.meli.desafiospringveterinaria.dao;
 
 
-import com.meli.desafiospringveterinaria.arquivoutil.InterfaceAquivoUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
-import com.meli.desafiospringveterinaria.persistence.Persistivel;
+import com.meli.desafiospringveterinaria.model.RespostaBase;
+import com.meli.desafiospringveterinaria.persistence.IntefaceProprietarioService;
+import com.meli.desafiospringveterinaria.arquivoUtil.ArquivoUtil;
+import com.meli.desafiospringveterinaria.services.ProprietarioService;
+import lombok.Getter;
 
 import java.io.IOException;
 
@@ -12,60 +17,64 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DAOProprietarioAnimal implements Persistivel<ProprietarioAnimal>, InterfaceProprietarioAnimal {
+@Getter
+public class DAOProprietarioAnimal implements IntefaceProprietarioService<ProprietarioAnimal> {
 
-    InterfaceAquivoUtil iAquivoUtil;
+    ObjectMapper objectMapper = new ObjectMapper();
+    ArquivoUtil arquivoUtil = new ArquivoUtil();
+    ProprietarioService  proprietarioService;
 
-    List<ProprietarioAnimal> proprietarioAnimalList;
-/*    ObjectMapper objectMapper;
 
+    ArrayList<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<>();
+
+    public DAOProprietarioAnimal(ArquivoUtil arquivoUtil){this.arquivoUtil = arquivoUtil;}
+    public DAOProprietarioAnimal(ProprietarioService proprietarioService){this.proprietarioService = proprietarioService;}
+
+
+    public DAOProprietarioAnimal(ArquivoUtil arquivoUtil, ProprietarioService proprietarioService){
+        this.arquivoUtil = arquivoUtil;
+        this.proprietarioService = proprietarioService;
+    }
+    public DAOProprietarioAnimal() {
+
+    }
 
     private void mapearObjeto() {
         objectMapper.findAndRegisterModules();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
-*/
-  //  com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil
-    @Override
-    public void DAOProprietarioAnimal() {
-//        objectMapper = new ObjectMapper();
-//        mapearObjeto();
 
-        List<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<ProprietarioAnimal>();
-        try {
-            // Carregando a lista com o arquivo existente
-            proprietarioAnimalList = (List<ProprietarioAnimal>) iAquivoUtil.carregaArquivo("Proprietarios.json", proprietarioAnimalList);
-        } catch (RuntimeException exception) { }
-
-        if (proprietarioAnimalList == null)
-            proprietarioAnimalList = new ArrayList<ProprietarioAnimal>();
-    }
-
-
-    public ProprietarioAnimal cadastrar(ProprietarioAnimal obj) {
+    public ProprietarioAnimal cadastrarProprietario(ProprietarioAnimal obj) {
 
         this.proprietarioAnimalList.add(obj);
 
         try {
-            iAquivoUtil.gravaArquivo(Collections.singletonList((List<ProprietarioAnimal>) proprietarioAnimalList), "Proprietarios.json");
+            arquivoUtil.gravaQualquerArquivo(Collections.singletonList(proprietarioAnimalList), "Proprietarios.json");
         } catch (Exception exception) {
-            String erro = exception.toString();
+            throw new RuntimeException(exception);
         }
-return null;
+        return obj;
     }
 
-    @Override
+    public RespostaBase atualizarProprietario(ProprietarioAnimal proprietario, ProprietarioAnimal propriet) {
+        return null;
+    }
+
+    public RespostaBase listagemConsulta() {
+        return null;
+    }
+
     public ProprietarioAnimal editar(ProprietarioAnimal obj) {
         return null;
     }
 
-    @Override
+
     public ProprietarioAnimal editar(ProprietarioAnimal obj, ProprietarioAnimal obj2) throws IOException { // Edenilson - Correcao de parametros
         for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
             if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
                 proprietarioAnimalList.remove(proprietarioAnimal);
                 proprietarioAnimalList.add(obj2);
-                iAquivoUtil.gravaArquivo(Collections.singletonList((List<ProprietarioAnimal>) proprietarioAnimalList), "Proprietarios.json");
+                arquivoUtil.gravaQualquerArquivo(Collections.singletonList((List<ProprietarioAnimal>) proprietarioAnimalList), "Proprietarios.json");
                 return obj2;
             }
         }
@@ -73,7 +82,7 @@ return null;
         return null;
     }
 
-    @Override
+
     public ProprietarioAnimal obter(ProprietarioAnimal obj) {
         if (proprietarioAnimalList == null) {
             return null;
@@ -91,7 +100,7 @@ return null;
         return null;
     }
 
-    @Override
+
     public ProprietarioAnimal obterProprietarioAnimal(ProprietarioAnimal obj) {
         if (proprietarioAnimalList == null) {
             return null;
@@ -110,7 +119,7 @@ return null;
     }
 
 
-    @Override
+
     public ProprietarioAnimal obterPorIdentificador(String identificador) {
         if (proprietarioAnimalList == null) {
             return null;
@@ -128,7 +137,8 @@ return null;
         return null;
     }
 
-    @Override
+
+
     public List<ProprietarioAnimal> listagem() {
         return proprietarioAnimalList;
     }

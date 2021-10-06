@@ -7,7 +7,6 @@ import com.meli.desafiospringveterinaria.dao.*;
 import com.meli.desafiospringveterinaria.model.Animal;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.model.RespostaBase;
-import com.meli.desafiospringveterinaria.persistence.IntefaceProprietarioService;
 
 
 import java.io.IOException;
@@ -15,19 +14,25 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-public abstract class ProprietarioService implements IntefaceProprietarioService {
+public class ProprietarioService {
 
-    private static ArquivoUtil arquivoUtil;
+    ArquivoUtil arquivoUtil = new ArquivoUtil();
     List<ProprietarioAnimal> proprietarioAnimalList;
     DAOProprietarioAnimal daoProprietarioAnimal;
     DAOAnimal daoAnimal;
 
+
+    public ProprietarioService(ArquivoUtil arquivoUtil){
+        this.arquivoUtil = arquivoUtil;
+    }
+
     public ProprietarioService(DAOProprietarioAnimal _daoProprietarioAnimal, DAOAnimal _daoAnimal)
     {
         daoProprietarioAnimal = _daoProprietarioAnimal;
-        daoAnimal = _daoAnimal;
     }
-    public RespostaBase obterPorIdentificador(String Identificador)
+
+
+    public ProprietarioAnimal obterPorIdentificador(String Identificador)
     {
         RespostaBase retorno = new RespostaBase();
 
@@ -48,7 +53,7 @@ public abstract class ProprietarioService implements IntefaceProprietarioService
             retorno.Data = prop;
         }
 
-        return retorno;
+        return prop;
     }
 
     public RespostaBase cadastrarProprietario(ProprietarioAnimal proprietario)
@@ -105,7 +110,7 @@ public abstract class ProprietarioService implements IntefaceProprietarioService
             return retorno;
         }
 
-        daoProprietarioAnimal.cadastrar(proprietario);
+        daoProprietarioAnimal.cadastrarProprietario(proprietario);
 
         retorno.Sucesso = true;
         retorno.Data = proprietario;

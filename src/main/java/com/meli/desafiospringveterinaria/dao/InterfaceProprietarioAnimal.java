@@ -5,17 +5,8 @@ import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import java.io.IOException;
 import java.util.List;
 
-public interface InterfaceProprietarioAnimal {
-    /*    ObjectMapper objectMapper;
+public interface InterfaceProprietarioAnimal<P> {
 
-
-            private void mapearObjeto() {
-                objectMapper.findAndRegisterModules();
-                objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            }
-        */
-    //  com.meli.desafiospringveterinaria.ArquivoUtil.ArquivoUtil
-    void DAOProprietarioAnimal();
 
     ProprietarioAnimal cadastrar(ProprietarioAnimal obj);
 

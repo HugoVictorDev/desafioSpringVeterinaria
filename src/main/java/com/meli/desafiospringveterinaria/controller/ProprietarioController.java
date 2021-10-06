@@ -7,7 +7,6 @@ import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 import com.meli.desafiospringveterinaria.model.RespostaBase;
 import com.meli.desafiospringveterinaria.persistence.IntefaceProprietarioService;
 
-import com.meli.desafiospringveterinaria.services.ProprietarioService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -17,9 +16,7 @@ import java.text.ParseException;
 @RequestMapping("/proprietario")
 public class ProprietarioController
 {
-
-
-    DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
+   DAOProprietarioAnimal daoProprietarioAnimal = new DAOProprietarioAnimal();
    DAOAnimal daoAnimal = new DAOAnimal();
 
     IntefaceProprietarioService intefaceProprietarioService;
@@ -28,22 +25,16 @@ public class ProprietarioController
     public ProprietarioController() throws ParseException {
         DAOAnimal animal = new DAOAnimal();
         DAOProprietarioAnimal proprietarioAnimal = new DAOProprietarioAnimal();
-        intefaceProprietarioService = new ProprietarioService(proprietarioAnimal, animal) {
-            @Override
-            public RespostaBase atualizarProprietario(ProprietarioAnimal proprietario, ProprietarioAnimal proprietario2) {
-                return null;
-            }
-        };
     }
 
 
     @GetMapping("/consulta/{identificador}")
-    public RespostaBase obter(@PathVariable ("identificador") String identificador) throws IOException, ParseException {
+    public ProprietarioAnimal obter(@PathVariable ("identificador") String identificador) throws IOException, ParseException {
         return intefaceProprietarioService.obterPorIdentificador(identificador);
     }
 
     @PostMapping("/cadastrar")
-    public RespostaBase cadastrarProprietario( @RequestBody ProprietarioAnimal proprietario) {
+    public ProprietarioAnimal cadastrarProprietario( @RequestBody ProprietarioAnimal proprietario) {
         return intefaceProprietarioService.cadastrarProprietario(proprietario);
     }
 

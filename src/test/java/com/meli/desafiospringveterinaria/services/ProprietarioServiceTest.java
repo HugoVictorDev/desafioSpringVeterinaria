@@ -45,7 +45,7 @@ public class ProprietarioServiceTest {
 
 
     @Test //Teste OK do metodo proprietarioAnimalDao.obterPorIdentificador(identificador)
-    public void deve_obterPorIdentificadorTest() throws ParseException {
+    public void deve_obterPorIdentificadorTest() throws ParseException, IOException {
 
         proprietarioAnimalDao = mock(DAOProprietarioAnimal.class);
         //proprietariolDao = new DAOAnimal(ProprietarioService.class);
@@ -65,7 +65,7 @@ public class ProprietarioServiceTest {
     }
 
     @Test //Teste de Recusa do metodo obterPorIdentificador(identificador)
-    public void nao_deve_obterPorIdentificadorTest() throws ParseException {
+    public void nao_deve_obterPorIdentificadorTest() throws ParseException, IOException {
         String identificador = "1234567892";
 
         when(proprietarioAnimalDao.obterPorIdentificador(identificador))
@@ -111,7 +111,7 @@ public class ProprietarioServiceTest {
         when(animalDao.obter2(animal)).thenReturn(animal);
 
         when(proprietarioAnimalDao
-                .obterProprietarioAnimal(proprietarioAnimal.getCpf()))
+                .obterProprietarioAnimal(proprietarioAnimal))
                 .thenReturn(null);
 
         proprietarioAnimal = proprietarioAnimalDao.cadastrarProprietario(proprietarioAnimal);
@@ -145,7 +145,7 @@ public class ProprietarioServiceTest {
                 .thenReturn(animal);
 
         when(proprietarioAnimalDao
-                .obterProprietarioAnimal(proprietarioAnimal.getCpf()))
+                .obterProprietarioAnimal(proprietarioAnimal))
                 .thenReturn(null);
 
         ProprietarioAnimal proprietarioAnimal1 = service.cadastrarProprietario(proprietarioAnimal);
@@ -185,7 +185,7 @@ public class ProprietarioServiceTest {
 
         when(animalDao.obter2(animal)).thenReturn(animal);
 
-        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal.getCpf()))
+        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal))
                 .thenReturn(proprietarioAnimal);
 
         RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal, proprietarioAnimal);
@@ -227,7 +227,7 @@ public class ProprietarioServiceTest {
 
         when(animalDao.obter2(animal)).thenReturn(animal);
 
-        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal.getCpf()))
+        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal))
                 .thenReturn(proprietarioAnimal);
 
         RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal, proprietarioAnimal2);
@@ -269,7 +269,7 @@ public class ProprietarioServiceTest {
 
         when(animalDao.obter2(animal)).thenReturn(animal);
 
-        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal.getCpf()))
+        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal))
                 .thenReturn(proprietarioAnimal);
 
         RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal, proprietarioAnimal2);
@@ -312,7 +312,7 @@ public class ProprietarioServiceTest {
 
         when(animalDao.obter2(animal)).thenReturn(animal);
 
-        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal.getCpf()))
+        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal))
                 .thenReturn(proprietarioAnimal);
 
         RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal, proprietarioAnimal2);

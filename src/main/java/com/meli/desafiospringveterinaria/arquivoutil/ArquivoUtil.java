@@ -101,6 +101,7 @@ public class ArquivoUtil {
 
     public List<Object> carregaArquivo(List<Object> ObjetolList, String nomeArquivo) {
         ArrayList<Object> objectArrayList = new ArrayList<>(ObjetolList.size());
+
         for (Object o : (ObjetolList)) {
             objectArrayList.add(o);
         }
@@ -111,13 +112,17 @@ public class ArquivoUtil {
 
     public List<ProprietarioAnimal> metodoCarregaArquivo(String nomeArquivo) throws IOException {
         mapearObjeto();
+
+        List<ProprietarioAnimal> list;
         try {
-            List<ProprietarioAnimal> list;
-            list = objectMapper.readValue(new File(nomeArquivo), new TypeReference<List<ProprietarioAnimal>>(){});
-            return list;
+
+            return objectMapper.readValue(new File(nomeArquivo), new TypeReference<List<ProprietarioAnimal>>(){});
+
         }catch (IOException e){
             e.printStackTrace();
-        } return null;
+            return null;
+        }
+
     }
 
 

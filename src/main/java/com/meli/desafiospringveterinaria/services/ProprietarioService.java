@@ -32,8 +32,7 @@ public class ProprietarioService {
     }
 
 
-    public ProprietarioAnimal obterPorIdentificador(String Identificador)
-    {
+    public ProprietarioAnimal obterPorIdentificador(String Identificador) throws IOException {
         RespostaBase retorno = new RespostaBase();
 
         if(Identificador == null || Identificador.length() == 0){
@@ -101,7 +100,7 @@ public class ProprietarioService {
             return retorno;
         }
 
-        ProprietarioAnimal prop = daoProprietarioAnimal.obterProprietarioAnimal(proprietario.getCpf());
+        ProprietarioAnimal prop = daoProprietarioAnimal.obterProprietarioAnimal(proprietario);
 
         if(prop != null){
             retorno.Erros.add("Proprietario já cadastrado!");
@@ -180,8 +179,8 @@ public class ProprietarioService {
             return retorno;
         }
 
-        ProprietarioAnimal prop = daoProprietarioAnimal.obterProprietarioAnimal(proprietario.getCpf());
-        ProprietarioAnimal prop2 = daoProprietarioAnimal.obterProprietarioAnimal(proprietario2.getCpf());
+        ProprietarioAnimal prop = daoProprietarioAnimal.obterProprietarioAnimal(proprietario);
+        ProprietarioAnimal prop2 = daoProprietarioAnimal.obterProprietarioAnimal(proprietario2);
 
 
         if(prop == null)

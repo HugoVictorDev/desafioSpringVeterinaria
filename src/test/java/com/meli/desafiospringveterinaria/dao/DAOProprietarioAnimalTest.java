@@ -125,9 +125,12 @@ public class DAOProprietarioAnimalTest {
         daoProprietarioAnimal = new DAOProprietarioAnimal(arquivoUtilMock, proprietarioService);
 
         Mockito.when(arquivoUtilMock.metodoCarregaArquivo(Mockito.anyString())).thenReturn(proprietarioAnimalList);
+
         //Mockito.when(daoProprietarioAnimal.obterProprietarioAnimal(Mockito.anyString())).thenReturn(proprietarioAnimal);
-        daoProprietarioAnimal.obterProprietarioAnimal("09878998765").equals(proprietarioAnimal);
-        assert(daoProprietarioAnimal.obterProprietarioAnimal("09878998765").equals(proprietarioAnimal));
+
+        daoProprietarioAnimal.obterProprietarioAnimal(proprietarioAnimal).equals(proprietarioAnimal);
+
+        assert(daoProprietarioAnimal.obterProprietarioAnimal(proprietarioAnimal).equals(proprietarioAnimal));
 
     }
 
@@ -153,6 +156,12 @@ public class DAOProprietarioAnimalTest {
 
         proprietarioAnimalList.add(proprietarioAnimal);
         daoProprietarioAnimal = new DAOProprietarioAnimal(arquivoUtilMock, proprietarioService);
+
+        Mockito.when(arquivoUtilMock.metodoCarregaArquivo(Mockito.anyString())).thenReturn(proprietarioAnimalList);
+
+        boolean proprietarioAnimal1 = daoProprietarioAnimal.obterPorIdentificador(proprietarioAnimal.getCpf()).equals(proprietarioAnimal);
+
         assert (daoProprietarioAnimal.obterPorIdentificador(proprietarioAnimal.getCpf()).equals(proprietarioAnimal));
     }
+
 }

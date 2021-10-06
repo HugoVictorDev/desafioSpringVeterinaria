@@ -64,10 +64,23 @@ public class DAOProprietarioAnimal implements IntefaceProprietarioService<Propri
         return null;
     }
 
-    public ProprietarioAnimal editar(ProprietarioAnimal obj) {
-        return null;
-    }
+    public boolean removerProprietario(ProprietarioAnimal obj) throws IOException {
+        try{
+            proprietarioAnimalList = arquivoUtil.metodoCarregaArquivo("Proprietario.json");
+            for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
+                if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
+                    proprietarioAnimalList.remove(proprietarioAnimal);
+                    arquivoUtil.gravaQualquerArquivo(Collections.singletonList((List<ProprietarioAnimal>) proprietarioAnimalList), "Proprietarios.json");
+                    return true;
+                }
+            }
+        }catch (IOException i){
+            throw new RuntimeException ("Vendedor nao encontrado");
+        }
 
+
+        return false;
+    }
 
     public ProprietarioAnimal editar(ProprietarioAnimal obj, ProprietarioAnimal obj2) throws IOException { // Edenilson - Correcao de parametros
 
@@ -114,7 +127,7 @@ public class DAOProprietarioAnimal implements IntefaceProprietarioService<Propri
 
         try {
             for (ProprietarioAnimal a : proprietarioAnimalList) {
-                if (a.getCpf().equals(proprietarioAnimalList)) {
+                if (a.getCpf().equals(proprietarioAnimal.getCpf())) {
                     return a;
                 }
             }
@@ -126,7 +139,8 @@ public class DAOProprietarioAnimal implements IntefaceProprietarioService<Propri
 
 
 
-    public ProprietarioAnimal obterPorIdentificador(String identificador) {
+    public ProprietarioAnimal obterPorIdentificador(String identificador) throws IOException {
+        List<ProprietarioAnimal> proprietarioAnimalList = arquivoUtil.metodoCarregaArquivo("Proprietario.json");
         if (proprietarioAnimalList == null) {
             return null;
         }

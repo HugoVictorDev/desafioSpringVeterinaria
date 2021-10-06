@@ -2,6 +2,8 @@ package com.meli.desafiospringveterinaria.dao;
 
 
 import com.meli.desafiospringveterinaria.model.Animal;
+import com.meli.desafiospringveterinaria.model.Consulta;
+import com.meli.desafiospringveterinaria.model.Medico;
 import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
 
 import com.meli.desafiospringveterinaria.services.ProprietarioService;
@@ -16,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.meli.desafiospringveterinaria.arquivoUtil.ArquivoUtil;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class DAOProprietarioAnimalTest {
-    Animal animal;
+    Animal animal, animal2;
     ProprietarioAnimal proprietarioAnimal;
     DAOProprietarioAnimal daoProprietarioAnimal;
     InterfaceProprietarioAnimal interfaceProprietarioAnimal;
@@ -163,5 +165,47 @@ public class DAOProprietarioAnimalTest {
 
         assert (daoProprietarioAnimal.obterPorIdentificador(proprietarioAnimal.getCpf()).equals(proprietarioAnimal));
     }
+    //POR CPF
+    @Test
+    void deve_removerProprietario() throws ParseException, IOException {
+        Consulta consulta;
+        Medico medico;
+        ProprietarioService proprietarioService;
+        daoProprietarioAnimal = new DAOProprietarioAnimal();
+        arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
+        proprietarioService = Mockito.mock(ProprietarioService.class);
+        animal =  new Animal(9876L,"Chiaua","Pink","Preta",LocalDate.now(),"toto");
+        animal2 =  new Animal(9176L,"Chiaua","Pink","Preta",LocalDate.now(),"toto");
+        //setUp();
+        List<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<>();
+        List<Medico> medicoList = new ArrayList<>();
+        List<Consulta> consultaList = new ArrayList<>();
 
+        ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal
+                ("09878998765",
+                        "ednilson",
+                        "Pinto",
+                        LocalDate.now(),"rua texte, ",
+                        "11987654321",
+                        animal);
+
+        medico = new Medico ("123456879",
+                     "marco",
+                     "da Rocha",
+                     2000006000,
+                     "cardio");
+
+        consulta = new Consulta(LocalDate.now(),"motivo","diagnostico","tratamento",medico, animal2);
+        proprietarioAnimalList.add(proprietarioAnimal);
+        consultaList.add(consulta);
+        medicoList.add(medico);
+        daoProprietarioAnimal = new DAOProprietarioAnimal(arquivoUtilMock, proprietarioService);
+
+        Mockito.when(arquivoUtilMock.metodoCarregaArquivo(Mockito.anyString())).thenReturn(proprietarioAnimalList);
+        Mockito.when(arquivoUtilMock.carregaArquivoConsulta(Mockito.anyString())).thenReturn(consultaList);
+        Mockito.when(arquivoUtilMock.carregaArquivo(Mockito.anyString())).thenReturn(medicoList);
+        proprietarioAnimalList = daoProprietarioAnimal.removerProprietario(proprietarioAnimal);
+
+        assertFalse(daoProprietarioAnimal.removerProprietario(proprietarioAnimal).contains(proprietarioAnimalList));
+    }
 }

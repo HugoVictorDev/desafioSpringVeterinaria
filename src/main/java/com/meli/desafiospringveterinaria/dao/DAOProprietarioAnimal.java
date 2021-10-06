@@ -3,8 +3,7 @@ package com.meli.desafiospringveterinaria.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.meli.desafiospringveterinaria.model.ProprietarioAnimal;
-import com.meli.desafiospringveterinaria.model.RespostaBase;
+import com.meli.desafiospringveterinaria.model.*;
 import com.meli.desafiospringveterinaria.persistence.IntefaceProprietarioService;
 import com.meli.desafiospringveterinaria.arquivoUtil.ArquivoUtil;
 import com.meli.desafiospringveterinaria.services.ProprietarioService;
@@ -64,22 +63,35 @@ public class DAOProprietarioAnimal implements IntefaceProprietarioService<Propri
         return null;
     }
 
-    public boolean removerProprietario(ProprietarioAnimal obj) throws IOException {
-        try{
-            proprietarioAnimalList = arquivoUtil.metodoCarregaArquivo("Proprietario.json");
-            for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
-                if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
-                    proprietarioAnimalList.remove(proprietarioAnimal);
-                    arquivoUtil.gravaQualquerArquivo(Collections.singletonList((List<ProprietarioAnimal>) proprietarioAnimalList), "Proprietarios.json");
-                    return true;
+    public List<ProprietarioAnimal> removerProprietario(ProprietarioAnimal obj) throws IOException {
+        mapearObjeto();
+        List<Consulta> listConsulta;
+        List<Medico> medicosList = new ArrayList<>();
+
+        List<Animal> animal = new ArrayList<>();
+        List<ProprietarioAnimal>proprietarioAnimalList =  new ArrayList<>();
+
+        proprietarioAnimalList  = arquivoUtil.metodoCarregaArquivo("Proprietario.json");
+
+        try {
+
+            listConsulta = arquivoUtil.carregaArquivoConsulta("Consulta.json");
+            for (Consulta a : listConsulta) {
+                if (a.getAnimal().equals(obj.getAnimal())) {
+                    throw new RuntimeException("Proprietário com consulta nao pode ser excluido!");
+                }else{
+                    proprietarioAnimalList.remove(proprietarioAnimalList);
+                    arquivoUtil.metodoCarregaArquivo ( "Proprietario.json");
+                    arquivoUtil.gravaQualquerArquivo(Collections.singletonList(proprietarioAnimalList), "Proprietarios.json");
+                    return proprietarioAnimalList;
                 }
-            }
-        }catch (IOException i){
-            throw new RuntimeException ("Vendedor nao encontrado");
+            }throw new RuntimeException("Proprietario não cadastrado!");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
 
-        return false;
+
     }
 
     public ProprietarioAnimal editar(ProprietarioAnimal obj, ProprietarioAnimal obj2) throws IOException { // Edenilson - Correcao de parametros

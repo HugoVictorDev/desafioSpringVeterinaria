@@ -116,15 +116,12 @@ public class ArquivoUtil {
         List<ProprietarioAnimal> list;
         try {
 
-            return objectMapper.readValue(new File(nomeArquivo), new TypeReference<List<ProprietarioAnimal>>(){});
+            return objectMapper.readValue(new File(nomeArquivo), new TypeReference<List<ProprietarioAnimal>>() {
+            });
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
-
     }
-
-
-
 }

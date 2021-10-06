@@ -25,7 +25,7 @@ public class DAOProprietarioAnimal implements IntefaceProprietarioService<Propri
     ProprietarioService  proprietarioService;
 
 
-    List<ProprietarioAnimal> proprietarioAnimalList;
+    List<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<>();
 
     public DAOProprietarioAnimal(ArquivoUtil arquivoUtil){this.arquivoUtil = arquivoUtil;}
     public DAOProprietarioAnimal(ProprietarioService proprietarioService){this.proprietarioService = proprietarioService;}

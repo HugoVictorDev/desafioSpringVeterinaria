@@ -108,12 +108,8 @@ public class ProprietarioService {
             retorno.Sucesso = false;
             return retorno;
         }
-
-        daoProprietarioAnimal.cadastrarProprietario(proprietario);
-
-        retorno.Sucesso = true;
-        retorno.Data = proprietario;
         return retorno;
+
     }
 
     public  RespostaBase atualizarProprietario(ProprietarioAnimal proprietario, ProprietarioAnimal proprietario2) throws IOException {

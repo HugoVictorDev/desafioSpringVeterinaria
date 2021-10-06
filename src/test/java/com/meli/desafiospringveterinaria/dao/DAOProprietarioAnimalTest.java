@@ -134,6 +134,25 @@ public class DAOProprietarioAnimalTest {
     //POR CPF
     @Test
     void deve_obterProprietarioPorIdentificador() throws ParseException, IOException {
+        ProprietarioService proprietarioService;
+        daoProprietarioAnimal = new DAOProprietarioAnimal();
+        arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
+        proprietarioService = Mockito.mock(ProprietarioService.class);
+        animal =  new Animal(9876L,"Chiaua","Pink","Preta",LocalDate.now(),"toto");
+        //setUp();
+        List<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<>();
+
+        ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal
+                ("09878998765",
+                        "ednilson",
+                        "Pinto",
+                        LocalDate.now(),"rua texte, ",
+                        "11987654321",
+                        animal);
+
+
+        proprietarioAnimalList.add(proprietarioAnimal);
+        daoProprietarioAnimal = new DAOProprietarioAnimal(arquivoUtilMock, proprietarioService);
         assert (daoProprietarioAnimal.obterPorIdentificador(proprietarioAnimal.getCpf()).equals(proprietarioAnimal));
     }
 }

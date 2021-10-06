@@ -105,17 +105,17 @@ public class DAOProprietarioAnimal implements IntefaceProprietarioService<Propri
     }
 
 
-    public ProprietarioAnimal obterProprietarioAnimal(ProprietarioAnimal obj) throws IOException {
+    public ProprietarioAnimal obterProprietarioAnimal(String cpf) throws IOException {
 
-        proprietarioAnimalList =arquivoUtil.metodoCarregaArquivo("Proprietario.json");
+        List<ProprietarioAnimal>proprietarioAnimalList = arquivoUtil.metodoCarregaArquivo("Proprietario.json");
         if (proprietarioAnimalList == null) {
             return null;
         }
 
         try {
-            for (ProprietarioAnimal proprietarioAnimal : proprietarioAnimalList) {
-                if (proprietarioAnimal.getCpf().equals(obj.getCpf())) {
-                    return proprietarioAnimal;
+            for (ProprietarioAnimal a : proprietarioAnimalList) {
+                if (a.getCpf().equals(cpf)) {
+                    return a;
                 }
             }
         } catch (Exception e) {

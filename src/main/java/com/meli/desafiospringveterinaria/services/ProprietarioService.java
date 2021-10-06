@@ -101,7 +101,7 @@ public class ProprietarioService {
             return retorno;
         }
 
-        ProprietarioAnimal prop = daoProprietarioAnimal.obterProprietarioAnimal(proprietario);
+        ProprietarioAnimal prop = daoProprietarioAnimal.obterProprietarioAnimal(proprietario.getCpf());
 
         if(prop != null){
             retorno.Erros.add("Proprietario já cadastrado!");
@@ -180,8 +180,8 @@ public class ProprietarioService {
             return retorno;
         }
 
-        ProprietarioAnimal prop = daoProprietarioAnimal.obterProprietarioAnimal(proprietario);
-        ProprietarioAnimal prop2 = daoProprietarioAnimal.obterProprietarioAnimal(proprietario2);
+        ProprietarioAnimal prop = daoProprietarioAnimal.obterProprietarioAnimal(proprietario.getCpf());
+        ProprietarioAnimal prop2 = daoProprietarioAnimal.obterProprietarioAnimal(proprietario2.getCpf());
 
 
         if(prop == null)

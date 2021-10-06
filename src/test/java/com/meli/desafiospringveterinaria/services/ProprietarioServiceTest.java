@@ -111,7 +111,7 @@ public class ProprietarioServiceTest {
         when(animalDao.obter2(animal)).thenReturn(animal);
 
         when(proprietarioAnimalDao
-                .obterProprietarioAnimal(proprietarioAnimal))
+                .obterProprietarioAnimal(proprietarioAnimal.getCpf()))
                 .thenReturn(null);
 
         proprietarioAnimal = proprietarioAnimalDao.cadastrarProprietario(proprietarioAnimal);
@@ -145,7 +145,7 @@ public class ProprietarioServiceTest {
                 .thenReturn(animal);
 
         when(proprietarioAnimalDao
-                .obterProprietarioAnimal(proprietarioAnimal))
+                .obterProprietarioAnimal(proprietarioAnimal.getCpf()))
                 .thenReturn(null);
 
         ProprietarioAnimal proprietarioAnimal1 = service.cadastrarProprietario(proprietarioAnimal);
@@ -185,7 +185,7 @@ public class ProprietarioServiceTest {
 
         when(animalDao.obter2(animal)).thenReturn(animal);
 
-        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal))
+        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal.getCpf()))
                 .thenReturn(proprietarioAnimal);
 
         RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal, proprietarioAnimal);
@@ -227,7 +227,7 @@ public class ProprietarioServiceTest {
 
         when(animalDao.obter2(animal)).thenReturn(animal);
 
-        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal))
+        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal.getCpf()))
                 .thenReturn(proprietarioAnimal);
 
         RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal, proprietarioAnimal2);
@@ -269,7 +269,7 @@ public class ProprietarioServiceTest {
 
         when(animalDao.obter2(animal)).thenReturn(animal);
 
-        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal))
+        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal.getCpf()))
                 .thenReturn(proprietarioAnimal);
 
         RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal, proprietarioAnimal2);
@@ -312,7 +312,7 @@ public class ProprietarioServiceTest {
 
         when(animalDao.obter2(animal)).thenReturn(animal);
 
-        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal))
+        when(proprietarioAnimalDao.obterProprietarioAnimal(proprietarioAnimal.getCpf()))
                 .thenReturn(proprietarioAnimal);
 
         RespostaBase respostaBase = service.atualizarProprietario(proprietarioAnimal, proprietarioAnimal2);

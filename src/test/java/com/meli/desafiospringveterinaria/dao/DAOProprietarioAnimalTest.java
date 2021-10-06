@@ -12,6 +12,8 @@ import org.mockito.Mockito;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.meli.desafiospringveterinaria.arquivoUtil.ArquivoUtil;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -72,6 +74,8 @@ public class DAOProprietarioAnimalTest {
         proprietarioService = Mockito.mock(ProprietarioService.class);
         animal =  new Animal(9876L,"Chiaua","Pink","Preta",LocalDate.now(),"toto");
         //setUp();
+        List<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<>();
+
         ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal
                 ("09878998765",
                         "ednilson",
@@ -87,7 +91,11 @@ public class DAOProprietarioAnimalTest {
                         LocalDate.now(),"rua texte, ",
                         "11987654321",
                         animal);
-        deve_cadastrar();
+
+        proprietarioAnimalList.add(proprietarioAnimal1);
+        daoProprietarioAnimal = new DAOProprietarioAnimal(arquivoUtilMock, proprietarioService);
+        Mockito.when(arquivoUtilMock.metodoCarregaArquivo(Mockito.anyString())).thenReturn(proprietarioAnimalList);
+        //deve_cadastrar();
         daoProprietarioAnimal.editar(proprietarioAnimal, proprietarioAnimal1).equals(proprietarioAnimal1);
         assertTrue(daoProprietarioAnimal.editar(proprietarioAnimal, proprietarioAnimal1).equals(proprietarioAnimal1));
         //assert(resultado);
@@ -96,8 +104,30 @@ public class DAOProprietarioAnimalTest {
 
     @Test
     void deve_obterProprietarioAnimal() throws ParseException, IOException {
-        setUp();
-        assert(daoProprietarioAnimal.obterProprietarioAnimal(proprietarioAnimal).equals(proprietarioAnimal));
+        ProprietarioService proprietarioService;
+        daoProprietarioAnimal = new DAOProprietarioAnimal();
+        arquivoUtilMock = Mockito.mock(ArquivoUtil.class);
+        proprietarioService = Mockito.mock(ProprietarioService.class);
+        animal =  new Animal(9876L,"Chiaua","Pink","Preta",LocalDate.now(),"toto");
+        //setUp();
+        List<ProprietarioAnimal> proprietarioAnimalList = new ArrayList<>();
+
+        ProprietarioAnimal proprietarioAnimal = new ProprietarioAnimal
+                ("09878998765",
+                        "ednilson",
+                        "Pinto",
+                        LocalDate.now(),"rua texte, ",
+                        "11987654321",
+                        animal);
+
+
+        proprietarioAnimalList.add(proprietarioAnimal);
+        daoProprietarioAnimal = new DAOProprietarioAnimal(arquivoUtilMock, proprietarioService);
+
+        Mockito.when(arquivoUtilMock.metodoCarregaArquivo(Mockito.anyString())).thenReturn(proprietarioAnimalList);
+        //Mockito.when(daoProprietarioAnimal.obterProprietarioAnimal(Mockito.anyString())).thenReturn(proprietarioAnimal);
+        daoProprietarioAnimal.obterProprietarioAnimal("09878998765").equals(proprietarioAnimal);
+        assert(daoProprietarioAnimal.obterProprietarioAnimal("09878998765").equals(proprietarioAnimal));
 
     }
 

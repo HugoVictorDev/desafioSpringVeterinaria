@@ -34,6 +34,7 @@ public class DAOAnimalTest {
 
     @Test
     public void deveMapearObjeto(){
+
         DAOAnimal mock = Mockito.mock(DAOAnimal.class);
     }
 
